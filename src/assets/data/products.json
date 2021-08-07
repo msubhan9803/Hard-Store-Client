@@ -9865,7 +9865,40 @@
                 21601
             ]
         }]
-    }, {
+    }, 
+    {
+        "id": 216,
+        "title": "Goat Head",
+        "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.",
+        "type": "marijuana",
+        "brand": "Goat Head",
+        "collection": ["on sale"],
+        "category": "marijuana",
+        "price": 150,
+        "sale": true,
+        "discount": "10",
+        "stock": 25,
+        "new": true,
+        "tags": [
+            "sale"
+        ],
+        "variants": [{
+            "variant_id": 21601,
+            "id": 216,
+            "sku": "marijuana46",
+            "image_id": 21611
+        }],
+        "images": [{
+            "image_id": 21611,
+            "id": 216,
+            "alt": "marijuana",
+            "src": "assets/images/product/marijuana/1.jpg",
+            "variant_id": [
+                21601
+            ]
+        }]
+    }, 
+    {
         "id": 217,
         "title": "Fruit Tarts",
         "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.",
