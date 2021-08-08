@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
+import { EnvironmentUrlService } from './enviroment-url.service';
+import { Router } from '@angular/router';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -16,19 +18,43 @@ const state = {
   providedIn: 'root'
 })
 export class ProductService {
+  protected _env: EnvironmentUrlService;
+  protected http: HttpClient;
+  httpHeaders: any;
+
+  constructor(
+    private router: Router,
+    injector: Injector,
+    private toastrService: ToastrService
+  ) {
+    this.http = injector.get(HttpClient);
+    this._env = injector.get(EnvironmentUrlService);
+
+    // Setting Up token to be passed with request
+    // const token = localStorage.getItem('userToken');
+    // const SecutiryGroupId = localStorage.getItem("securityGroup");
+    // this.httpHeaders = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': `Bearer ${token}`,
+    //   'GroupId': `${SecutiryGroupId}`
+    // });
+  }
 
   public Currency = { name: 'Dollar', currency: 'USD', price: 1 } // Default Currency
   public OpenCart: boolean = false;
-  public Products
-
-  constructor(private http: HttpClient,
-    private toastrService: ToastrService) { }
+  public Products;
 
   /*
     ---------------------------------------------
     ---------------  Product  -------------------
     ---------------------------------------------
   */
+
+  // GET: category/getProducts
+  public getAllProductsAPI() {
+    let url = this._env.urlAddress + 'products/getProducts';
+    return this.http.get(url);
+  }
 
   // Product
   private get products(): Observable<Product[]> {

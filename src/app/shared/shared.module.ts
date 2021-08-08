@@ -53,6 +53,8 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 
 // Pipes
 import { DiscountPipe } from './pipes/discount.pipe';
+import { EnvironmentUrlService } from './services/enviroment-url.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -88,6 +90,9 @@ import { DiscountPipe } from './pipes/discount.pipe';
     TapToTopComponent,
     DiscountPipe
   ],
+  providers: [
+    EnvironmentUrlService
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -96,6 +101,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
     NgbModule,
     CarouselModule,
     BarRatingModule,
+    HttpClientModule,
     LazyLoadImageModule.forRoot({
       // preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     }),
@@ -111,6 +117,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
     BarRatingModule,
     LazyLoadImageModule,
     NgxSkeletonLoaderModule,
+    HttpClientModule,
     TranslateModule,
     HeaderOneComponent,
     FooterOneComponent,

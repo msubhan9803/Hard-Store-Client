@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
   public menuItems: Menu[];
 
   constructor(private router: Router, public navServices: NavService) {
-    this.navServices.items.subscribe(menuItems => this.menuItems = menuItems );
+    this.navServices.items.subscribe(menuItems => this.menuItems = menuItems);
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
     });
@@ -30,4 +30,15 @@ export class MenuComponent implements OnInit {
     item.active = !item.active;
   }
 
+  scrollToSection(value) {
+    console.log(value)
+    if (value == "contact-section") {
+      let el = document.getElementById(value);
+      window.scrollTo(0,document.body.scrollHeight);
+    } else {
+      let el = document.getElementById(value);
+      // el.scrollTop = el.scrollHeight;
+      window.scrollTo(0, el.scrollHeight - 200)
+    }
+  }
 }

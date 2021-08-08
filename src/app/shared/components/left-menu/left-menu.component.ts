@@ -38,4 +38,15 @@ export class LeftMenuComponent implements OnInit {
     }
   }
 
+  scrollToSection(value) {
+    console.log(value)
+    if (value == "contact-section") {
+      let el = document.getElementById(value);
+      window.scrollTo(0,document.body.scrollHeight);
+    } else {
+      let el = document.getElementById(value);
+      // el.scrollTop = el.scrollHeight;
+      window.scrollTo(0, el.scrollHeight - 200)
+    }
+  }
 }

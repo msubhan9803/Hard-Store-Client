@@ -99,11 +99,18 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
     image: 'assets/images/logos/8.png',
   }];
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     // Change color for this layout
     document.documentElement.style.setProperty('--theme-deafult', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
+    
+    // await this.productService.getAllProductsAPI().toPromise().then(
+    //   (res: []) => {
+    //     this.products = res;
+    //     console.log("products: ", res)
+    //   }
+    // );
   }
 
   ngOnDestroy(): void {

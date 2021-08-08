@@ -9,8 +9,8 @@ import { ProductService } from "../../../services/product.service";
   templateUrl: './product-box-three.component.html',
   styleUrls: ['./product-box-three.component.scss']
 })
-export class ProductBoxThreeComponent implements OnInit {
 
+export class ProductBoxThreeComponent implements OnInit {
   @Input() product: Product;
   @Input() currency: any = this.productService.Currency; // Default Currency
   @Input() cartModal: boolean = false; // Default False
@@ -21,6 +21,7 @@ export class ProductBoxThreeComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    // console.log("product from product component: ", this.product)
   }
 
   addToCart(product: any) {
