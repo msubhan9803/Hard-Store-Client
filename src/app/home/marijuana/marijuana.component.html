@@ -103,8 +103,14 @@
             <ng-template ngbTabTitle>{{collection}}</ng-template>
             <ng-template ngbTabContent>
               <div class="no-slider row">
-                <ng-container *ngFor="let product of getCollectionProducts(collection)">
-                  <div class="col-md-3">
+                <ng-container *ngFor="let product of products">
+                  <div class="col-md-3" *ngIf="collection == 'sale' && product.sale">
+                    <div class="product-box product-wrap m-2">
+                      <app-product-box-three [product]="product" [currency]="productService?.Currency">
+                      </app-product-box-three>
+                    </div>
+                  </div>
+                  <div class="col-md-3" *ngIf="collection == 'regular' && !product.sale">
                     <div class="product-box product-wrap m-2">
                       <app-product-box-three [product]="product" [currency]="productService?.Currency">
                       </app-product-box-three>

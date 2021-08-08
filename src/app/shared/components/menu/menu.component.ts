@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavService, Menu } from '../../services/nav.service';
 import { Router } from '@angular/router';
+import { HelperMethodsService } from '../../services/helper-methods.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +12,11 @@ export class MenuComponent implements OnInit {
 
   public menuItems: Menu[];
 
-  constructor(private router: Router, public navServices: NavService) {
+  constructor(
+    private router: Router,
+    public navServices: NavService,
+    public helperMethodsService: HelperMethodsService
+  ) {
     this.navServices.items.subscribe(menuItems => this.menuItems = menuItems);
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
@@ -28,17 +33,5 @@ export class MenuComponent implements OnInit {
   // Click Toggle menu (Mobile)
   toggletNavActive(item) {
     item.active = !item.active;
-  }
-
-  scrollToSection(value) {
-    console.log(value)
-    if (value == "contact-section") {
-      let el = document.getElementById(value);
-      window.scrollTo(0,document.body.scrollHeight);
-    } else {
-      let el = document.getElementById(value);
-      // el.scrollTop = el.scrollHeight;
-      window.scrollTo(0, el.scrollHeight - 200)
-    }
   }
 }

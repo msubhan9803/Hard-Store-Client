@@ -12,23 +12,26 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
 
   public themeLogo: string = 'assets/images/icon/logo-3.png';
   public themeFooterLogo: string = 'assets/images/icon/logo-9.png';
-  
+
   public products: Product[] = [];
-  public productCollections: any[] = [];
+  public productCollections: any[] = [
+    "sale",
+    "regular"
+  ];
 
   public ProductSliderConfig: any = ProductSlider;
-  
+
   constructor(public productService: ProductService) {
-    this.productService.getProducts.subscribe(response => {
-      this.products = response.filter(item => item.type == 'marijuana');
-      // Get Product Collection
-      this.products.filter((item) => {
-        item.collection.filter((collection) => {
-          const index = this.productCollections.indexOf(collection);
-          if (index === -1) this.productCollections.push(collection);
-        })
-      })
-    });
+    // this.productService.getProducts.subscribe(response => {
+    //   this.products = response.filter(item => item.type == 'marijuana');
+    //   // Get Product Collection
+    //   this.products.filter((item) => {
+    //     item.collection.filter((collection) => {
+    //       const index = this.productCollections.indexOf(collection);
+    //       if (index === -1) this.productCollections.push(collection);
+    //     })
+    //   })
+    // });
   }
 
   public sliders = [{
@@ -104,13 +107,20 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
     document.documentElement.style.setProperty('--theme-deafult', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
-    
-    // await this.productService.getAllProductsAPI().toPromise().then(
-    //   (res: []) => {
-    //     this.products = res;
-    //     console.log("products: ", res)
-    //   }
-    // );
+
+    await this.productService.getAllProductsAPI().toPromise().then(
+      (res: []) => {
+        this.products = res;
+        console.log("products: ", res)
+
+        // this.products.filter((item) => {
+        //   item.collection.filter((collection) => {
+        //     const index = this.productCollections.indexOf(collection);
+        //     if (index === -1) this.productCollections.push(collection);
+        //   })
+        // })
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -122,11 +132,17 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
 
   // Product Tab collection
   getCollectionProducts(collection) {
+    console.log("collection: ", collection)
     return this.products.filter((item) => {
-      if (item.collection.find(i => i === collection)) {
-        return item
+      if (collection == "sale") {
+        if (item.sale) {
+          return item;
+        }
+      } else if (collection == "regular") {
+        if (item.sale) {
+          return item;
+        }
       }
     })
   }
-
 }

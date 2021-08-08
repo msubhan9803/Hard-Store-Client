@@ -44,6 +44,11 @@ export class ProductService {
   public OpenCart: boolean = false;
   public Products;
 
+  // get api url
+  public getImageUrl() {
+    return this._env.imageAddress;
+  }
+
   /*
     ---------------------------------------------
     ---------------  Product  -------------------
@@ -53,6 +58,12 @@ export class ProductService {
   // GET: category/getProducts
   public getAllProductsAPI() {
     let url = this._env.urlAddress + 'products/getProducts';
+    return this.http.get(url);
+  }
+
+  // GET: category/getProductById
+  public getAllProductsById(productId) {
+    let url = this._env.urlAddress + 'products/getProductById/' + productId;
     return this.http.get(url);
   }
 

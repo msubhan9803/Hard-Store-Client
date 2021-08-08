@@ -17,11 +17,12 @@ export class ProductBoxThreeComponent implements OnInit {
   
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
+  public imageAddress = "";
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    // console.log("product from product component: ", this.product)
+    this.imageAddress = this.productService.getImageUrl();
   }
 
   addToCart(product: any) {

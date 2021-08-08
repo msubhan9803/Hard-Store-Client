@@ -55,6 +55,7 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 import { DiscountPipe } from './pipes/discount.pipe';
 import { EnvironmentUrlService } from './services/enviroment-url.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HelperMethodsService } from './services/helper-methods.service';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { HttpClientModule } from '@angular/common/http';
     DiscountPipe
   ],
   providers: [
-    EnvironmentUrlService
+    EnvironmentUrlService,
+    HelperMethodsService
   ],
   imports: [
     CommonModule,
@@ -123,6 +125,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterOneComponent,
     HeaderTwoComponent,
     FooterTwoComponent,
+    RouterModule,
     HeaderThreeComponent,
     FooterThreeComponent,
     HeaderFourComponent,

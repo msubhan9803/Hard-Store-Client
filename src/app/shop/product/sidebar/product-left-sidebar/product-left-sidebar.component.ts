@@ -13,20 +13,33 @@ import { SizeModalComponent } from "../../../../shared/components/modal/size-mod
 export class ProductLeftSidebarComponent implements OnInit {
 
   public product: Product = {};
+  public productId = "";
   public counter: number = 1;
   public activeSlide: any = 0;
   public selectedSize: any;
   public mobileSidebar: boolean = false;
 
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
-  
+
   public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
 
   constructor(private route: ActivatedRoute, private router: Router,
-    public productService: ProductService) { 
-      this.route.data.subscribe(response => this.product = response.data );
-    }
+    public productService: ProductService) {
+    this.productId = this.route.snapshot.paramMap.get('id');
+    console.log("productId: ", this.productId)
+
+    this.productService.getAllProductsById(this.productId).subscribe(
+      res => {
+        console.log("product: ", res)
+        this.product = res;
+      }
+    )
+
+    // this.route.data.subscribe(response => {
+    //   this.product = response.data
+    // });
+  }
 
   ngOnInit(): void {
   }
@@ -56,22 +69,22 @@ export class ProductLeftSidebarComponent implements OnInit {
   selectSize(size) {
     this.selectedSize = size;
   }
-  
+
   // Increament
   increment() {
-    this.counter++ ;
+    this.counter++;
   }
 
   // Decrement
   decrement() {
-    if (this.counter > 1) this.counter-- ;
+    if (this.counter > 1) this.counter--;
   }
 
   // Add to cart
   async addToCart(product: any) {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
-    if(status)
+    if (status)
       this.router.navigate(['/shop/cart']);
   }
 
@@ -79,7 +92,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   async buyNow(product: any) {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
-    if(status)
+    if (status)
       this.router.navigate(['/shop/checkout']);
   }
 

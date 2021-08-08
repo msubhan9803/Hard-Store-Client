@@ -1,16 +1,16 @@
 <div class="img-wrapper">
-    <div class="ribbon" *ngIf="product.new"><span>new</span></div>
-    <div class="front">
-        <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+    <div class="ribbon" *ngIf="this.product.new"><span>new</span></div>
+    <div class="front product-img" style="height: 300px;">
+        <a [routerLink]="['/shop/product/left/sidebar/', product._id]">
             <img  [defaultImage]="'assets/images/product/placeholder.jpg'"
-                  [lazyLoad]="product.images[0].src" class="img-fluid"
-                  alt="{{ product.images[0].alt }}">
+                  [lazyLoad]="this.imageAddress + this.product.variants[0].imagesPreview[0]" class="img-fluid"
+                  alt="">
         </a>
     </div>
     <div class="cart-info cart-wrap">
-        <!-- <a href="javascript:void(0)" (click)="addToWishlist(product)" title="Add to Wishlist">
+        <a href="javascript:void(0)" (click)="addToWishlist(product)" title="Add to Wishlist">
         	<i class="fa fa-heart" aria-hidden="true"></i>
-        </a> -->
+        </a>
         <button title="Add to cart" (click)="CartModal.openModal(product)" *ngIf="cartModal">
         	<i class="ti-shopping-cart"></i> Add to cart
         </button>
@@ -24,18 +24,19 @@
         	<i class="ti-search" aria-hidden="true"></i>
         </a>
     </div>
-    <div class="quick-view-part">
+    <!-- <div class="quick-view-part">
         <a href="javascript:void(0)" (click)="QuickView.openModal()" title="Quick View">
         	<i class="ti-search" aria-hidden="true"></i>
         </a>
-    </div>
+    </div> -->
 </div>
 <div class="product-info">
     <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
     <a [routerLink]="['/shop/product/left/sidebar/', product?.title.replace(' ', '-')]">
-    	<h6>{{ product?.title | titlecase }}</h6>
+    	<h6>{{ product?.title ? product?.title : "No Title" | titlecase }}</h6>
     </a>
-    <h4>{{ product?.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}</h4>
+    <!-- <h4>{{ product?.skuArray[0].price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}</h4> -->
+    <h4>{{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}</h4>
 </div>
 
 <app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view>

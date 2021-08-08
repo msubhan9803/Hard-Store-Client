@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavService, Menu } from '../../services/nav.service';
 import { Router } from '@angular/router';
+import { HelperMethodsService } from '../../services/helper-methods.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -11,8 +12,12 @@ export class LeftMenuComponent implements OnInit {
 
   public menuItems: Menu[];
 
-  constructor(private router: Router, public navServices: NavService) {
-    this.navServices.leftMenuItems.subscribe(menuItems => this.menuItems = menuItems );
+  constructor(
+    private router: Router,
+    public navServices: NavService,
+    public helperMethodsService: HelperMethodsService
+  ) {
+    this.navServices.leftMenuItems.subscribe(menuItems => this.menuItems = menuItems);
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
     });
@@ -31,22 +36,10 @@ export class LeftMenuComponent implements OnInit {
   }
 
   onHover(menuItem) {
-    if(window.innerWidth > 1200 && menuItem){
-       document.getElementById('unset').classList.add('sidebar-unset')
+    if (window.innerWidth > 1200 && menuItem) {
+      document.getElementById('unset').classList.add('sidebar-unset')
     } else {
       document.getElementById('unset').classList.remove('sidebar-unset')
-    }
-  }
-
-  scrollToSection(value) {
-    console.log(value)
-    if (value == "contact-section") {
-      let el = document.getElementById(value);
-      window.scrollTo(0,document.body.scrollHeight);
-    } else {
-      let el = document.getElementById(value);
-      // el.scrollTop = el.scrollHeight;
-      window.scrollTo(0, el.scrollHeight - 200)
     }
   }
 }

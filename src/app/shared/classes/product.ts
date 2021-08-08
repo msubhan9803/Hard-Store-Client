@@ -1,6 +1,7 @@
 // Products
 export interface Product {
     id?: number;
+    _id?: number;
     title?: string;
     description?: string;
     type?: string;
@@ -16,6 +17,7 @@ export interface Product {
     tags?: any[];
     variants?: Variants[];
     images?: Images[];
+    skuArray?: any[];
 }
 
 export interface Variants {
@@ -25,6 +27,11 @@ export interface Variants {
     size?: string;
     color?: string;
     image_id?: number;
+    imagesPreview: Array<string>;
+    isAvailable: boolean;
+    isThumbnailImageIndex: number;
+    variantColor: string;
+    variantIndex: number;
 }
 
 export interface Images {
