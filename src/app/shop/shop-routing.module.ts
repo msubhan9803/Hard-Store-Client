@@ -45,11 +45,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'product/three/column/:slug',
+    path: 'product/three/column/:id',
     component: ThreeColumnComponent,
-    resolve: {
-      data: Resolver
-    }
+    // resolve: {
+    //   data: Resolver
+    // }
   },
   {
     path: 'product/four/image/:slug',
@@ -66,11 +66,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'product/image/outside/:slug',
+    path: 'product/image/outside/:id',
     component: ImageOutsideComponent,
-    resolve: {
-      data: Resolver
-    }
+    // resolve: {
+    //   data: Resolver
+    // }
   },
   {
     path: 'collection/left/sidebar',

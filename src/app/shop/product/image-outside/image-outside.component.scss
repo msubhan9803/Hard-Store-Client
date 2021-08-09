@@ -1,0 +1,11 @@
+.center-image {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+.main-variant-slider {
+    height: 500px !important;
+    width: 100%;
+    object-fit: cover;
+}

@@ -1,7 +1,7 @@
 <div class="img-wrapper">
     <div class="ribbon" *ngIf="this.product.new"><span>new</span></div>
     <div class="front product-img" style="height: 300px;">
-        <a [routerLink]="['/shop/product/left/sidebar/', product._id]">
+        <a [routerLink]="['/shop/product/image/outside/', product._id]">
             <img  [defaultImage]="'assets/images/product/placeholder.jpg'"
                   [lazyLoad]="this.imageAddress + this.product.variants[0].imagesPreview[0]" class="img-fluid"
                   alt="">

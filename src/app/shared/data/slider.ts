@@ -244,3 +244,11 @@ export let ProductDetailsThumbSlider: any = {
     margin: 10,
     dots:false
 }
+
+// Vairants Slider
+export let ProductVariantsThumbSlider: any = {
+    items: 3,
+    loop: true,
+    margin: 10,
+    dots:false
+}

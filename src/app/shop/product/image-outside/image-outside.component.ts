@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../shared/data/slider';
+import { ProductDetailsMainSlider, ProductDetailsThumbSlider, ProductVariantsThumbSlider } from '../../../shared/data/slider';
 import { Product } from '../../../shared/classes/product';
 import { ProductService } from '../../../shared/services/product.service';
 import { SizeModalComponent } from "../../../shared/components/modal/size-modal/size-modal.component";
@@ -16,11 +16,17 @@ export class ImageOutsideComponent implements OnInit {
   public counter: number = 1;
   public activeSlide: any = 0;
   public selectedSize: any;
+  public productId = "";
+  public currentVariant = 0;
+  public currentVariantImage = 0;
+  public imageAddress = "";
+  @Input() currency: any = this.productService.Currency;
 
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
   
   public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
+  public ProductVariantsThumbSlider: any = ProductVariantsThumbSlider;
 
   constructor(private route: ActivatedRoute, private router: Router,
     public productService: ProductService) { 
@@ -28,6 +34,16 @@ export class ImageOutsideComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.productId = this.route.snapshot.paramMap.get('id');
+    this.imageAddress = this.productService.getImageUrl();
+
+    this.productService.getAllProductsById(this.productId).subscribe(
+      res => {
+        this.product = res;
+        console.log(this.product.variants[this.currentVariant].imagesPreview)
+        // this.currentVariantImage = this.product.variants[this.currentVariant].isThumbnailImageIndex;
+      }
+    )
   }
 
   // Get Product Color
@@ -86,5 +102,8 @@ export class ImageOutsideComponent implements OnInit {
   addToWishlist(product: any) {
     this.productService.addToWishlist(product);
   }
-
+  
+  changeVariant(variantIndex) {
+    this.currentVariant = variantIndex;
+  }
 }
