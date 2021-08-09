@@ -182,28 +182,28 @@ export class ProductService {
 
   // Add to Cart
   public addToCart(product, quantity?, variantIndex?): any {
-    const cartItem = state.cart.find(item => item.id === product.id);
+    console.log("variantIndex: ", variantIndex)
+    // const cartItem = state.cart.find(item => item.id === product.id);
     const qty = quantity ? quantity : 1;
-    const items = cartItem ? cartItem : product;
-    const stock = this.calculateStockCounts(items, qty);
+    // const items = cartItem ? cartItem : product;
+    // const stock = this.calculateStockCounts(items, qty);
     
-    if(!stock) return false
+    // if(!stock) return false
 
-    if (cartItem) {
-        cartItem.quantity += qty    
-    } else {
+    // if (cartItem) {
+    //     cartItem.quantity += qty    
+    // } else {
       state.cart.push({
         ...product,
         quantity: qty,
         variantIndex: variantIndex
       })
-    }
-
-    console.log("state.cart: ", state.cart)
+      console.log("state.cart: ", state.cart)
+    // }
 
     // this.OpenCart = true; // If we use cart variation modal
-    localStorage.setItem("cartItems", JSON.stringify(state.cart));
-    this.storageSub.next('localStorageChanged');
+    // localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    // this.storageSub.next('localStorageChanged');
     return true;
   }
 

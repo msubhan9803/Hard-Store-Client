@@ -42,11 +42,13 @@ export class CartComponent implements OnInit {
 
       let tempProduct = {
         _id: product._id,
-        imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex],
+        imageAddress: this.imageAddress + product.variants[index].imagesPreview[product.variants[index].isThumbnailImageIndex | 0],
         title: product.title,
         price: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].price,
         quantity: product.quantity
       }
+
+      console.log(tempProduct)
 
       this.parsedProducts.push(tempProduct);
     }
