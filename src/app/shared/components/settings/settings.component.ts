@@ -14,6 +14,8 @@ export class SettingsComponent implements OnInit {
 
   public products: Product[] = [];
   public search: boolean = false;
+  public parsedProducts = [];
+  public imageAddress = "";
   
   public languages = [{ 
     name: 'English',
@@ -44,10 +46,37 @@ export class SettingsComponent implements OnInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
     public productService: ProductService) {
-    this.productService.cartItems.subscribe(response => this.products = response);
+    this.productService.cartItems.subscribe(response => {
+      this.products = response;
+
+      this.imageAddress = this.productService.getImageUrl();
+
+      this.products = response;
+      this.recreateParsedProductList();
+    });
   }
 
   ngOnInit(): void {
+  }
+
+  public recreateParsedProductList() {
+    this.parsedProducts = []
+    for (let index = 0; index < this.products.length; index++) {
+      const product: any = this.products[index];
+      const variantIndex = product.variantIndex;
+
+      let tempProduct = {
+        _id: product._id,
+        imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex],
+        title: product.title,
+        price: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].price,
+        quantity: product.quantity
+      }
+
+      console.log(tempProduct)
+
+      this.parsedProducts.push(tempProduct);
+    }
   }
 
   searchToggle(){

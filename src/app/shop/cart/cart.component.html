@@ -20,11 +20,12 @@
                         <th scope="col">total</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let product of products">
+                <tbody *ngFor="let product of parsedProducts; let arrayIndex = index">
                     <tr>
                         <td>
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                                <img [src]="product.images[0].src" [alt]="product.images[0].alt">
+                            <a [routerLink]="['/shop/product/image/outside/', product._id]">
+                                <!-- <img [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]" [alt]=""> -->
+                                <img [src]="product.imageAddress" [alt]="">
                             </a>
                         </td>
                         <td>
@@ -60,13 +61,13 @@
                             <div class="qty-box">
                                 <div class="input-group">
                                     <span class="input-group-prepend">
-                                        <button type="button" class="btn quantity-left-minus" data-type="minus" (click)="decrement(product)">
+                                        <button type="button" class="btn quantity-left-minus" data-type="minus" (click)="decrement(arrayIndex)">
                                             <i class="ti-angle-left"></i>
                                         </button>
                                     </span>
                                     <input type="text" name="quantity" class="form-control input-number" disabled [(ngModel)]="product.quantity">
                                     <span class="input-group-prepend">
-                                        <button type="button" class="btn quantity-right-plus"  data-type="plus" (click)="increment(product)">
+                                        <button type="button" class="btn quantity-right-plus"  data-type="plus" (click)="increment(arrayIndex)">
                                             <i class="ti-angle-right"></i>
                                         </button>
                                     </span>

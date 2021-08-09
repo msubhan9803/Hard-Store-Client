@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, startWith, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
@@ -21,6 +21,9 @@ export class ProductService {
   protected _env: EnvironmentUrlService;
   protected http: HttpClient;
   httpHeaders: any;
+  private storageSub = new Subject<string>();
+  public storageSubObs: Observable<any>
+
 
   constructor(
     private router: Router,
@@ -29,6 +32,7 @@ export class ProductService {
   ) {
     this.http = injector.get(HttpClient);
     this._env = injector.get(EnvironmentUrlService);
+    this.storageSubObs = this.storageSub.asObservable();
 
     // Setting Up token to be passed with request
     // const token = localStorage.getItem('userToken');
@@ -177,9 +181,9 @@ export class ProductService {
   }
 
   // Add to Cart
-  public addToCart(product): any {
+  public addToCart(product, quantity?, variantIndex?): any {
     const cartItem = state.cart.find(item => item.id === product.id);
-    const qty = product.quantity ? product.quantity : 1;
+    const qty = quantity ? quantity : 1;
     const items = cartItem ? cartItem : product;
     const stock = this.calculateStockCounts(items, qty);
     
@@ -190,13 +194,21 @@ export class ProductService {
     } else {
       state.cart.push({
         ...product,
-        quantity: qty
+        quantity: qty,
+        variantIndex: variantIndex
       })
     }
 
-    this.OpenCart = true; // If we use cart variation modal
+    console.log("state.cart: ", state.cart)
+
+    // this.OpenCart = true; // If we use cart variation modal
     localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    this.storageSub.next('localStorageChanged');
     return true;
+  }
+
+  public storageSubInstance () {
+    return this.storageSubObs;
   }
 
   // Update Cart Quantity
@@ -208,7 +220,9 @@ export class ProductService {
         if (qty !== 0 && stock) {
           state.cart[index].quantity = qty
         }
+
         localStorage.setItem("cartItems", JSON.stringify(state.cart));
+        this.storageSub.next('localStorageChanged');
         return true
       }
     })
@@ -230,6 +244,7 @@ export class ProductService {
     const index = state.cart.indexOf(product);
     state.cart.splice(index, 1);
     localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    this.storageSub.next('localStorageChanged');
     return true
   }
 

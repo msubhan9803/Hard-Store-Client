@@ -33,11 +33,9 @@ export class ThreeColumnComponent implements OnInit {
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
-    console.log("productId: ", this.productId)
 
     this.productService.getAllProductsById(this.productId).subscribe(
       res => {
-        console.log("product: ", res)
         this.product = res;
       }
     )

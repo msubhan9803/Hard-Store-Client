@@ -40,7 +40,6 @@ export class ImageOutsideComponent implements OnInit {
     this.productService.getAllProductsById(this.productId).subscribe(
       res => {
         this.product = res;
-        console.log(this.product.variants[this.currentVariant].imagesPreview)
         // this.currentVariantImage = this.product.variants[this.currentVariant].isThumbnailImageIndex;
       }
     )
@@ -83,17 +82,17 @@ export class ImageOutsideComponent implements OnInit {
   }
 
   // Add to cart
-  async addToCart(product: any) {
-    product.quantity = this.counter || 1;
-    const status = await this.productService.addToCart(product);
+  async addToCart(product: any, variantIndex: number) {
+    let quantity = this.counter || 1;
+    const status = await this.productService.addToCart(product, quantity, variantIndex);
     if(status)
       this.router.navigate(['/shop/cart']);
   }
 
   // Buy Now
-  async buyNow(product: any) {
-    product.quantity = this.counter || 1;
-    const status = await this.productService.addToCart(product);
+  async buyNow(product: any, variantIndex: number) {
+    let quantity = this.counter || 1;
+    const status = await this.productService.addToCart(product, quantity, variantIndex);
     if(status)
       this.router.navigate(['/shop/checkout']);
   }

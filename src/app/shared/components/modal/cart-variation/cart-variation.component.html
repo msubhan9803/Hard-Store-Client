@@ -11,10 +11,11 @@
         </div>
         <div class="cart_media" *ngIf="products.length">
             <ul class="cart_product">
-                <li *ngFor="let product of products">
+                <li *ngFor="let product of parsedProducts">
                     <div class="media">
-                        <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                            <img class="mr-3" [src]="product.images[0].src" [alt]="product.images[0].alt">
+                        <a [routerLink]="['/shop/product/image/outside/', product._id]">
+                            <!-- <img class="mr-3" [src]="product.images[0].src" [alt]="product.images[0].alt"> -->
+                            <img [src]="product.imageAddress" [alt]="">
                         </a>
                         <div class="media-body">
                             <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">

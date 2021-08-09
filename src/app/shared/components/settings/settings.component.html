@@ -58,12 +58,13 @@
         <h5>Your cart is currently empty.</h5>
       </ul>
       <ul class="show-div shopping-cart" *ngIf='products.length'>
-        <li *ngFor="let product of products">
+        <li *ngFor="let product of parsedProducts">
           <div class="media">
             <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-              <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt">
+              <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
+              <img [src]="product.imageAddress" height="20px" [alt]="">
             </a>
-            <div class="media-body">
+            <div class="media-body m-2">
               <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
                 <h4>{{ product?.title }}</h4>
               </a>

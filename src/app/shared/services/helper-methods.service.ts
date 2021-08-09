@@ -5,7 +5,6 @@ export class HelperMethodsService {
     constructor() { }
 
     public scrollToSection(value) {
-        console.log("here...")
         if (value == "contact-section") {
             let el = document.getElementById(value);
             window.scrollTo(0, document.body.scrollHeight);

@@ -27,11 +27,9 @@ export class ProductLeftSidebarComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
     public productService: ProductService) {
     this.productId = this.route.snapshot.paramMap.get('id');
-    console.log("productId: ", this.productId)
 
     this.productService.getAllProductsById(this.productId).subscribe(
       res => {
-        console.log("product: ", res)
         this.product = res;
       }
     )

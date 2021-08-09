@@ -1,5 +1,6 @@
 <div class="img-wrapper">
-    <div class="ribbon" *ngIf="this.product.new"><span>new</span></div>
+    <!-- <div class="ribbon" *ngIf="this.product.new"><span>new</span></div> -->
+    <div class="ribbon" *ngIf="this.product.sale"><span>sale</span></div>
     <div class="front product-img" style="height: 300px;">
         <a [routerLink]="['/shop/product/image/outside/', product._id]">
             <img  [defaultImage]="'assets/images/product/placeholder.jpg'"
@@ -8,9 +9,9 @@
         </a>
     </div>
     <div class="cart-info cart-wrap">
-        <a href="javascript:void(0)" (click)="addToWishlist(product)" title="Add to Wishlist">
+        <!-- <a href="javascript:void(0)" (click)="addToWishlist(product)" title="Add to Wishlist">
         	<i class="fa fa-heart" aria-hidden="true"></i>
-        </a>
+        </a> -->
         <button title="Add to cart" (click)="CartModal.openModal(product)" *ngIf="cartModal">
         	<i class="ti-shopping-cart"></i> Add to cart
         </button>
