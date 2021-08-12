@@ -23,7 +23,7 @@
                         </ul>
                         <div class="border-product">
                             <h6 class="product-title">product details</h6>
-                            <p>{{ product.description.substring(0, 200)+'...' }}</p>
+                            <div [innerHTML]="this.product?.description"></div>
                         </div>
                         <div class="product-description border-product">
                             <div class="size-box" *ngIf="Size(product.variants).length">
@@ -54,7 +54,7 @@
                         </div>
                         <div class="product-buttons">
                             <a href="javascript:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="addToCart(product)">add to cart</a>
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]" class="btn btn-solid">view detail</a>
+                            <a [routerLink]="['/shop/product/image/outside/', product._id]" class="btn btn-solid">view detail</a>
                         </div>
                     </div>
                 </div>

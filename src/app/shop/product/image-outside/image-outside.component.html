@@ -119,7 +119,8 @@
                                 </div>
                                 <div class="border-product">
                                     <h6 class="product-title">product details</h6>
-                                    <p>{{ this.product?.description.substring(0, 200)+'...' }}</p>
+                                    
+                                    <div [innerHTML]="this.product?.description"></div>
                                 </div>
                                 <div class="border-product">
                                     <h6 class="product-title">share it</h6>
@@ -135,7 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col order-up">
+                        <div class="col order-up" *ngIf="product?.variants.length > 0">
                             <div class="imgae-outside-thumbnail">
                                 <div class="col-12 p-0 slider-nav-images">
                                     <owl-carousel-o [options]="ProductVariantsThumbSlider" class="product-slick">
@@ -163,7 +164,7 @@
                             <ngb-tab>
                                 <ng-template ngbTabTitle>Description</ng-template>
                                 <ng-template ngbTabContent>
-                                    <p>{{ this.product?.description }}</p>
+                                    <div [innerHTML]="this.product?.description"></div>
                                 </ng-template>
                             </ngb-tab>
                             <ngb-tab>
