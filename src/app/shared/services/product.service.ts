@@ -55,13 +55,14 @@ export class ProductService {
 
   /*
     ---------------------------------------------
-    ---------------  Product  -------------------
+    --------------- API Product  -------------------
     ---------------------------------------------
   */
 
   // GET: category/getProducts
   public getAllProductsAPI() {
     let url = this._env.urlAddress + 'products/getProducts';
+    this.toastrService.success('Product get request .');
     return this.http.get(url);
   }
 
@@ -182,7 +183,6 @@ export class ProductService {
 
   // Add to Cart
   public addToCart(product, quantity?, variantIndex?): any {
-    console.log("variantIndex: ", variantIndex)
     // const cartItem = state.cart.find(item => item.id === product.id);
     const qty = quantity ? quantity : 1;
     // const items = cartItem ? cartItem : product;
@@ -198,12 +198,11 @@ export class ProductService {
         quantity: qty,
         variantIndex: variantIndex
       })
-      console.log("state.cart: ", state.cart)
     // }
 
     // this.OpenCart = true; // If we use cart variation modal
-    // localStorage.setItem("cartItems", JSON.stringify(state.cart));
-    // this.storageSub.next('localStorageChanged');
+    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    this.storageSub.next('localStorageChanged');
     return true;
   }
 
@@ -212,9 +211,9 @@ export class ProductService {
   }
 
   // Update Cart Quantity
-  public updateCartQuantity(product: Product, quantity: number): Product | boolean {
+  public updateCartQuantity(product: Product, arrayIndex: number, quantity: number): Product | boolean {
     return state.cart.find((items, index) => {
-      if (items.id === product.id) {
+      if (arrayIndex == index) {
         const qty = state.cart[index].quantity + quantity
         const stock = this.calculateStockCounts(state.cart[index], quantity)
         if (qty !== 0 && stock) {
@@ -240,8 +239,8 @@ export class ProductService {
   }
 
   // Remove Cart items
-  public removeCartItem(product: Product): any {
-    const index = state.cart.indexOf(product);
+  public removeCartItem(index: number): any {
+    console.log(`Delete product at Index ${index}`)
     state.cart.splice(index, 1);
     localStorage.setItem("cartItems", JSON.stringify(state.cart));
     this.storageSub.next('localStorageChanged');

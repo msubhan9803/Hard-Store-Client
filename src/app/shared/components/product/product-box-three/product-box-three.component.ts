@@ -3,6 +3,8 @@ import { QuickViewComponent } from "../../modal/quick-view/quick-view.component"
 import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component";
 import { Product } from "../../../classes/product";
 import { ProductService } from "../../../services/product.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-product-box-three',
@@ -14,19 +16,31 @@ export class ProductBoxThreeComponent implements OnInit {
   @Input() product: Product;
   @Input() currency: any = this.productService.Currency; // Default Currency
   @Input() cartModal: boolean = false; // Default False
-  
+
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
   public imageAddress = "";
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    public toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.imageAddress = this.productService.getImageUrl();
   }
 
-  addToCart(product: any) {
-    this.productService.addToCart(product);
+  // addToCart(product: any) {
+  //   this.productService.addToCart(product);
+  // }
+
+  // Add to cart
+  async addToCart(product: any, variantIndex: number) {
+    let quantity = 1;
+    const status = await this.productService.addToCart(product, quantity, variantIndex);
+    if (status)
+      this.router.navigate(['/shop/cart']);
   }
 
   addToWishlist(product: any) {

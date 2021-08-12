@@ -35,23 +35,25 @@ export class CartComponent implements OnInit {
   }
 
   public recreateParsedProductList() {
+    console.log("============ recreateParsedProductList ==============")
     this.parsedProducts = []
     for (let index = 0; index < this.products.length; index++) {
       const product: any = this.products[index];
+      console.log("product: ", product)
       const variantIndex = product.variantIndex;
+      console.log("variantIndex: ", variantIndex)
 
       let tempProduct = {
         _id: product._id,
-        imageAddress: this.imageAddress + product.variants[index].imagesPreview[product.variants[index].isThumbnailImageIndex | 0],
+        imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex],
         title: product.title,
         price: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].price,
         quantity: product.quantity
       }
 
-      console.log(tempProduct)
-
       this.parsedProducts.push(tempProduct);
     }
+    console.log("this.parsedProducts: ", this.parsedProducts)
   }
 
   public get getTotal(): Observable<number> {
@@ -63,7 +65,7 @@ export class CartComponent implements OnInit {
   //   this.productService.updateCartQuantity(product, qty);
   // }
   increment(index, qty = 1) {
-    this.productService.updateCartQuantity(this.products[index], qty);
+    this.productService.updateCartQuantity(this.products[index], index, qty);
   }
 
   // Decrement
@@ -71,11 +73,10 @@ export class CartComponent implements OnInit {
   //   this.productService.updateCartQuantity(product, qty);
   // }
   decrement(index, qty = -1) {
-    this.productService.updateCartQuantity(this.products[index], qty);
+    this.productService.updateCartQuantity(this.products[index], index, qty);
   }
 
-  public removeItem(product: any) {
-    this.productService.removeCartItem(product);
+  public removeItem(index: any) {
+    this.productService.removeCartItem(index);
   }
-
 }

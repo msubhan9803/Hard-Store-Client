@@ -56,6 +56,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
 import { EnvironmentUrlService } from './services/enviroment-url.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HelperMethodsService } from './services/helper-methods.service';
+import { ToastService } from './services/toast.service';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { HelperMethodsService } from './services/helper-methods.service';
   ],
   providers: [
     EnvironmentUrlService,
-    HelperMethodsService
+    HelperMethodsService,
+    ToastService
   ],
   imports: [
     CommonModule,

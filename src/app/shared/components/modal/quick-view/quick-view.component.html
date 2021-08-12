@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6  col-xs-12">
                     <div class="quick-view-img">
-                        <img [src]="ImageSrc ? ImageSrc : product.images[0].src" [alt]="product.images[0].alt" class="img-fluid">
+                        <img [src]="this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex]" [alt]="" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 rtl-text">

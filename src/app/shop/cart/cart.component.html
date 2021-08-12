@@ -20,8 +20,8 @@
                         <th scope="col">total</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let product of parsedProducts; let arrayIndex = index">
-                    <tr>
+                <tbody>
+                    <tr *ngFor="let product of parsedProducts; let arrayIndex = index">
                         <td>
                             <a [routerLink]="['/shop/product/image/outside/', product._id]">
                                 <!-- <img [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]" [alt]=""> -->
@@ -75,7 +75,7 @@
                             </div>
                         </td>
                         <td>
-                            <a href="javascript:void(0)" (click)="removeItem(product)" class="icon">
+                            <a href="javascript:void(0)" (click)="removeItem(arrayIndex)" class="icon">
                             <i class="ti-close"></i>
                         </a>
                         </td>

@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input,
-  Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input,
+  Injectable, PLATFORM_ID, Inject
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
@@ -11,20 +13,27 @@ import { ProductService } from '../../../../shared/services/product.service';
   templateUrl: './quick-view.component.html',
   styleUrls: ['./quick-view.component.scss']
 })
-export class QuickViewComponent implements OnInit, OnDestroy  {
+export class QuickViewComponent implements OnInit, OnDestroy {
 
   @Input() product: Product;
-  @Input() currency: any;  
+  @Input() currency: any;
   @ViewChild("quickView", { static: false }) QuickView: TemplateRef<any>;
 
+  public variantIndex = 0;
   public closeResult: string;
   public ImageSrc: string;
   public counter: number = 1;
   public modalOpen: boolean = false;
+  public imageAddress = "";
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router, private modalService: NgbModal,
-    public productService: ProductService) { }
+    public productService: ProductService
+  ) {
+    this.imageAddress = this.productService.getImageUrl();
+  }
 
   ngOnInit(): void {
   }
@@ -32,11 +41,11 @@ export class QuickViewComponent implements OnInit, OnDestroy  {
   openModal() {
     this.modalOpen = true;
     if (isPlatformBrowser(this.platformId)) { // For SSR 
-      this.modalService.open(this.QuickView, { 
+      this.modalService.open(this.QuickView, {
         size: 'lg',
         ariaLabelledBy: 'modal-basic-title',
         centered: true,
-        windowClass: 'Quickview' 
+        windowClass: 'Quickview'
       }).result.then((result) => {
         `Result ${result}`
       }, (reason) => {
@@ -92,24 +101,25 @@ export class QuickViewComponent implements OnInit, OnDestroy  {
 
   // Increament
   increment() {
-    this.counter++ ;
+    this.counter++;
   }
 
   // Decrement
   decrement() {
-    if (this.counter > 1) this.counter-- ;
+    if (this.counter > 1) this.counter--;
   }
 
   // Add to cart
   async addToCart(product: any) {
-    product.quantity = this.counter || 1;
-    const status = await this.productService.addToCart(product);
-    if(status)
-      this.router.navigate(['/shop/cart']);
+    let quantity = this.counter || 1;
+    let variantIndex = 0;
+    const status = await this.productService.addToCart(product, quantity, variantIndex);
+    if (status)
+      this.router.navigate(['/shop/cart'])
   }
 
   ngOnDestroy() {
-    if(this.modalOpen){
+    if (this.modalOpen) {
       this.modalService.dismissAll();
     }
   }

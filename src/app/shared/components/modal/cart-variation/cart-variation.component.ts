@@ -39,13 +39,11 @@ export class CartVariationComponent implements OnInit, OnDestroy {
 
       let tempProduct = {
         _id: product._id,
-        imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex | 0],
+        imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex],
         title: product.title,
         price: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].price,
         quantity: product.quantity
       }
-
-      console.log(tempProduct)
 
       this.parsedProducts.push(tempProduct);
     }

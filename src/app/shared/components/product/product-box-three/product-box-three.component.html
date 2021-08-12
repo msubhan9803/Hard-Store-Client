@@ -3,9 +3,8 @@
     <div class="ribbon" *ngIf="this.product.sale"><span>sale</span></div>
     <div class="front product-img" style="height: 300px;">
         <a [routerLink]="['/shop/product/image/outside/', product._id]">
-            <img  [defaultImage]="'assets/images/product/placeholder.jpg'"
-                  [lazyLoad]="this.imageAddress + this.product.variants[0].imagesPreview[0]" class="img-fluid"
-                  alt="">
+            <img [defaultImage]="'assets/images/product/placeholder.jpg'"
+                [lazyLoad]="this.imageAddress + this.product.variants[0].imagesPreview[0]" class="img-fluid" alt="">
         </a>
     </div>
     <div class="cart-info cart-wrap">
@@ -13,28 +12,28 @@
         	<i class="fa fa-heart" aria-hidden="true"></i>
         </a> -->
         <button title="Add to cart" (click)="CartModal.openModal(product)" *ngIf="cartModal">
-        	<i class="ti-shopping-cart"></i> Add to cart
+            <i class="ti-shopping-cart"></i> Add to cart
         </button>
-        <button title="Add to cart" (click)="addToCart(product)" *ngIf="!cartModal">
-        	<i class="ti-shopping-cart"></i> Add to cart
+        <button title="Add to cart" (click)="addToCart(product, 0)" *ngIf="!cartModal">
+            <i class="ti-shopping-cart"></i> Add to cart
         </button>
         <a href="javascript:void(0)" (click)="addToCompare(product)" title="Compare">
-        	<i class="fa fa-refresh" aria-hidden="true"></i>
+            <i class="fa fa-refresh" aria-hidden="true"></i>
         </a>
         <a href="javascript:void(0)" class="mobile-quick-view" (click)="QuickView.openModal()" title="Quick View">
-        	<i class="ti-search" aria-hidden="true"></i>
+            <i class="ti-search" aria-hidden="true"></i>
         </a>
     </div>
-    <!-- <div class="quick-view-part">
+    <div class="quick-view-part">
         <a href="javascript:void(0)" (click)="QuickView.openModal()" title="Quick View">
         	<i class="ti-search" aria-hidden="true"></i>
         </a>
-    </div> -->
+    </div>
 </div>
 <div class="product-info">
     <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
     <a [routerLink]="['/shop/product/left/sidebar/', product?.title.replace(' ', '-')]">
-    	<h6>{{ product?.title ? product?.title : "No Title" | titlecase }}</h6>
+        <h6>{{ product?.title ? product?.title : "No Title" | titlecase }}</h6>
     </a>
     <!-- <h4>{{ product?.skuArray[0].price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}</h4> -->
     <h4>{{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}</h4>
