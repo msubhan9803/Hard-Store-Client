@@ -25,8 +25,14 @@ export class CartComponent implements OnInit {
     });
 
     this.productService.storageSubObs.subscribe((data: string) => {
-      // invokes when the localstorage is changed. 
-      this.recreateParsedProductList();
+      if (localStorage.getItem("cartItems").length == 0) {
+        console.log("cartItems: ", localStorage.getItem("cartItems"))
+        this.products = [];
+        this.parsedProducts = [];
+      } else {
+        // invokes when the localstorage is changed. 
+        this.recreateParsedProductList();
+      }
     })
   }
 

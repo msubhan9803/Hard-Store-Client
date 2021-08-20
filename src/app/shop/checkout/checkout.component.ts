@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Product } from "../../shared/classes/product";
 import { ProductService } from "../../shared/services/product.service";
 import { OrderService } from "../../shared/services/order.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-checkout',
@@ -34,15 +35,14 @@ export class CheckoutComponent implements OnInit {
       country: ['', Validators.required],
       town: ['', Validators.required],
       state: ['', Validators.required],
-      postalcode: ['', Validators.required]
+      postalcode: ['', Validators.required],
+      products: []
     })
   }
 
   ngOnInit(): void {
     this.productService.cartItems.subscribe(response => {
       this.products = response;
-      
-      console.log("product price: ", this.products[0].skuArray[this.products[0].variantIndex].price)
     });
     this.getTotal.subscribe(amount => this.amount = amount);
     this.initConfig();
@@ -50,6 +50,35 @@ export class CheckoutComponent implements OnInit {
 
   public get getTotal(): Observable<number> {
     return this.productService.cartTotalAmount();
+  }
+
+  onSubmit() {
+    if (this.checkoutForm.invalid) return;
+
+    // Setting Products in payload
+    this.checkoutForm.controls['products'].setValue(this.products);
+    this.orderService.createOrderAPI(this.checkoutForm.value).subscribe(
+      res => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully Placed Order',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.checkoutForm.reset();
+        this.products = [];
+        this.productService.emptyCartAndProducts();
+        window.location.reload();
+      },
+      err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Internal Server Error',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    )
   }
 
   // Stripe Payment Gateway

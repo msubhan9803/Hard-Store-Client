@@ -237,15 +237,19 @@
                                                                     alt="" /></span></label>
                                                     </div>
                                                 </li> -->
-                                                <li>
+                                                <!-- <li>
                                                     <div id="paypal-button"></div>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
+                                        <!-- <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
                                             (click)="stripeCheckout()" *ngIf="payment == 'Stripe'">
+                                            Place Order
+                                        </button> -->
+                                        <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
+                                            (click)="onSubmit()">
                                             Place Order
                                         </button>
                                         <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal>

@@ -16,8 +16,8 @@ export class SettingsComponent implements OnInit {
   public search: boolean = false;
   public parsedProducts = [];
   public imageAddress = "";
-  
-  public languages = [{ 
+
+  public languages = [{
     name: 'English',
     code: 'en'
   }, {
@@ -54,6 +54,15 @@ export class SettingsComponent implements OnInit {
       this.products = response;
       this.recreateParsedProductList();
     });
+
+    this.productService.storageSubObs.subscribe((data: string) => {
+      if (localStorage.getItem("cartItems").length == 0) {
+        this.products = [];
+      }
+
+      // invokes when the localstorage is changed. 
+      this.recreateParsedProductList();
+    })
   }
 
   ngOnInit(): void {
@@ -77,11 +86,11 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  searchToggle(){
+  searchToggle() {
     this.search = !this.search;
   }
 
-  changeLanguage(code){
+  changeLanguage(code) {
     if (isPlatformBrowser(this.platformId)) {
       this.translate.use(code)
     }
