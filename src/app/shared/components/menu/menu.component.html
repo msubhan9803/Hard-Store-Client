@@ -18,7 +18,7 @@
           <!-- <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
           <span class="sub-arrow" *ngIf="menuItem.children"></span> -->
         </a>
-        <a href="menuItem.path" *ngIf="menuItem.path" class="nav-link" (click)="this.helperMethodsService.scrollToSection(menuItem.toggleToSection)">
+        <a href="{{menuItem.path}}" *ngIf="menuItem.path" class="nav-link">
           {{ menuItem.title }}
           <!-- <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
           <span class="sub-arrow" *ngIf="menuItem.children"></span> -->

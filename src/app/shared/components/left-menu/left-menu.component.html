@@ -13,7 +13,12 @@
       <ul id="sub-menu" class="sidebar-menu">
 
         <li *ngFor="let menuItem of menuItems">
-          <a href="javascript:void(0)" class="nav-link" (click)="this.helperMethodsService.scrollToSection(menuItem.toggleToSection)">
+          <a href="javascript:void(0)" class="nav-link" href="{{menuItem.path}}" *ngIf="menuItem.path">
+            {{ menuItem.title }}
+            <!-- <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
+            <span class="sub-arrow" *ngIf="menuItem.children"></span> -->
+          </a>
+          <a href="javascript:void(0)" class="nav-link" *ngIf="!menuItem.path" (click)="this.helperMethodsService.scrollToSection(menuItem.toggleToSection)">
             {{ menuItem.title }}
             <!-- <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
             <span class="sub-arrow" *ngIf="menuItem.children"></span> -->

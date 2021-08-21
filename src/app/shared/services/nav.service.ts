@@ -38,7 +38,7 @@ export class NavService {
 		{ title: 'Products', type: 'sub', active: false, toggleToSection: "products-section" },
 		{ title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
 		{ title: 'Contact', type: 'sub', active: false, toggleToSection: "contact-section" },
-		{ title: 'Track Your Order', type: 'sub', active: false, toggleToSection: "" },
+		{ title: 'Track Order', type: 'sub', active: false, toggleToSection: "", path: "/trackorder" },
 		// {
 		// 	title: 'home', type: 'sub', active: false, children: [
 		// 		{
@@ -167,14 +167,14 @@ export class NavService {
 		// 		{ path: '/pages/faq', title: 'faq', type: 'link' }
 		// 	]
 		// },
-		// {
-		// 	title: 'blogs', type: 'sub', active: false, children: [
-		// 		{ path: '/pages/blog/left/sidebar', title: 'left-sidebar', type: 'link' },
-		// 		{ path: '/pages/blog/right/sidebar', title: 'right-sidebar', type: 'link' },
-		// 		{ path: '/pages/blog/no/sidebar', title: 'no-sidebar', type: 'link' },
-		// 		{ path: '/pages/blog/details', title: 'blog-details', type: 'link' }
-		// 	]
-		// }
+		{
+			title: 'blogs', type: 'sub', active: false, path: '/pages/blog/no/sidebar', children: [
+				{ path: '/pages/blog/left/sidebar', title: 'left-sidebar', type: 'link' },
+				{ path: '/pages/blog/right/sidebar', title: 'right-sidebar', type: 'link' },
+				{ path: '/pages/blog/no/sidebar', title: 'no-sidebar', type: 'link' },
+				{ path: '/pages/blog/details', title: 'blog-details', type: 'link' }
+			]
+		}
 	];
 
 	LEFTMENUITEMS: Menu[] = [
@@ -183,7 +183,7 @@ export class NavService {
 		{ title: 'Products', type: 'sub', active: false, toggleToSection: "products-section" },
 		{ title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
 		{ title: 'Contact', type: 'sub', active: false, toggleToSection: "contact-section" },
-		{ title: 'Track Your Order', type: 'sub', active: false, toggleToSection: "" },
+		{ title: 'Track Order', type: 'sub', active: false, toggleToSection: "", path: "/trackorder" },
 
 		// {
 		// 	title: 'clothing', type: 'sub', megaMenu: true, active: false, children: [
