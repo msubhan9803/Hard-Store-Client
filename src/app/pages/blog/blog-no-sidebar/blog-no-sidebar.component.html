@@ -8,19 +8,26 @@
                 <div class="row blog-media" *ngFor="let blog of blogs">
                     <div class="col-xl-6">
                         <div class="blog-left">
-                            <a [routerLink]="['/pages/blog/details', blog._id]"><img src="{{this.imageAddress + blog.imgUrl}}" class="img-fluid" alt=""/></a>
+                            <a [routerLink]="['/pages/blog/details', blog._id]"><img
+                                    src="{{this.imageAddress + blog.imgUrl}}" class="img-fluid" alt="" /></a>
                         </div>
                     </div>
                     <div class="col-xl-6">
                         <div class="blog-right">
                             <div>
                                 <h6>{{ blog.createdAt | date }}</h6>
-                                <a [routerLink]="['/pages/blog/details', blog._id]"><h4>{{ blog.title }}</h4></a>
-                                <ul class="post-social">
-                                    <!-- <li>Posted By : Admin Admin </li> -->
-                                    <!-- <li><i class="fa fa-heart"></i>  5 Hits  </li>
-                                    <li><i class="fa fa-comments"></i> 10  Comment</li> -->
-                                </ul>
+                                <a [routerLink]="['/pages/blog/details', blog._id]">
+                                    <h4>{{ blog.title }}</h4>
+                                    <ul class="post-social">
+                                        <span class="badge badge-pill badge-primary"
+                                            *ngFor="let object of blog.tags">
+                                            {{ object }}
+                                        </span>
+                                        <!-- <li>Posted By : Admin Admin </li> -->
+                                        <!-- <li><i class="fa fa-heart"></i>  5 Hits  </li>
+                                        <li><i class="fa fa-comments"></i> 10  Comment</li> -->
+                                    </ul>
+                                </a>
                                 <p><span [innerHTML]="blog.description.substring(0, 1000)+'...'"></span></p>
                             </div>
                         </div>

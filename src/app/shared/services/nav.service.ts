@@ -184,6 +184,14 @@ export class NavService {
 		{ title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
 		{ title: 'Contact', type: 'sub', active: false, toggleToSection: "contact-section" },
 		{ title: 'Track Order', type: 'sub', active: false, toggleToSection: "", path: "/trackorder" },
+		{
+			title: 'blogs', type: 'sub', active: false, path: '/pages/blog/no/sidebar', children: [
+				{ path: '/pages/blog/left/sidebar', title: 'left-sidebar', type: 'link' },
+				{ path: '/pages/blog/right/sidebar', title: 'right-sidebar', type: 'link' },
+				{ path: '/pages/blog/no/sidebar', title: 'no-sidebar', type: 'link' },
+				{ path: '/pages/blog/details', title: 'blog-details', type: 'link' }
+			]
+		}
 
 		// {
 		// 	title: 'clothing', type: 'sub', megaMenu: true, active: false, children: [

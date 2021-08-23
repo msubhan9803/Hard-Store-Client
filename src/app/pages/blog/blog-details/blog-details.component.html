@@ -6,6 +6,9 @@
             <div class="col-sm-12 blog-detail">
                 <img src="{{this.blogDetails.imgUrl}}" class="img-fluid" alt="" />
                 <h3>{{this.blogDetails.title}}</h3>
+                <span class="badge badge-pill badge-primary" *ngFor="let object of this.blogDetails.tags">
+                    {{ object }}
+                </span>
                 <ul class="post-social">
                     <li>{{ this.blogDetails.createdAt | date }}</li>
                     <!-- <li>Posted By : Admin Admin </li> -->

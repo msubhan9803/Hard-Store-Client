@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { environment } from '../../../environments/environment';
@@ -27,16 +27,16 @@ export class CheckoutComponent implements OnInit {
     private orderService: OrderService
   ) {
     this.checkoutForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      first_Name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      last_Name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      email: ['', [Validators.required, Validators.email]],
-      address: ['', [Validators.required, Validators.maxLength(50)]],
-      country: ['', Validators.required],
-      town: ['', Validators.required],
-      state: ['', Validators.required],
-      postalcode: ['', Validators.required],
-      products: []
+      Email: ['', [Validators.required, Validators.email]],
+      Address: ['', [Validators.required, Validators.maxLength(50)]],
+      Country: ['', Validators.required],
+      City: ['', Validators.required],
+      State: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      products: [[]]
     })
   }
 
@@ -52,11 +52,29 @@ export class CheckoutComponent implements OnInit {
     return this.productService.cartTotalAmount();
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.checkoutForm.invalid) return;
 
-    // Setting Products in payload
-    this.checkoutForm.controls['products'].setValue(this.products);
+    for (let index = 0; index < this.products.length; index++) {
+      let currentProduct = this.products[index];
+
+      let product = {
+        product_name: currentProduct.title,
+        product_Id: currentProduct._id,
+        unit_Cost: currentProduct.skuArray[0].price,
+        quantity: currentProduct.quantity,
+        discount: currentProduct.skuArray[0].specialPrice,
+        amount: currentProduct.quantity * currentProduct.skuArray[0].price
+      }
+
+      this.checkoutForm.value.products.push(product)
+    }
+
+    let payload = this.checkoutForm.value;
+    await this.getTotal.subscribe(res => payload.totalAmount = res);
+
+    console.log("payload: ", this.checkoutForm.value)
+
     this.orderService.createOrderAPI(this.checkoutForm.value).subscribe(
       res => {
         Swal.fire({
@@ -68,7 +86,7 @@ export class CheckoutComponent implements OnInit {
         this.checkoutForm.reset();
         this.products = [];
         this.productService.emptyCartAndProducts();
-        window.location.reload();
+        // window.location.reload();
       },
       err => {
         Swal.fire({
