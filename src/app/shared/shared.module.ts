@@ -57,6 +57,9 @@ import { EnvironmentUrlService } from './services/enviroment-url.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HelperMethodsService } from './services/helper-methods.service';
 import { ToastService } from './services/toast.service';
+import { BlogService } from './services/blog.service';
+import { OrderService } from './services/order.service';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -95,7 +98,10 @@ import { ToastService } from './services/toast.service';
   providers: [
     EnvironmentUrlService,
     HelperMethodsService,
-    ToastService
+    ToastService,
+    ProductService,
+    OrderService,
+    BlogService
   ],
   imports: [
     CommonModule,

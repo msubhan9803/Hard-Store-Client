@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductSlider } from '../../shared/data/slider';
 import { Product } from '../../shared/classes/product';
 import { ProductService } from '../../shared/services/product.service';
+import { BlogService } from 'src/app/shared/services/blog.service';
 
 @Component({
   selector: 'app-marijuana',
@@ -21,7 +22,10 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
 
   public ProductSliderConfig: any = ProductSlider;
 
-  constructor(public productService: ProductService) {
+  constructor(
+    public productService: ProductService,
+    public blogService: BlogService,
+  ) {
     // this.productService.getProducts.subscribe(response => {
     //   this.products = response.filter(item => item.type == 'marijuana');
     //   // Get Product Collection
@@ -61,27 +65,29 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
   }];
 
   // Blog
-  public blogs = [{
-    image: 'assets/images/blog/40.jpg',
-    date: '25 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/41.jpg',
-    date: '26 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/42.jpg',
-    date: '27 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/40.jpg',
-    date: '28 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }];
+  public blogs = [
+    // {
+    //   image: 'assets/images/blog/40.jpg',
+    //   date: '25 January 2018',
+    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
+    //   by: 'John Dio'
+    // }, {
+    //   image: 'assets/images/blog/41.jpg',
+    //   date: '26 January 2018',
+    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
+    //   by: 'John Dio'
+    // }, {
+    //   image: 'assets/images/blog/42.jpg',
+    //   date: '27 January 2018',
+    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
+    //   by: 'John Dio'
+    // }, {
+    //   image: 'assets/images/blog/40.jpg',
+    //   date: '28 January 2018',
+    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
+    //   by: 'John Dio'
+    // }
+  ];
 
   // Logo
   public logos = [{
@@ -120,6 +126,8 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
         // })
       }
     );
+
+    await this.blogService.getBlogs().subscribe((res: []) => this.blogs = res);
   }
 
   ngOnDestroy(): void {

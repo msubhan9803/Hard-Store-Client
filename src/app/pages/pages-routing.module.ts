@@ -132,7 +132,7 @@ const routes: Routes = [
     component: BlogNoSidebarComponent 
   },
   { 
-    path: 'blog/details', 
+    path: 'blog/details/:id', 
     component: BlogDetailsComponent 
   },
   { 

@@ -1,8 +1,9 @@
 <owl-carousel-o [options]="BlogSliderConfig" class="no-arrow">
   <ng-container *ngFor="let blog of blogs">
+  <!-- <ng-container *ngFor="let blog of blogs" [routerLink]="['/blog/details', blog._id]" > -->
     <ng-template carouselSlide>
       <div class="col-md-12">
-        <a [routerLink]="'/pages/blog/details'">
+        <a [routerLink]="['/pages/blog/details', blog._id]">
           <div class="classic-effect">
             <img [src]="blog.image" class="img-fluid" alt="blog">
             <span></span>
@@ -10,7 +11,7 @@
         </a>
         <div class="blog-details">
           <h4>{{blog.date}}</h4>
-          <a [routerLink]="'/pages/blog/details'">
+          <a [routerLink]="['/pages/blog/details', blog._id]">
             <p>{{blog.title}}</p>
           </a>
           <hr class="style1">
