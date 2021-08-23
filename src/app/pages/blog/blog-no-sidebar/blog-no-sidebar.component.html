@@ -8,7 +8,7 @@
                 <div class="row blog-media" *ngFor="let blog of blogs">
                     <div class="col-xl-6">
                         <div class="blog-left">
-                            <a [routerLink]="['/pages/blog/details', blog._id]"><img src="assets/images/blog/1.jpg" class="img-fluid" alt=""/></a>
+                            <a [routerLink]="['/pages/blog/details', blog._id]"><img src="{{this.imageAddress + blog.imgUrl}}" class="img-fluid" alt=""/></a>
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -17,7 +17,7 @@
                                 <h6>{{ blog.createdAt | date }}</h6>
                                 <a [routerLink]="['/pages/blog/details', blog._id]"><h4>{{ blog.title }}</h4></a>
                                 <ul class="post-social">
-                                    <li>Posted By : Admin Admin </li>
+                                    <!-- <li>Posted By : Admin Admin </li> -->
                                     <!-- <li><i class="fa fa-heart"></i>  5 Hits  </li>
                                     <li><i class="fa fa-comments"></i> 10  Comment</li> -->
                                 </ul>

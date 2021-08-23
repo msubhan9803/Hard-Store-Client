@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 blog-detail">
-                <img src="assets/images/about-main.jpg" class="img-fluid" alt="" />
+                <img src="{{this.blogDetails.imgUrl}}" class="img-fluid" alt="" />
                 <h3>{{this.blogDetails.title}}</h3>
                 <ul class="post-social">
                     <li>{{ this.blogDetails.createdAt | date }}</li>

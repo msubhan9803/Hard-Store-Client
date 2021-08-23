@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { BlogSlider } from '../../../shared/data/slider';
 
 @Component({
@@ -9,10 +10,14 @@ import { BlogSlider } from '../../../shared/data/slider';
 export class BlogComponent implements OnInit {
   
   @Input() blogs: any[] = [];
+  public imageAddress: string;
 
-  constructor() { }
+  constructor(
+    private productService: ProductService
+  ) { }
 
   ngOnInit(): void {
+    this.imageAddress = this.productService.getImageUrl();
   }
 
   public BlogSliderConfig: any = BlogSlider;
