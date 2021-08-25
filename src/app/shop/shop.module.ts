@@ -41,6 +41,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CompareComponent } from './compare/compare.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SuccessComponent } from './checkout/success/success.component';
+import { HelperMethodsService } from '../shared/services/helper-methods.service';
 
 
 @NgModule({
@@ -72,6 +73,9 @@ import { SuccessComponent } from './checkout/success/success.component';
     CompareComponent,
     CheckoutComponent,
     SuccessComponent
+  ],
+  providers: [
+    HelperMethodsService
   ],
   imports: [
     CommonModule,

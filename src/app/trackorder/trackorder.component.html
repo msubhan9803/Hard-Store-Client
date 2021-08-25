@@ -1,18 +1,44 @@
-<app-header-one [sticky]="true"></app-header-one>
+<app-header-one [sticky]="false"></app-header-one>
 
 <section class="section-b-space">
     <div class="collection-wrapper">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"
-            id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
+        <div class="container container-custom">
+            <div class="d-flex justify-content-center h-100">
+                <div class="searchbar">
+                    <input class="search_input" [(ngModel)]="searchValue" type="text" name="searchValue"
+                        placeholder="Type Order Id...">
+                    <a href="#" class="search_icon" (click)="searchOrder($event)"><i class="fa fa-search"></i></a>
+                </div>
+            </div>
+        </div>
 
-        <div class="container">
+        <div class="container mt-3" *ngIf="showTimeLine">
             <div class="page-header">
-                <h1 id="timeline">Timeline</h1>
+                <h3 id="timeline">Timeline</h3>
             </div>
             <ul class="timeline">
-                <li class="timeline-inverted timeline-li">
+                <!-- <tr *ngFor="let status of this.tracking_Status | keyvalue">
+                    <td style="width: auto;">{{ this.capitalizeFirstLetter(status.key.replaceAll('_', " ")) }}</td>
+                    <td style="width: 20px;">
+                        <div class="form-check">
+                            <input [disabled]="this.current_Status != status.key" class="form-check-input"
+                                type="checkbox" [checked]="status.value.completed"
+                                [(ngModel)]="this.tracking_Status[status.key].completed" id="flexCheckChecked"
+                                (change)="this.checkStatusCheckboxVal(status.key)">
+                        </div>
+                    </td>
+                    <td style="width: 20px;">
+                        <div class="form-check">
+                            <input [disabled]="this.current_Status != status.key" class="form-check-input"
+                                type="checkbox" [checked]="status.value.cancelled"
+                                [(ngModel)]="this.tracking_Status[status.key].cancelled" id="flexCheckChecked"
+                                (change)="this.checkStatusCheckboxVal(status.key)">
+                        </div>
+                    </td>
+                </tr> -->
+
+                <li class="timeline-li" [ngClass]="{'timeline-sm': i % 2 == 0, 'timeline-inverted': i % 2 != 0 }"
+                    *ngFor="let status of this.tracking_Status | keyvalue; let i = index">
                     <div class="timeline-badge">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">13</div>
@@ -21,18 +47,26 @@
                     </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h4 class="timeline-title">Order Placed</h4>
-                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via
-                                    Twitter</small></p>
+                            <h4 class="timeline-title">{{
+                                this.helperMethodsService.capitalizeFirstLetter(status.key.replaceAll('_', " ")) }}</h4>
+                            <p>
+                                <small class="text-muted">
+                                    <i class="glyphicon glyphicon-time"></i>
+                                    <span>{{ status.value.comment }}</span>
+                                </small>
+                            </p>
                         </div>
                         <div class="timeline-body">
-                            <span class="badge badge-pill info">In Progress</span>
-                            <span class="badge badge-pill success">Completed</span>
-                            <!-- <span class="badge badge-pill badge-danger">Cancelled</span> -->
+                            <span class="badge badge-pill text-white info" *ngIf="status.value.inProgress">In
+                                Progress</span>
+                            <span class="badge badge-pill text-white success"
+                                *ngIf="status.value.completed">Completed</span>
+                            <span class="badge badge-pill text-white badge-danger"
+                                *ngIf="status.value.cancelled">Cancelled</span>
                         </div>
                     </div>
                 </li>
-                <li class="timeline-sm timeline-li">
+                <!-- <li class="timeline-sm timeline-li">
                     <div class="timeline-badge">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">13</div>
@@ -120,8 +154,37 @@
                             <span class="badge badge-pill success">Completed</span>
                         </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
+
+
+            <div class="table-responsive" *ngIf="showProducts">
+                <table class="table table-bordered table-hover shadow">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class=""
+                            *ngFor="let product of product_List; let arrayIndex = index">
+                            <td class="p-3 w-25">{{ product.product_name }}</td>
+                            <td class="p-3">{{ product.amount }}</td>
+                            <td class="p-3">{{ product.quantity }}</td>
+                            <td class="p-3">{{ product.unit_Cost }}</td>
+                            <td class="p-3">{{ product.unit_Cost * product.quantity }}</td>
+                            <!-- <td class="p-3">
+                                <img src="{{ this.imageAddress + product_List[arrayIndex].variants[0].imagesPreview[0] }}"
+                                    width="150" />
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </section>
