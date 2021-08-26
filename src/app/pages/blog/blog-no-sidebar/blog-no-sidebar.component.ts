@@ -17,6 +17,9 @@ export class BlogNoSidebarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    document.documentElement.style.setProperty('--theme-deafult', '#5d7227');
+    document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
+    document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
     this.imageAddress = this.productService.getImageUrl();
     this.blogService.getBlogs().subscribe(
       (res: any) => {

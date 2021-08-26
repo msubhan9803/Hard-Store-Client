@@ -9,7 +9,7 @@ import { TrackorderComponent } from "./trackorder/trackorder.component";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "home/marijuana",
+    redirectTo: "home/uaeslimmers",
     pathMatch: "full",
   },
   {
@@ -41,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: "**", // Navigate to Home Page if not found any page
-    redirectTo: "home/marijuana",
+    redirectTo: "home/uaeslimmers",
   }
 ];
 

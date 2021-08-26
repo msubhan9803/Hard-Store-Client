@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HelperMethodsService } from 'src/app/shared/services/helper-methods.service';
 import { HomeSlider } from '../../../shared/data/slider';
 
 @Component({
@@ -15,7 +16,9 @@ export class SliderComponent implements OnInit {
   @Input() buttonText: string;
   @Input() buttonClass: string;
 
-  constructor() { }
+  constructor(
+    public helperMethodsService: HelperMethodsService
+  ) { }
 
   ngOnInit(): void {
   }

@@ -9,8 +9,8 @@ import { HomeSlider } from '../../../shared/data/slider';
 export class HomeSliderComponent implements OnInit {
 
   public HomeSliderConfig: any = HomeSlider;
-  
-  constructor() { }
+
+  constructor( ) { }
 
   ngOnInit(): void {
   }

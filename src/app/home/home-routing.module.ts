@@ -5,7 +5,7 @@ import { MarijuanaComponent } from "./marijuana/marijuana.component";
 
 const routes: Routes = [
   {
-    path: "marijuana",
+    path: "uaeslimmers",
     component: MarijuanaComponent,
   },
 ];

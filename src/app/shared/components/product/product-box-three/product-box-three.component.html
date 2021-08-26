@@ -32,7 +32,7 @@
 </div>
 <div class="product-info">
     <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-    <a [routerLink]="['/shop/product/left/sidebar/', product?.title.replace(' ', '-')]">
+    <a [routerLink]="['/shop/product/image/outside/', product._id]">
         <h6>{{ product?.title ? product?.title : "No Title" | titlecase }}</h6>
     </a>
     <!-- <h4>{{ product?.skuArray[0].price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}</h4> -->

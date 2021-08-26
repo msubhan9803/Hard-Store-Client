@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { HelperMethodsService } from '../../services/helper-methods.service';
 
 @Component({
   selector: 'app-header-one',
@@ -8,13 +9,16 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 export class HeaderOneComponent implements OnInit {
   
   @Input() class: string;
-  @Input() themeLogo: string = 'assets/images/icon/logo.png'; // Default Logo
+  // @Input() themeLogo: string = 'assets/images/icon/logo.png'; // Default Logo
+  @Input() themeLogo: string = 'assets/images/logo-new.png'; // Default Logo
   @Input() topbar: boolean = true; // Default True
   @Input() sticky: boolean = false; // Default false
   
   public stick: boolean = false;
 
-  constructor() { }
+  constructor(
+    private helperMethodsService: HelperMethodsService
+  ) { }
 
   ngOnInit(): void {
   }

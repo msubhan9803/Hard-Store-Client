@@ -11,8 +11,10 @@ import { BlogService } from 'src/app/shared/services/blog.service';
 })
 export class MarijuanaComponent implements OnInit, OnDestroy {
 
-  public themeLogo: string = 'assets/images/icon/logo-3.png';
-  public themeFooterLogo: string = 'assets/images/icon/logo-9.png';
+  // public themeLogo: string = 'assets/images/icon/logo-3.png';
+  public themeLogo: string = 'assets/images/logo-new.png';
+  // public themeFooterLogo: string = 'assets/images/icon/logo-9.png';
+  public themeFooterLogo: string = 'assets/images/logo-new.png';
 
   public products: Product[] = [];
   public productCollections: any[] = [
@@ -40,14 +42,16 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
 
   public sliders = [{
     title: 'special offer',
-    subTitle: 'Buy Marijuana',
+    subTitle: 'Buy UAESlimmers',
     // image: 'assets/images/slider/28.jpg'
     image: 'assets/images/header-background-img.jpg'
   }, {
     title: 'special offer',
-    subTitle: 'cannabis weed',
-    image: 'assets/images/slider/29.jpg'
-  }];
+    subTitle: 'Buy UAESlimmers',
+    // image: 'assets/images/slider/28.jpg'
+    image: 'assets/images/header-background-img.jpg'
+  }
+  ];
 
   // Collection banner
   public collections = [{

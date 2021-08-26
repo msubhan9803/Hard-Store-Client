@@ -57,6 +57,7 @@ export class TrackorderComponent implements OnInit {
     },
   };
   public product_List = [];
+  public themeFooterLogo: string = 'assets/images/logo-new.png';
 
   constructor(
     private orderService: OrderService,
@@ -66,6 +67,9 @@ export class TrackorderComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageAddress = this.productService.getImageUrl();
+    document.documentElement.style.setProperty('--theme-deafult', '#5d7227');
+    document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
+    document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
   }
 
   public searchOrder(e) {

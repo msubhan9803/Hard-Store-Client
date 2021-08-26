@@ -61,7 +61,7 @@ export class ProductService {
   // GET: category/getProducts
   public getAllProductsAPI() {
     let url = this._env.urlAddress + 'products/getProducts';
-    this.toastrService.success('Product get request .');
+    // this.toastrService.success('Product get request .');
     return this.http.get(url);
   }
 
