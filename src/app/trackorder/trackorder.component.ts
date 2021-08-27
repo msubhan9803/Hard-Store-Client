@@ -87,25 +87,36 @@ export class TrackorderComponent implements OnInit {
     this.product_List = [];
     this.orderService.getOrderbyId(this.searchValue).subscribe(
       async (res: any) => {
-        Object.entries(res.tracking_Status).forEach(([key, value]) => {
-          if (key != "current_Status") {
-            let status = {
-              date: res.tracking_Status[key].date ? res.tracking_Status[key].date : null,
-              status: res.tracking_Status[key].status ? res.tracking_Status[key].status : null,
-              // disabled: key != this.current_Status ? true : false,
-              completed: res.tracking_Status[key].status == "completed" ? true : false,
-              inProgress: res.tracking_Status[key].status == "inProgress" ? true : false,
-              cancelled: res.tracking_Status[key].status == "cancelled" ? true : false
+        if (res.status == 200) {
+          Object.entries(res.tracking_Status).forEach(([key, value]) => {
+            if (key != "current_Status") {
+              let status = {
+                date: res.tracking_Status[key].date ? res.tracking_Status[key].date : null,
+                status: res.tracking_Status[key].status ? res.tracking_Status[key].status : null,
+                // disabled: key != this.current_Status ? true : false,
+                completed: res.tracking_Status[key].status == "completed" ? true : false,
+                inProgress: res.tracking_Status[key].status == "inProgress" ? true : false,
+                cancelled: res.tracking_Status[key].status == "cancelled" ? true : false
+              }
+  
+              this.tracking_Status[key] = status;
             }
+          });
+  
+          this.product_List = res.products;
+  
+          this.showTimeLine = true;
+          this.showProducts = true;
+        } 
 
-            this.tracking_Status[key] = status;
-          }
-        });
-
-        this.product_List = res.products;
-
-        this.showTimeLine = true;
-        this.showProducts = true;
+        if (res.status == 400) {
+          Swal.fire({
+            icon: 'error',
+            title: "Invalid Order Id",
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
       },
       err => {
         Swal.fire({
