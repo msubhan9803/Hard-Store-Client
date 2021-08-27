@@ -4,5 +4,5 @@ export const environment = {
   stripe_token: 'STRIPE_TOKEN',
   paypal_token: 'PAYPAL_TOKEN',
   urlAddress: 'http://uaeslimmers.com/api/',
-  imageAddress: 'http://uaeslimmers.com/api/'
+  imageAddress: 'http://uaeslimmers.com/uploads/'
 };
