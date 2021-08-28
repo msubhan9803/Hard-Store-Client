@@ -18,8 +18,10 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
   public productCollections: any[] = [
-    "sale",
-    "regular"
+    "On Sale",
+    "New",
+    "All",
+    "Best Seller",
   ];
 
   public ProductSliderConfig: any = ProductSlider;
@@ -121,6 +123,7 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
     await this.productService.getAllProductsAPI().toPromise().then(
       (res: []) => {
         this.products = res;
+        console.log("res: ", this.products)
 
         // this.products.filter((item) => {
         //   item.collection.filter((collection) => {
@@ -144,14 +147,8 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
   // Product Tab collection
   getCollectionProducts(collection) {
     return this.products.filter((item) => {
-      if (collection == "sale") {
-        if (item.sale) {
-          return item;
-        }
-      } else if (collection == "regular") {
-        if (item.sale) {
-          return item;
-        }
+      if (item.collections.includes(collection)) {
+        return item;
       }
     })
   }

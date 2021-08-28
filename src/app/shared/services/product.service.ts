@@ -202,6 +202,7 @@ export class ProductService {
     // this.OpenCart = true; // If we use cart variation modal
     localStorage.setItem("cartItems", JSON.stringify(state.cart));
     this.storageSub.next('localStorageChanged');
+    this.toastrService.success('Product added to cart');
     return true;
   }
 

@@ -11,6 +11,9 @@ export class HelperMethodsService {
         } else if (value == "products-section") {
             let el = document.getElementById(value);
             window.scrollTo(0, el.offsetTop)
+        } else if (value == "detail-section") {
+            let el = document.getElementById(value);
+            window.scrollTo(0, el.offsetTop)
         } else {
             window.scrollTo(0, 0)
         }

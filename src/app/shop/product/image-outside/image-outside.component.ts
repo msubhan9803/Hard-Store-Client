@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductDetailsMainSlider, ProductDetailsThumbSlider, ProductVariantsThumbSlider } from '../../../shared/data/slider';
+import { ProductDetailsMainSlider, ProductDetailsThumbSlider, ProductSlider, ProductVariantsThumbSlider } from '../../../shared/data/slider';
 import { Product } from '../../../shared/classes/product';
 import { ProductService } from '../../../shared/services/product.service';
 import { SizeModalComponent } from "../../../shared/components/modal/size-modal/size-modal.component";
+import { HelperMethodsService } from 'src/app/shared/services/helper-methods.service';
 
 @Component({
   selector: 'app-image-outside',
@@ -21,17 +22,29 @@ export class ImageOutsideComponent implements OnInit {
   public currentVariantImage = 0;
   public imageAddress = "";
   @Input() currency: any = this.productService.Currency;
+  public products: Product[] = [];
 
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
-  
+
   public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
   public ProductVariantsThumbSlider: any = ProductVariantsThumbSlider;
+  public ProductSlider: any = ProductSlider;
+  public productCollections: any[] = [
+    "On Sale",
+    "New",
+    "All",
+    "Best Seller",
+  ];
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    public productService: ProductService) { 
-      this.route.data.subscribe(response => this.product = response.data );
-    }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public productService: ProductService,
+    public helperMethodsService: HelperMethodsService
+  ) {
+    this.route.data.subscribe(response => this.product = response.data);
+  }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
@@ -43,6 +56,12 @@ export class ImageOutsideComponent implements OnInit {
         // this.currentVariantImage = this.product.variants[this.currentVariant].isThumbnailImageIndex;
       }
     )
+    this.productService.getAllProductsAPI().subscribe(
+      (res: []) => {
+        console.log("res: ", res)
+        this.products = res;
+      }
+    );
   }
 
   // Get Product Color
@@ -70,30 +89,30 @@ export class ImageOutsideComponent implements OnInit {
   selectSize(size) {
     this.selectedSize = size;
   }
-  
+
   // Increament
   increment() {
-    this.counter++ ;
+    this.counter++;
   }
 
   // Decrement
   decrement() {
-    if (this.counter > 1) this.counter-- ;
+    if (this.counter > 1) this.counter--;
   }
 
   // Add to cart
   async addToCart(product: any, variantIndex: number) {
     let quantity = this.counter || 1;
     const status = await this.productService.addToCart(product, quantity, variantIndex);
-    if(status)
-      this.router.navigate(['/shop/cart']);
+    // if(status)
+    //   this.router.navigate(['/shop/cart']);
   }
 
   // Buy Now
   async buyNow(product: any, variantIndex: number) {
     let quantity = this.counter || 1;
     const status = await this.productService.addToCart(product, quantity, variantIndex);
-    if(status)
+    if (status)
       this.router.navigate(['/shop/checkout']);
   }
 
@@ -101,8 +120,17 @@ export class ImageOutsideComponent implements OnInit {
   addToWishlist(product: any) {
     this.productService.addToWishlist(product);
   }
-  
+
   changeVariant(variantIndex) {
     this.currentVariant = variantIndex;
+  }
+
+  // Product Tab collection
+  getCollectionProducts(collection) {
+    return this.products.filter((item) => {
+      if (item.collections.includes(collection)) {
+        return item;
+      }
+    })
   }
 }

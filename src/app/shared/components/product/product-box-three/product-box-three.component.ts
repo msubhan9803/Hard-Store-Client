@@ -39,8 +39,8 @@ export class ProductBoxThreeComponent implements OnInit {
   async addToCart(product: any, variantIndex: number) {
     let quantity = 1;
     const status = await this.productService.addToCart(product, quantity, variantIndex);
-    if (status)
-      this.router.navigate(['/shop/cart']);
+    // if (status)
+    //   this.router.navigate(['/shop/cart']);
   }
 
   addToWishlist(product: any) {

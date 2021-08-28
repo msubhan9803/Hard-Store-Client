@@ -31,6 +31,9 @@ export class BlogDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    document.documentElement.style.setProperty('--theme-deafult', '#5d7227');
+    document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
+    document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
     this.currentRecId = this.route.snapshot.paramMap.get('id');
     this.imageAddress = this.productService.getImageUrl();
     this.blogService.getBlogById(this.currentRecId).subscribe(

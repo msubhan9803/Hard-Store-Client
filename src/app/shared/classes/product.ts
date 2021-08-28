@@ -6,7 +6,7 @@ export interface Product {
     description?: string;
     type?: string;
     brand?: string;
-    collection?: any[];
+    collections?: any[];
     category?: string;
     price?: number;
     sale?: boolean;

@@ -193,17 +193,20 @@ export let ProductSlider: any = {
     dots: false,
     navSpeed: 300,
     responsive: {
-        991: {
-            items: 4
+        0: {
+            items: 2
         },
-        767: {
+        400: {
             items: 3
         },
-        420: {
-            items: 2
-        }, 
-        0: {
-            items: 1
+        740: {
+            items: 4
+        },
+        940: {
+            items: 7
+        },
+        1200: {
+            items: 7
         }
     }
 }
