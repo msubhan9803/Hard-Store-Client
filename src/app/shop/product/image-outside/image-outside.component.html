@@ -119,8 +119,9 @@
                                 <div class="border-product">
                                     <h6 class="product-title">product details</h6>
 
-                                    <div [innerHTML]="this.product?.description.substring(0, 200)+'...'"></div>
-                                    <a href="javascript:void(0)"
+                                    <div *ngIf="this.product?.description.length > 200" [innerHTML]="this.product?.description.substring(0, 200)+'...'"></div>
+                                    <div *ngIf="this.product?.description.length < 200" [innerHTML]="this.product?.description"></div>
+                                    <a *ngIf="this.product?.description.length > 200" href="javascript:void(0)"
                                         (click)="this.helperMethodsService.scrollToSection('detail-section')">view
                                         more</a>
                                 </div>

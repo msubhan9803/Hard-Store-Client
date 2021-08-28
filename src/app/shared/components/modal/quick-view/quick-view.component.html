@@ -23,7 +23,8 @@
                         </ul>
                         <div class="border-product">
                             <h6 class="product-title">product details</h6>
-                            <div [innerHTML]="this.product?.description"></div>
+                            <div *ngIf="this.product?.description.length > 200" [innerHTML]="this.product?.description.substring(0, 200)+'...'"></div>
+                            <div *ngIf="this.product?.description.length < 200" [innerHTML]="this.product?.description"></div>
                         </div>
                         <div class="product-description border-product">
                             <div class="size-box" *ngIf="Size(product.variants).length">

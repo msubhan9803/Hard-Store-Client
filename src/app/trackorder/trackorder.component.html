@@ -4,7 +4,7 @@
 <section class="section-b-space">
     <div class="collection-wrapper">
         <div class="container container-custom">
-            <div class="d-flex justify-content-center h-100">
+            <div class="d-flex flex-row justify-content-center h-100">
                 <div class="searchbar">
                     <input class="search_input" [(ngModel)]="searchValue" type="text" name="searchValue"
                         placeholder="Type Order Id...">
@@ -38,7 +38,7 @@
                     </td>
                 </tr> -->
 
-                <li class="timeline-li" [ngClass]="{'timeline-sm': i % 2 == 0, 'timeline-inverted': i % 2 != 0 }"
+                <!-- <li class="timeline-li" [ngClass]="{'timeline-sm': i % 2 == 0, 'timeline-inverted': i % 2 != 0 }"
                     *ngFor="let status of this.tracking_Status | keyvalue; let i = index">
                     <div class="timeline-badge">
                         <div class="m-auto">
@@ -66,50 +66,93 @@
                                 *ngIf="status.value.cancelled">Cancelled</span>
                         </div>
                     </div>
-                </li>
-                <!-- <li class="timeline-sm timeline-li">
+                </li> -->
+                <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.order_Confirmed.status">
                     <div class="timeline-badge">
+                    <!-- <div [ngClass]="{'primary': this.tracking_Status.order_Confirmed.inProgress, 'success': this.tracking_Status.order_Confirmed.completed, 'danger': this.tracking_Status.order_Confirmed.cancelled}"> -->
                         <div class="m-auto">
-                            <div class="timeline-balloon-date-day">13</div>
-                            <div class="timeline-balloon-date-month">APR</div>
+                            <div class="timeline-balloon-date-day">{{
+                                this.tracking_Status.order_Confirmed.date.getDate() || null }}</div>
+                            <div class="timeline-balloon-date-day">{{
+                                monthNames[this.tracking_Status.order_Confirmed.date.getMonth()] || null }}</div>
                         </div>
                     </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h4 class="timeline-title">Packed</h4>
-                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via
-                                    Twitter</small></p>
+                            <h4 class="timeline-title">Order Confirmed</h4>
+                            <!-- <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via
+                                    Twitter</small></p> -->
                         </div>
                         <div class="timeline-body">
-                            <span class="badge badge-pill info">In Progress</span>
-                            <span class="badge badge-pill success">Completed</span>
+                            <span class="badge badge-pill text-white info"
+                                *ngIf="this.tracking_Status.order_Confirmed.inProgress">In
+                                Progress</span>
+                            <span class="badge badge-pill text-white success"
+                                *ngIf="this.tracking_Status.order_Confirmed.completed">Completed</span>
+                            <span class="badge badge-pill text-white badge-danger"
+                                *ngIf="this.tracking_Status.order_Confirmed.cancelled">Cancelled</span>
                         </div>
                     </div>
                 </li>
-                <li class="timeline-inverted timeline-li">
+                <li class="timeline-inverted timeline-li" *ngIf="this.tracking_Status.ready_for_Delivery.status">
                     <div class="timeline-badge">
                         <div class="m-auto">
-                            <div class="timeline-balloon-date-day">13</div>
-                            <div class="timeline-balloon-date-month">APR</div>
+                            <div class="timeline-balloon-date-day">{{
+                                this.tracking_Status.ready_for_Delivery.date.getDate() || null }}</div>
+                            <div class="timeline-balloon-date-day">{{
+                                monthNames[this.tracking_Status.ready_for_Delivery.date.getMonth()] || null }}</div>
                         </div>
                     </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h4 class="timeline-title">Dispatched</h4>
+                            <h4 class="timeline-title">Ready For Delivery</h4>
                             <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via
                                     Twitter</small></p>
                         </div>
                         <div class="timeline-body">
-                            <span class="badge badge-pill info">In Progress</span>
-                            <span class="badge badge-pill success">Completed</span>
+                            <span class="badge badge-pill text-white info"
+                                *ngIf="this.tracking_Status.ready_for_Delivery.inProgress">In
+                                Progress</span>
+                            <span class="badge badge-pill text-white success"
+                                *ngIf="this.tracking_Status.ready_for_Delivery.completed">Completed</span>
+                            <span class="badge badge-pill text-white badge-danger"
+                                *ngIf="this.tracking_Status.ready_for_Delivery.cancelled">Cancelled</span>
                         </div>
                     </div>
                 </li>
-                <li class="timeline-sm timeline-li">
+                <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.out_For_Delivery.status">
                     <div class="timeline-badge">
                         <div class="m-auto">
-                            <div class="timeline-balloon-date-day">13</div>
-                            <div class="timeline-balloon-date-month">APR</div>
+                            <div class="timeline-balloon-date-day">{{
+                                this.tracking_Status.out_For_Delivery.date.getDate() || null }}</div>
+                            <div class="timeline-balloon-date-day">{{
+                                monthNames[this.tracking_Status.out_For_Delivery.date.getMonth()] || null }}</div>
+                        </div>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">Out For Delivery</h4>
+                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via
+                                    Twitter</small></p>
+                        </div>
+                        <div class="timeline-body">
+                            <span class="badge badge-pill text-white info"
+                                *ngIf="this.tracking_Status.out_For_Delivery.inProgress">In
+                                Progress</span>
+                            <span class="badge badge-pill text-white success"
+                                *ngIf="this.tracking_Status.out_For_Delivery.completed">Completed</span>
+                            <span class="badge badge-pill text-white badge-danger"
+                                *ngIf="this.tracking_Status.out_For_Delivery.cancelled">Cancelled</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted timeline-li" *ngIf="this.tracking_Status.delivered.status">
+                    <div class="timeline-badge">
+                        <div class="m-auto">
+                            <div class="timeline-balloon-date-day">{{ this.tracking_Status.delivered.date.getDate() ||
+                                null }}</div>
+                            <div class="timeline-balloon-date-day">{{
+                                monthNames[this.tracking_Status.delivered.date.getMonth()] || null }}</div>
                         </div>
                     </div>
                     <div class="timeline-panel">
@@ -119,29 +162,23 @@
                                     Twitter</small></p>
                         </div>
                         <div class="timeline-body">
-                            <span class="badge badge-pill info">In Progress</span>
-                            <span class="badge badge-pill success">Completed</span>
+                            <span class="badge badge-pill text-white info"
+                                *ngIf="this.tracking_Status.delivered.inProgress">In
+                                Progress</span>
+                            <span class="badge badge-pill text-white success"
+                                *ngIf="this.tracking_Status.delivered.completed">Completed</span>
+                            <span class="badge badge-pill text-white badge-danger"
+                                *ngIf="this.tracking_Status.delivered.cancelled">Cancelled</span>
                         </div>
                     </div>
                 </li>
-                <li class="timeline-sm timeline-li">
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via
-                                    Twitter</small></p>
-                        </div>
-                        <div class="timeline-body">
-                            <span class="badge badge-pill info">In Progress</span>
-                            <span class="badge badge-pill success">Completed</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted timeline-li">
+                <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.Paid.status">
                     <div class="timeline-badge">
                         <div class="m-auto">
-                            <div class="timeline-balloon-date-day">13</div>
-                            <div class="timeline-balloon-date-month">APR</div>
+                            <div class="timeline-balloon-date-day">{{ this.tracking_Status.Paid.date.getDate() || null
+                                }}</div>
+                            <div class="timeline-balloon-date-day">{{
+                                monthNames[this.tracking_Status.Paid.date.getMonth()] || null }}</div>
                         </div>
                     </div>
                     <div class="timeline-panel">
@@ -151,11 +188,16 @@
                                     Twitter</small></p>
                         </div>
                         <div class="timeline-body">
-                            <span class="badge badge-pill info">In Progress</span>
-                            <span class="badge badge-pill success">Completed</span>
+                            <span class="badge badge-pill text-white info"
+                                *ngIf="this.tracking_Status.Paid.inProgress">In
+                                Progress</span>
+                            <span class="badge badge-pill text-white success"
+                                *ngIf="this.tracking_Status.Paid.completed">Completed</span>
+                            <span class="badge badge-pill text-white badge-danger"
+                                *ngIf="this.tracking_Status.Paid.cancelled">Cancelled</span>
                         </div>
                     </div>
-                </li> -->
+                </li>
             </ul>
 
 
@@ -171,8 +213,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class=""
-                            *ngFor="let product of product_List; let arrayIndex = index">
+                        <tr class="" *ngFor="let product of product_List; let arrayIndex = index">
                             <td class="p-3 w-25">{{ product.product_name }}</td>
                             <td class="p-3">{{ product.amount }}</td>
                             <td class="p-3">{{ product.quantity }}</td>

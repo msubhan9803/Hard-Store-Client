@@ -186,17 +186,17 @@
                                                 currency:productService?.Currency.currency:'symbol'}}</span>
                                         </li>
                                         <li *ngIf='products.length'>
-                                            Shipping
+                                            Shipping <span class="text-muted">(free shipping)</span>
                                             <div class="shipping">
                                                 <div class="shopping-option">
                                                     <input type="radio" name="shipping" checked="checked"
                                                         id="free-shipping">
-                                                    <label for="free-shipping">Shipping</label>
+                                                    <label for="free-shipping">Cash on Delivery</label>
                                                 </div>
-                                                <div class="shopping-option">
+                                                <!-- <div class="shopping-option">
                                                     <input type="radio" name="shipping" id="local-pickup">
                                                     <label for="local-pickup">Local Pickup</label>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </li>
                                     </ul>

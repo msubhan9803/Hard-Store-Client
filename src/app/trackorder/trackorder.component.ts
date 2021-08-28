@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { monthNames } from '../shared/data/other';
 import { HelperMethodsService } from '../shared/services/helper-methods.service';
 import { OrderService } from '../shared/services/order.service';
 import { ProductService } from '../shared/services/product.service';
@@ -14,9 +15,10 @@ export class TrackorderComponent implements OnInit {
   public showProducts = false;
   public searchValue = "";
   public imageAddress = "";
+  public monthNames = monthNames;
   public tracking_Status = {
     order_Confirmed: {
-      date: "",
+      date: null,
       status: "",
       disabled: false,
       completed: false,
@@ -24,7 +26,7 @@ export class TrackorderComponent implements OnInit {
       cancelled: false
     },
     ready_for_Delivery: {
-      date: "",
+      date: null,
       status: "",
       disabled: false,
       completed: false,
@@ -32,7 +34,7 @@ export class TrackorderComponent implements OnInit {
       cancelled: false
     },
     out_For_Delivery: {
-      date: "",
+      date: null,
       status: "",
       disabled: false,
       completed: false,
@@ -40,7 +42,7 @@ export class TrackorderComponent implements OnInit {
       cancelled: false
     },
     delivered: {
-      date: "",
+      date: null,
       status: "",
       disabled: false,
       completed: false,
@@ -48,7 +50,7 @@ export class TrackorderComponent implements OnInit {
       cancelled: false
     },
     Paid: {
-      date: "",
+      date: null,
       status: "",
       disabled: false,
       completed: false,
@@ -87,41 +89,32 @@ export class TrackorderComponent implements OnInit {
     this.product_List = [];
     this.orderService.getOrderbyId(this.searchValue).subscribe(
       async (res: any) => {
-        if (res.status == 200) {
-          Object.entries(res.tracking_Status).forEach(([key, value]) => {
-            if (key != "current_Status") {
-              let status = {
-                date: res.tracking_Status[key].date ? res.tracking_Status[key].date : null,
-                status: res.tracking_Status[key].status ? res.tracking_Status[key].status : null,
-                // disabled: key != this.current_Status ? true : false,
-                completed: res.tracking_Status[key].status == "completed" ? true : false,
-                inProgress: res.tracking_Status[key].status == "inProgress" ? true : false,
-                cancelled: res.tracking_Status[key].status == "cancelled" ? true : false
-              }
-  
-              this.tracking_Status[key] = status;
+        Object.entries(res.tracking_Status).forEach(([key, value]) => {
+          if (key != "current_Status") {
+            let status = {
+              date: res.tracking_Status[key].date ? new Date(res.tracking_Status[key].date) : null,
+              status: res.tracking_Status[key].status ? res.tracking_Status[key].status : null,
+              // disabled: key != this.current_Status ? true : false,
+              completed: res.tracking_Status[key].status == "completed" ? true : false,
+              inProgress: res.tracking_Status[key].status == "inProgress" ? true : false,
+              cancelled: res.tracking_Status[key].status == "cancelled" ? true : false
             }
-          });
-  
-          this.product_List = res.products;
-  
-          this.showTimeLine = true;
-          this.showProducts = true;
-        } 
 
-        if (res.status == 400) {
-          Swal.fire({
-            icon: 'error',
-            title: "Invalid Order Id",
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }
+            this.tracking_Status[key] = status;
+          }
+        });
+
+        console.log("this.tracking_Status: ", this.tracking_Status)
+
+        this.product_List = res.products;
+
+        this.showTimeLine = true;
+        this.showProducts = true;
       },
       err => {
         Swal.fire({
           icon: 'error',
-          title: err.error.message,
+          title: "Invalid Order Id",
           showConfirmButton: false,
           timer: 1500
         })
