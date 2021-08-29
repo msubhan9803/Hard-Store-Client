@@ -146,12 +146,14 @@ export class ProductService {
 
   // Add to Compare
   public addToCompare(product): any {
-    const compareItem = state.compare.find(item => item.id === product.id)
+    console.log("product: ", product)
+    const compareItem = state.compare.find(item => item._id === product._id)
     if (!compareItem) {
       state.compare.push({
         ...product
       })
     }
+    console.log("compareItems: ", compareItem)
     this.toastrService.success('Product has been added in compare.');
     localStorage.setItem("compareItems", JSON.stringify(state.compare));
     return true

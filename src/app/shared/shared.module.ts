@@ -60,6 +60,7 @@ import { ToastService } from './services/toast.service';
 import { BlogService } from './services/blog.service';
 import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { ProductService } from './services/product.service';
       // preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     }),
     NgxSkeletonLoaderModule,
-    TranslateModule
+    TranslateModule,
+    NgxIntlTelInputModule
   ],
   exports: [
     CommonModule,
@@ -127,6 +129,7 @@ import { ProductService } from './services/product.service';
     BarRatingModule,
     LazyLoadImageModule,
     NgxSkeletonLoaderModule,
+    NgxIntlTelInputModule,
     HttpClientModule,
     TranslateModule,
     HeaderOneComponent,

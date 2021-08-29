@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Product } from "../../shared/classes/product";
 import { ProductService } from "../../shared/services/product.service";
 import { OrderService } from "../../shared/services/order.service";
+import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,6 +21,12 @@ export class CheckoutComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   public payment: string = 'Stripe';
   public amount: any;
+
+  separateDialCode = false;
+  SearchCountryField = SearchCountryField;
+  CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+  preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
 
   constructor(
     private fb: FormBuilder,
@@ -53,6 +60,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   async onSubmit() {
+    console.log("payload: ", this.checkoutForm.value)
+
     if (this.checkoutForm.invalid) return;
 
     for (let index = 0; index < this.products.length; index++) {
@@ -72,8 +81,6 @@ export class CheckoutComponent implements OnInit {
 
     let payload = this.checkoutForm.value;
     await this.getTotal.subscribe(res => payload.totalAmount = res);
-
-    console.log("payload: ", this.checkoutForm.value)
 
     this.orderService.createOrderAPI(this.checkoutForm.value).subscribe(
       res => {

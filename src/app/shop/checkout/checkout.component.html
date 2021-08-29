@@ -22,8 +22,9 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Last Name </div>
-                                    <input type="text" name="last_Name" [formControl]="checkoutForm.controls['last_Name']"
-                                        value="" placeholder="" autocomplete="off">
+                                    <input type="text" name="last_Name"
+                                        [formControl]="checkoutForm.controls['last_Name']" value="" placeholder=""
+                                        autocomplete="off">
                                     <div *ngIf="checkoutForm.controls.last_Name.touched && checkoutForm.controls.last_Name.errors?.required"
                                         class="text text-danger">
                                         Last Name is required.
@@ -50,19 +51,33 @@
                                         class="text text-danger">
                                         Email is required
                                     </div>
-                                    <div *ngIf="checkoutForm.controls.Email.touched && checkoutForm.controls.Email.errors?.Email"
+                                    <div *ngIf="checkoutForm.controls.Email.touched && checkoutForm.controls.Email.errors?.email"
                                         class="text text-danger">
                                         Invalid Email
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">Country</div>
+                                    <!-- <div class="field-label">Country</div> -->
                                     <select name="Country" [formControl]="checkoutForm.controls['Country']">
                                         <option value="" selected>Select Country</option>
                                         <option value="India">India</option>
                                         <option value="USA">USA</option>
                                         <option value="Australia">Australia</option>
                                     </select>
+                                    <!-- <international-phone-number [formControl]="checkoutForm.controls['Country']"
+                                        placeholder="Enter phone number" [maxlength]="20" [locale]="'en'"
+                                        [allowDropdown]="true" [required]="true" name="phone_number">
+                                    </international-phone-number> -->
+
+                                    <!-- <ngx-intl-tel-input [cssClass]="'custom'"
+                                        [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
+                                        [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+                                        [searchCountryFlag]="true"
+                                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                        [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India"
+                                        [maxLength]="15" [phoneValidation]="true" name="phone"
+                                        [formControl]="checkoutForm.controls['phone']"></ngx-intl-tel-input> -->
+
                                     <div *ngIf="checkoutForm.controls.Country.touched && checkoutForm.controls.Country.errors?.required"
                                         class="text text-danger">
                                         Country is required
@@ -244,6 +259,9 @@
                                             (click)="onSubmit()">
                                             Place Order
                                         </button>
+                                        <!-- <button type="submit" class="btn-solid btn" (click)="onSubmit()">
+                                            Place Order
+                                        </button> -->
                                         <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal>
                                     </div>
                                 </div>

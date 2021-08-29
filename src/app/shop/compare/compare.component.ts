@@ -11,6 +11,7 @@ import { Product } from "../../shared/classes/product";
 export class CompareComponent implements OnInit {
 
   public products: Product[] = [];
+  public imageAddress = "";
 
   constructor(private router: Router, 
     public productService: ProductService) {
@@ -18,6 +19,7 @@ export class CompareComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.imageAddress = this.productService.getImageUrl();
   }
 
   async addToCart(product: any) {

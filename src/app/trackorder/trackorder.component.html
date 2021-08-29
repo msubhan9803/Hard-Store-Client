@@ -40,7 +40,12 @@
 
                 <!-- <li class="timeline-li" [ngClass]="{'timeline-sm': i % 2 == 0, 'timeline-inverted': i % 2 != 0 }"
                     *ngFor="let status of this.tracking_Status | keyvalue; let i = index">
-                    <div class="timeline-badge">
+                    <div [ngClass]="{
+                        'timeline-badge': true, 
+                        'primary': this.tracking_Status.order_Confirmed.inProgress, 
+                        'success': this.tracking_Status.order_Confirmed.completed, 
+                        'danger': this.tracking_Status.order_Confirmed.cancelled
+                    }">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">13</div>
                             <div class="timeline-balloon-date-month">APR</div>
@@ -68,8 +73,12 @@
                     </div>
                 </li> -->
                 <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.order_Confirmed.status">
-                    <div class="timeline-badge">
-                    <!-- <div [ngClass]="{'primary': this.tracking_Status.order_Confirmed.inProgress, 'success': this.tracking_Status.order_Confirmed.completed, 'danger': this.tracking_Status.order_Confirmed.cancelled}"> -->
+                    <div [ngClass]="{
+                        'timeline-badge': true, 
+                        'info': this.tracking_Status.order_Confirmed.inProgress, 
+                        'success': this.tracking_Status.order_Confirmed.completed, 
+                        'danger': this.tracking_Status.order_Confirmed.cancelled
+                    }">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">{{
                                 this.tracking_Status.order_Confirmed.date.getDate() || null }}</div>
@@ -95,7 +104,12 @@
                     </div>
                 </li>
                 <li class="timeline-inverted timeline-li" *ngIf="this.tracking_Status.ready_for_Delivery.status">
-                    <div class="timeline-badge">
+                    <div [ngClass]="{
+                        'timeline-badge': true, 
+                        'info': this.tracking_Status.ready_for_Delivery.inProgress, 
+                        'success': this.tracking_Status.ready_for_Delivery.completed, 
+                        'danger': this.tracking_Status.ready_for_Delivery.cancelled
+                    }">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">{{
                                 this.tracking_Status.ready_for_Delivery.date.getDate() || null }}</div>
@@ -121,7 +135,12 @@
                     </div>
                 </li>
                 <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.out_For_Delivery.status">
-                    <div class="timeline-badge">
+                    <div [ngClass]="{
+                        'timeline-badge': true, 
+                        'info': this.tracking_Status.out_For_Delivery.inProgress, 
+                        'success': this.tracking_Status.out_For_Delivery.completed, 
+                        'danger': this.tracking_Status.out_For_Delivery.cancelled
+                    }">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">{{
                                 this.tracking_Status.out_For_Delivery.date.getDate() || null }}</div>
@@ -147,7 +166,12 @@
                     </div>
                 </li>
                 <li class="timeline-inverted timeline-li" *ngIf="this.tracking_Status.delivered.status">
-                    <div class="timeline-badge">
+                    <div [ngClass]="{
+                        'timeline-badge': true, 
+                        'info': this.tracking_Status.delivered.inProgress, 
+                        'success': this.tracking_Status.delivered.completed, 
+                        'danger': this.tracking_Status.delivered.cancelled
+                    }">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">{{ this.tracking_Status.delivered.date.getDate() ||
                                 null }}</div>
@@ -173,7 +197,12 @@
                     </div>
                 </li>
                 <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.Paid.status">
-                    <div class="timeline-badge">
+                    <div [ngClass]="{
+                        'timeline-badge': true, 
+                        'info': this.tracking_Status.Paid.inProgress, 
+                        'success': this.tracking_Status.Paid.completed, 
+                        'danger': this.tracking_Status.Paid.cancelled
+                    }">
                         <div class="m-auto">
                             <div class="timeline-balloon-date-day">{{ this.tracking_Status.Paid.date.getDate() || null
                                 }}</div>

@@ -37,6 +37,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "node_modules/font-awesome/scss/font-awesome.scss",
               "node_modules/font-awesome/css/font-awesome.css",
               "src/assets/scss/app.scss",
