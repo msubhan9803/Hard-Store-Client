@@ -42,6 +42,7 @@ import { CompareComponent } from './compare/compare.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SuccessComponent } from './checkout/success/success.component';
 import { HelperMethodsService } from '../shared/services/helper-methods.service';
+import { RatingBlockComponent } from './product/widgets/rating-block/rating-block.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { HelperMethodsService } from '../shared/services/helper-methods.service'
     WishlistComponent,
     CompareComponent,
     CheckoutComponent,
-    SuccessComponent
+    SuccessComponent,
+    RatingBlockComponent
   ],
   providers: [
     HelperMethodsService

@@ -61,6 +61,7 @@ import { BlogService } from './services/blog.service';
 import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     }),
     NgxSkeletonLoaderModule,
     TranslateModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    RatingModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -132,6 +134,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     NgxIntlTelInputModule,
     HttpClientModule,
     TranslateModule,
+    RatingModule,
     HeaderOneComponent,
     FooterOneComponent,
     HeaderTwoComponent,

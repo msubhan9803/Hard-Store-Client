@@ -64,11 +64,25 @@ export class ProductService {
     // this.toastrService.success('Product get request .');
     return this.http.get(url);
   }
+  
+  // GET: products/getReviews
+  public getReviewsByProductId(productId) {
+    let url = this._env.urlAddress + 'products/getReviews/' + productId;
+    // this.toastrService.success('Product get request .');
+    return this.http.get(url);
+  }
 
   // GET: category/getProductById
   public getAllProductsById(productId) {
     let url = this._env.urlAddress + 'products/getProductById/' + productId;
     return this.http.get(url);
+  }
+
+  // POST: product/writeReview
+  public writeReview(payload) {
+    let url = this._env.urlAddress + 'products/writeReview';
+    // this.toastrService.success('Product get request .');
+    return this.http.post(url, payload);
   }
 
   // Product

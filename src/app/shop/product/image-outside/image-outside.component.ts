@@ -5,6 +5,8 @@ import { Product } from '../../../shared/classes/product';
 import { ProductService } from '../../../shared/services/product.service';
 import { SizeModalComponent } from "../../../shared/components/modal/size-modal/size-modal.component";
 import { HelperMethodsService } from 'src/app/shared/services/helper-methods.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-image-outside',
@@ -23,6 +25,8 @@ export class ImageOutsideComponent implements OnInit {
   public imageAddress = "";
   @Input() currency: any = this.productService.Currency;
   public products: Product[] = [];
+  public reviewForm: FormGroup;
+  public isSubmit = false;
 
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
 
@@ -30,6 +34,7 @@ export class ImageOutsideComponent implements OnInit {
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
   public ProductVariantsThumbSlider: any = ProductVariantsThumbSlider;
   public ProductSlider: any = ProductSlider;
+  public reviewsArray = [];
   public productCollections: any[] = [
     "On Sale",
     "New",
@@ -37,10 +42,18 @@ export class ImageOutsideComponent implements OnInit {
     "Best Seller",
   ];
 
+  max = 5;
+  rate = 5;
+  isReadonly = false;
+
+  overStar: number | undefined;
+  // percent = 0;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public productService: ProductService,
+    private fb: FormBuilder,
     public helperMethodsService: HelperMethodsService
   ) {
     this.route.data.subscribe(response => this.product = response.data);
@@ -62,6 +75,52 @@ export class ImageOutsideComponent implements OnInit {
         this.products = res;
       }
     );
+    this.productService.getReviewsByProductId(this.productId).subscribe(
+      (res: []) => {
+        this.reviewsArray = res;
+      }
+    )
+
+    this.createReviewForm();
+  }
+
+  onReviewSubmit() {
+    this.isSubmit = true;
+    if (this.reviewForm.invalid) return;
+
+    let payload = this.reviewForm.value;
+    payload.ProductId = this.productId;
+
+    this.productService.writeReview(payload).subscribe(
+      res => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully Added Review',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        window.location.reload();
+      },
+      err => {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    )
+  }
+
+  createReviewForm() {
+    this.reviewForm = this.fb.group({
+      ProductId: [""],
+      Name: ["", Validators.required],
+      Title: ["", Validators.required],
+      Email: ["", Validators.required],
+      Comment: ["", Validators.required],
+      Rating: [5, Validators.required],
+    })
   }
 
   // Get Product Color
@@ -132,5 +191,14 @@ export class ImageOutsideComponent implements OnInit {
         return item;
       }
     })
+  }
+
+  hoveringOver(value: number): void {
+    this.overStar = value;
+    // this.percent = (value / this.max) * 100;
+  }
+
+  resetStar(): void {
+    this.overStar = void 0;
   }
 }
