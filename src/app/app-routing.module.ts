@@ -34,6 +34,12 @@ const routes: Routes = [
       import("./trackorder/trackorder.module").then((m) => m.TrackorderModule),
   },
   {
+    path: "trackorder/:id",
+    component: TrackorderComponent,
+    loadChildren: () =>
+      import("./trackorder/trackorder.module").then((m) => m.TrackorderModule),
+  },
+  {
     path: "elements",
     component: ElementsComponent,
     loadChildren: () =>

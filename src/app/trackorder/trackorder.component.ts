@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { monthNames } from '../shared/data/other';
 import { HelperMethodsService } from '../shared/services/helper-methods.service';
@@ -60,12 +62,22 @@ export class TrackorderComponent implements OnInit {
   };
   public product_List = [];
   public themeFooterLogo: string = 'assets/images/logo-new.png';
+  public trackingId;
 
   constructor(
     private orderService: OrderService,
     private productService: ProductService,
-    public helperMethodsService: HelperMethodsService
-  ) { }
+    public helperMethodsService: HelperMethodsService,
+    private actRoute: ActivatedRoute
+  ) {
+    this.trackingId = this.actRoute.snapshot.params.id;
+    console.log("this.trackingId: ", this.trackingId)
+
+    if(this.trackingId) {
+      this.searchValue = this.trackingId;
+      this.searchOrder();
+    }
+  }
 
   ngOnInit(): void {
     this.imageAddress = this.productService.getImageUrl();
@@ -74,8 +86,8 @@ export class TrackorderComponent implements OnInit {
     document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
   }
 
-  public searchOrder(e) {
-    e.preventDefault();
+  public searchOrder(e?) {
+    if (e) e.preventDefault();
 
     if (this.searchValue == "") {
       Swal.fire({
