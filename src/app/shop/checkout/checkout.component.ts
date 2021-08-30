@@ -34,8 +34,8 @@ export class CheckoutComponent implements OnInit {
     private orderService: OrderService
   ) {
     this.checkoutForm = this.fb.group({
-      first_Name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      last_Name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      first_Name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      last_Name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       Email: ['', [Validators.required, Validators.email]],
       Address: ['', [Validators.required, Validators.maxLength(50)]],
@@ -60,7 +60,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log("payload: ", this.checkoutForm.value)
+    console.log("payload: ", this.checkoutForm)
 
     if (this.checkoutForm.invalid) return;
 

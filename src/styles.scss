@@ -5,3 +5,9 @@
 
 /* Importing Datepicker SCSS file. */
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+
+// Common CSS
+.strikethrough {
+    text-decoration: line-through;
+}

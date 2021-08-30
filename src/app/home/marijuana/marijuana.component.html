@@ -102,7 +102,24 @@ product slider end -->
           <ngb-tab *ngFor="let collection of productCollections">
             <ng-template ngbTabTitle>{{collection}}</ng-template>
             <ng-template ngbTabContent>
-              <div class="no-slider row" *ngIf="collection != 'All'">
+              <div class="no-slider row" *ngIf="collection == 'On Sale'">
+                <ng-container *ngFor="let product of this.products">
+                  <div class="col-md-3" *ngIf="product.sale">
+                    <div class="product-box product-wrap m-2">
+                      <app-product-box-three [product]="product" [currency]="productService?.Currency">
+                      </app-product-box-three>
+                    </div>
+                  </div>
+                </ng-container>
+                <div *ngIf="this.products.length == 0">
+                  <div class="row pt-2 mt-3 text-center">
+                    <div class="col-12">
+                      <h4 class="text-white">No Products</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="no-slider row" *ngIf="collection != 'All' && collection != 'On Sale'">
                 <ng-container *ngFor="let product of getCollectionProducts(collection)">
                   <div class="col-md-3">
                     <div class="product-box product-wrap m-2">
@@ -111,6 +128,13 @@ product slider end -->
                     </div>
                   </div>
                 </ng-container>
+                <div *ngIf="getCollectionProducts(collection).length == 0">
+                  <div class="row pt-2 mt-3 text-center">
+                    <div class="col-12">
+                      <h4 class="text-white">No Products</h4>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="no-slider row" *ngIf="collection == 'All'">
                 <ng-container *ngFor="let product of this.products">
@@ -121,11 +145,11 @@ product slider end -->
                     </div>
                   </div>
                 </ng-container>
-              </div>
-              <div *ngIf="getCollectionProducts(collection).length == 0">
-                <div class="row pt-2 mt-3 text-center">
-                  <div class="col-12">
-                    <h4 class="text-white">No Products</h4>
+                <div *ngIf="this.products.length == 0">
+                  <div class="row pt-2 mt-3 text-center">
+                    <div class="col-12">
+                      <h4 class="text-white">No Products</h4>
+                    </div>
                   </div>
                 </div>
               </div>

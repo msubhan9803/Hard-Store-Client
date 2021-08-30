@@ -18,9 +18,9 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
   public productCollections: any[] = [
-    "On Sale",
-    "New",
     "All",
+    "On Sale",
+    // "New",
     "Best Seller",
   ];
 

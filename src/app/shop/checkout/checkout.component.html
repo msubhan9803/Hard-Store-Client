@@ -19,6 +19,14 @@
                                         class="text text-danger">
                                         First Name is required.
                                     </div>
+                                    <div *ngIf="checkoutForm.controls.first_Name.touched && checkoutForm.controls.first_Name.errors?.minlength"
+                                        class="text text-danger">
+                                        Minimum length is 3
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.first_Name.touched && checkoutForm.controls.first_Name.errors?.pattern"
+                                        class="text text-danger">
+                                        Only Alphabets are allowed
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Last Name </div>
@@ -28,6 +36,14 @@
                                     <div *ngIf="checkoutForm.controls.last_Name.touched && checkoutForm.controls.last_Name.errors?.required"
                                         class="text text-danger">
                                         Last Name is required.
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.last_Name.touched && checkoutForm.controls.last_Name.errors?.pattern"
+                                        class="text text-danger">
+                                        Only Alphabets are allowed
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.last_Name.touched && checkoutForm.controls.last_Name.errors?.minlength"
+                                        class="text text-danger">
+                                        Minimum length is 3
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -184,9 +200,16 @@
                                     <ul class="qty" *ngIf='products.length'>
                                         <li *ngFor="let product of products">
                                             {{ product.title }} × {{ product.quantity }}
-                                            <span>
-                                                <!-- {{ (product.skuArray[product.variantIndex].price | discount:product) * productService?.Currency.pice | currency:productService?.Currency.currency:'symbol' }} -->
+
+                                            <span class="td-color" *ngIf="!product.sale">
                                                 {{ (product.skuArray[product.variantIndex].price * product.quantity) *
+                                                productService?.Currency.price |
+                                                currency:productService?.Currency.currency:'symbol'
+                                                }}
+                                            </span>
+                                            <span class="td-color" *ngIf="product.sale">
+                                                {{ (product.skuArray[product.variantIndex].specialPrice *
+                                                product.quantity) *
                                                 productService?.Currency.price |
                                                 currency:productService?.Currency.currency:'symbol' }}
                                             </span>
@@ -244,9 +267,6 @@
                                                                     alt="" /></span></label>
                                                     </div>
                                                 </li> -->
-                                                <!-- <li>
-                                                    <div id="paypal-button"></div>
-                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
@@ -255,6 +275,8 @@
                                             (click)="stripeCheckout()" *ngIf="payment == 'Stripe'">
                                             Place Order
                                         </button> -->
+                                        <div class="m-2" id="paypal-button"></div>
+                                        
                                         <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
                                             (click)="onSubmit()">
                                             Place Order

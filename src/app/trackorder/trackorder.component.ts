@@ -18,6 +18,7 @@ export class TrackorderComponent implements OnInit {
   public searchValue = "";
   public imageAddress = "";
   public monthNames = monthNames;
+  public order;
   public tracking_Status = {
     order_Confirmed: {
       date: null,
@@ -25,7 +26,8 @@ export class TrackorderComponent implements OnInit {
       disabled: false,
       completed: false,
       inProgress: false,
-      cancelled: false
+      cancelled: false,
+      comment: ""
     },
     ready_for_Delivery: {
       date: null,
@@ -33,7 +35,8 @@ export class TrackorderComponent implements OnInit {
       disabled: false,
       completed: false,
       inProgress: false,
-      cancelled: false
+      cancelled: false,
+      comment: ""
     },
     out_For_Delivery: {
       date: null,
@@ -41,7 +44,8 @@ export class TrackorderComponent implements OnInit {
       disabled: false,
       completed: false,
       inProgress: false,
-      cancelled: false
+      cancelled: false,
+      comment: ""
     },
     delivered: {
       date: null,
@@ -49,7 +53,8 @@ export class TrackorderComponent implements OnInit {
       disabled: false,
       completed: false,
       inProgress: false,
-      cancelled: false
+      cancelled: false,
+      comment: ""
     },
     Paid: {
       date: null,
@@ -57,7 +62,8 @@ export class TrackorderComponent implements OnInit {
       disabled: false,
       completed: false,
       inProgress: false,
-      cancelled: false
+      cancelled: false,
+      comment: ""
     },
   };
   public product_List = [];
@@ -101,6 +107,7 @@ export class TrackorderComponent implements OnInit {
     this.product_List = [];
     this.orderService.getOrderbyId(this.searchValue).subscribe(
       async (res: any) => {
+        this.order = res;
         Object.entries(res.tracking_Status).forEach(([key, value]) => {
           if (key != "current_Status") {
             let status = {
@@ -109,7 +116,8 @@ export class TrackorderComponent implements OnInit {
               // disabled: key != this.current_Status ? true : false,
               completed: res.tracking_Status[key].status == "completed" ? true : false,
               inProgress: res.tracking_Status[key].status == "inProgress" ? true : false,
-              cancelled: res.tracking_Status[key].status == "cancelled" ? true : false
+              cancelled: res.tracking_Status[key].status == "cancelled" ? true : false,
+              comment: res.tracking_Status[key].comment ? res.tracking_Status[key].comment : ""
             }
 
             this.tracking_Status[key] = status;

@@ -64,7 +64,7 @@ export class ProductService {
     // this.toastrService.success('Product get request .');
     return this.http.get(url);
   }
-  
+
   // GET: products/getReviews
   public getReviewsByProductId(productId) {
     let url = this._env.urlAddress + 'products/getReviews/' + productId;
@@ -198,27 +198,28 @@ export class ProductService {
 
   // Add to Cart
   public addToCart(product, quantity?, variantIndex?): any {
-    // const cartItem = state.cart.find(item => item.id === product.id);
-    const qty = quantity ? quantity : 1;
-    // const items = cartItem ? cartItem : product;
-    // const stock = this.calculateStockCounts(items, qty);
+    const alreadyProduct = state.cart.find(item => item._id === product._id);
 
-    // if(!stock) return false
+    if (alreadyProduct) {
+      alreadyProduct.quantity = alreadyProduct.quantity + 1;
+      state.cart.forEach((item, index) => {
+        if (item._id === alreadyProduct._id) {
+          state.cart[index] = alreadyProduct;
+        }
+      })
+    } else {
+      const qty = quantity ? quantity : 1;
+      state.cart.push({
+        ...product,
+        quantity: qty,
+        variantIndex: variantIndex
+      })
+    }
 
-    // if (cartItem) {
-    //     cartItem.quantity += qty    
-    // } else {
-    state.cart.push({
-      ...product,
-      quantity: qty,
-      variantIndex: variantIndex
-    })
-    // }
-
-    // this.OpenCart = true; // If we use cart variation modal
     localStorage.setItem("cartItems", JSON.stringify(state.cart));
     this.storageSub.next('localStorageChanged');
     this.toastrService.success('Product added to cart');
+
     return true;
   }
 
@@ -267,7 +268,7 @@ export class ProductService {
   public cartTotalAmount(): Observable<number> {
     return this.cartItems.pipe(map((product: Product[]) => {
       return product.reduce((prev, curr: Product) => {
-        let price = curr.skuArray[0].price;
+        let price = curr.sale ? curr.skuArray[0].specialPrice : curr.skuArray[0].price;
         // if (curr.discount) {
         //   price = curr.skuArray[0].price - (curr.skuArray[0].price * curr.discount / 100)
         // }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from "../../shared/services/product.service";
 import { Product } from "../../shared/classes/product";
@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   public products: Product[] = [];
   public imageAddress = "";
   public parsedProducts = [];
+  @Input() currency: any = this.productService.Currency;
 
   constructor(
     public productService: ProductService
@@ -53,7 +54,9 @@ export class CartComponent implements OnInit {
         _id: product._id,
         imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex],
         title: product.title,
+        sale: product.sale,
         price: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].price,
+        specialPrice: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].specialPrice,
         quantity: product.quantity
       }
 

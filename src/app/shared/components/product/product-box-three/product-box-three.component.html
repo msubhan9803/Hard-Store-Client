@@ -2,7 +2,7 @@
     <!-- <div class="ribbon" *ngIf="this.product.new"><span>new</span></div> -->
     <div class="ribbon" *ngIf="this.product.sale"><span>sale</span></div>
     <div class="front product-img" style="height: 300px;">
-        <a [routerLink]="['/shop/product/image/outside/', product._id]">
+        <a href="{{'/shop/product/image/outside/' + product._id}}">
             <img [defaultImage]="'assets/images/product/placeholder.jpg'"
                 [lazyLoad]="this.imageAddress + this.product.variants[0].imagesPreview[0]" class="img-fluid" alt="">
         </a>
@@ -26,17 +26,21 @@
     </div>
     <div class="quick-view-part">
         <a href="javascript:void(0)" (click)="QuickView.openModal()" title="Quick View">
-        	<i class="ti-search" aria-hidden="true"></i>
+            <i class="ti-search" aria-hidden="true"></i>
         </a>
     </div>
 </div>
 <div class="product-info">
     <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-    <a [routerLink]="['/shop/product/image/outside/', product._id]">
+    <a href="{{'/shop/product/image/outside/' + product._id}}">
         <h6>{{ product?.title ? product?.title : "No Title" | titlecase }}</h6>
     </a>
-    <!-- <h4>{{ product?.skuArray[0].price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}</h4> -->
-    <h4>{{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}</h4>
+
+    <h4 [ngClass]="{'strikethrough': product.sale}">
+        {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}
+    </h4>
+    <span *ngIf="product.sale">{{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' }}</span>
+    <span *ngIf="!product.sale">&nbsp;</span>
 </div>
 
 <app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view>

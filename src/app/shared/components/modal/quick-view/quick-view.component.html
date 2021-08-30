@@ -7,14 +7,17 @@
             <div class="row">
                 <div class="col-lg-6  col-xs-12">
                     <div class="quick-view-img">
-                        <img [src]="this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex]" [alt]="" class="img-fluid">
+                        <img [src]="this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex]"
+                            [alt]="" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 rtl-text">
                     <div class="product-right">
                         <h2>{{ product.title | titlecase }}</h2>
-                        <h3>{{ product.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}
-                            <del *ngIf="product?.discount"><span class="money">{{ product.price * currency?.price | currency:currency?.currency:'symbol' }}</span></del>
+                        <h3>{{ product.price * currency?.price | discount:product | currency:currency?.currency:'symbol'
+                            }}
+                            <del *ngIf="product?.discount"><span class="money">{{ product.price * currency?.price |
+                                    currency:currency?.currency:'symbol' }}</span></del>
                         </h3>
                         <ul class="color-variant" *ngIf="Color(product.variants).length">
                             <li [class]="color" *ngFor="let color of Color(product.variants)"
@@ -23,8 +26,10 @@
                         </ul>
                         <div class="border-product">
                             <h6 class="product-title">product details</h6>
-                            <div *ngIf="this.product?.description.length > 200" [innerHTML]="this.product?.description.substring(0, 200)+'...'"></div>
-                            <div *ngIf="this.product?.description.length < 200" [innerHTML]="this.product?.description"></div>
+                            <div *ngIf="this.product?.description.length > 200"
+                                [innerHTML]="this.product?.description.substring(0, 200)+'...'"></div>
+                            <div *ngIf="this.product?.description.length < 200" [innerHTML]="this.product?.description">
+                            </div>
                         </div>
                         <div class="product-description border-product">
                             <div class="size-box" *ngIf="Size(product.variants).length">
@@ -36,17 +41,32 @@
                             </div>
                             <h5 class="avalibility" *ngIf="counter <= product.stock"><span>In Stock</span></h5>
                             <h5 class="avalibility" *ngIf="counter > product.stock"><span>Out of Stock</span></h5>
-                            <h6 class="product-title">quantity</h6>
+
+                            <div class="col-m-2">
+                                <h4 [ngClass]="{'strikethrough': product.sale}">
+                                    {{ product?.skuArray[0].price * currency?.price |
+                                    currency:currency?.currency:'symbol'
+                                    }}
+                                </h4>
+                                <span *ngIf="product.sale">{{ product?.skuArray[0].specialPrice * currency?.price |
+                                    currency:currency?.currency:'symbol' }}</span>
+                                <span *ngIf="!product.sale">&nbsp;</span>
+                            </div>
+
+                            <h6 class="product-title mt-2">quantity</h6>
                             <div class="qty-box">
                                 <div class="input-group">
                                     <span class="input-group-prepend">
-                                        <button type="button" class="btn quantity-left-minus" data-type="minus" (click)="decrement()">
+                                        <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                            (click)="decrement()">
                                             <i class="ti-angle-left"></i>
                                         </button>
                                     </span>
-                                    <input type="text" name="quantity" class="form-control input-number"  [value]="counter" disabled>
+                                    <input type="text" name="quantity" class="form-control input-number"
+                                        [value]="counter" disabled>
                                     <span class="input-group-prepend">
-                                        <button type="button" class="btn quantity-right-plus" data-type="plus" (click)="increment()">
+                                        <button type="button" class="btn quantity-right-plus" data-type="plus"
+                                            (click)="increment()">
                                             <i class="ti-angle-right"></i>
                                         </button>
                                     </span>
@@ -54,8 +74,10 @@
                             </div>
                         </div>
                         <div class="product-buttons">
-                            <a href="javascript:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="addToCart(product)">add to cart</a>
-                            <a [routerLink]="['/shop/product/image/outside/', product._id]" class="btn btn-solid">view detail</a>
+                            <a href="javascript:void(0)" class="btn btn-solid"
+                                [class.disabled]="counter > product.stock" (click)="addToCart(product)">add to cart</a>
+                            <a href="{{'/shop/product/image/outside/' + product._id}}" class="btn btn-solid">view
+                                detail</a>
                         </div>
                     </div>
                 </div>
