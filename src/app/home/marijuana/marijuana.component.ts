@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ProductSlider } from '../../shared/data/slider';
 import { Product } from '../../shared/classes/product';
 import { ProductService } from '../../shared/services/product.service';
 import { BlogService } from 'src/app/shared/services/blog.service';
+import { ActivatedRoute } from '@angular/router';
+import { HelperMethodsService } from 'src/app/shared/services/helper-methods.service';
 
 @Component({
   selector: 'app-marijuana',
@@ -29,6 +31,8 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
   constructor(
     public productService: ProductService,
     public blogService: BlogService,
+    public helperMethodsService: HelperMethodsService,
+    private route: ActivatedRoute
   ) {
     // this.productService.getProducts.subscribe(response => {
     //   this.products = response.filter(item => item.type == 'marijuana');

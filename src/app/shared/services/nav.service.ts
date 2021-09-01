@@ -35,7 +35,7 @@ export class NavService {
 
 	MENUITEMS: Menu[] = [
 		{ title: 'Home', type: 'sub', active: false, toggleToSection: "", path: "/" },
-		{ title: 'Products', type: 'sub', active: false, toggleToSection: "products-section" },
+		{ title: 'Products', type: 'sub', active: false, toggleToSection: "products-section", path: "/" },
 		{ title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
 		{ title: 'Contact', type: 'sub', active: false, toggleToSection: "contact-section" },
 		{ title: 'Track Order', type: 'sub', active: false, toggleToSection: "", path: "/trackorder" },
