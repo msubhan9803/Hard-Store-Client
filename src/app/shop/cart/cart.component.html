@@ -73,9 +73,19 @@
                                     currency:currency?.currency:'symbol'
                                     }}
                                 </h4>
+                                <h6>
+                                    {{ product.price * currency?.price |
+                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                    }}
+                                </h6>
                                 <h4 *ngIf="product.sale">{{
                                     product.specialPrice * currency?.price |
-                                    currency:currency?.currency:'symbol' }}</h4>
+                                    currency:currency?.currency:'symbol' }}
+                                </h4>
+                                <h6 *ngIf="product.sale">{{
+                                    product.specialPrice * currency?.price |
+                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
+                                </h6>
                                 <h4 *ngIf="!product.sale">&nbsp;</h4>
                             </td>
                             <td>
@@ -114,11 +124,21 @@
                                     currency:currency?.currency:'symbol'
                                     }}
                                 </h3>
+                                <h5 class="td-color" *ngIf="!product.sale">
+                                    {{ (product.price * product.quantity) * currency?.price |
+                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                    }}
+                                </h5>
                                 <h3 class="td-color" *ngIf="product.sale">
                                     {{ (product.specialPrice * product.quantity) * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
                                 </h3>
+                                <h5 class="td-color" *ngIf="product.sale">
+                                    {{ (product.specialPrice * product.quantity) * currency?.price |
+                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                    }}
+                                </h5>
                             </td>
                         </tr>
                     </tbody>
@@ -129,6 +149,7 @@
                             <td>total price :</td>
                             <td>
                                 <h2> {{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</h2>
+                                <h4> {{ getTotal | async | currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate}}</h4>
                             </td>
                         </tr>
                     </tfoot>

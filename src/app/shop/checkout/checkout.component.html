@@ -206,12 +206,27 @@
                                                 productService?.Currency.price |
                                                 currency:productService?.Currency.currency:'symbol'
                                                 }}
+                                                <span class="text-muted">
+                                                    {{ (product.skuArray[product.variantIndex].price * product.quantity)
+                                                    *
+                                                    productService?.Currency.price |
+                                                    currency:productService?.Currency.currency:'symbol' | aedToDollar:
+                                                    this.conversionRate
+                                                    }}
+                                                </span>
                                             </span>
                                             <span class="td-color" *ngIf="product.sale">
                                                 {{ (product.skuArray[product.variantIndex].specialPrice *
                                                 product.quantity) *
                                                 productService?.Currency.price |
                                                 currency:productService?.Currency.currency:'symbol' }}
+                                                <span class="text-muted">
+                                                    {{ (product.skuArray[product.variantIndex].specialPrice *
+                                                    product.quantity) *
+                                                    productService?.Currency.price |
+                                                    currency:productService?.Currency.currency:'symbol' | aedToDollar:
+                                                    this.conversionRate }}
+                                                </span>
                                             </span>
                                         </li>
                                     </ul>
@@ -220,8 +235,14 @@
                                     </ul>
                                     <ul class="sub-total">
                                         <li>
-                                            Subtotal <span class="count">{{ getTotal | async |
-                                                currency:productService?.Currency.currency:'symbol'}}</span>
+                                            Subtotal <span class="count">
+                                                {{ getTotal | async |
+                                                currency:productService?.Currency.currency:'symbol'}}
+                                                <span class="text-muted">
+                                                    {{ getTotal | async |
+                                                    currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate}}
+                                                </span>
+                                            </span>
                                         </li>
                                         <li *ngIf='products.length'>
                                             Shipping <span class="text-muted">(free shipping)</span>
@@ -239,8 +260,15 @@
                                         </li>
                                     </ul>
                                     <ul class="total">
-                                        <li>Total <span class="count">{{ getTotal | async |
-                                                currency:productService?.Currency.currency:'symbol'}}</span></li>
+                                        <li>Total <span class="count">
+                                                {{ getTotal | async |
+                                                currency:productService?.Currency.currency:'symbol'}}
+                                                <span class="text-muted">
+                                                    {{ getTotal | async |
+                                                    currency:productService?.Currency.currency:'symbol' | aedToDollar:
+                                                    this.conversionRate}}
+                                                </span>
+                                            </span></li>
                                     </ul>
                                 </div>
 
@@ -270,13 +298,14 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+
                                     <div class="text-right">
                                         <!-- <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
                                             (click)="stripeCheckout()" *ngIf="payment == 'Stripe'">
                                             Place Order
                                         </button> -->
-                                        <div class="m-2" id="paypal-button"></div>
-                                        
+
                                         <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
                                             (click)="onSubmit()">
                                             Place Order
@@ -284,8 +313,10 @@
                                         <!-- <button type="submit" class="btn-solid btn" (click)="onSubmit()">
                                             Place Order
                                         </button> -->
-                                        <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal>
+                                        <!-- <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal> -->
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>

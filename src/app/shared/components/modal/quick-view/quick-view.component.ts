@@ -7,6 +7,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { Product } from "../../../classes/product";
 import { ProductService } from '../../../../shared/services/product.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-quick-view',
@@ -25,17 +26,22 @@ export class QuickViewComponent implements OnInit, OnDestroy {
   public counter: number = 1;
   public modalOpen: boolean = false;
   public imageAddress = "";
+  public conversionRate;
 
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router, private modalService: NgbModal,
+    public userService: UserService,
     public productService: ProductService
   ) {
     this.imageAddress = this.productService.getImageUrl();
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
   }
 
   openModal() {

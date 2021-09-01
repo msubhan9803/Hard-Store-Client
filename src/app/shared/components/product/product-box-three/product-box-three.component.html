@@ -38,8 +38,12 @@
 
     <h4 [ngClass]="{'strikethrough': product.sale}">
         {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}
+        {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
     </h4>
-    <span *ngIf="product.sale">{{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' }}</span>
+    <span *ngIf="product.sale">
+        {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' }}
+        {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
+    </span>
     <span *ngIf="!product.sale">&nbsp;</span>
 </div>
 

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  public themeFooterLogo: string = 'assets/images/logo-new.png';
+  public themeFooterLogo: string = 'assets/images/footer-logo-new.png';
 
   constructor() { }
 

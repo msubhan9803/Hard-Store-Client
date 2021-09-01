@@ -5,6 +5,7 @@ import { Product } from "../../../classes/product";
 import { ProductService } from "../../../services/product.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-product-box-three',
@@ -20,15 +21,20 @@ export class ProductBoxThreeComponent implements OnInit {
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
   public imageAddress = "";
+  public conversionRate;
 
   constructor(
     private productService: ProductService,
     private router: Router,
+    public userService: UserService,
     public toastService: ToastService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.imageAddress = this.productService.getImageUrl();
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
   }
 
   // addToCart(product: any) {

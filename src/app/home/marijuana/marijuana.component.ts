@@ -14,7 +14,7 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
   // public themeLogo: string = 'assets/images/icon/logo-3.png';
   public themeLogo: string = 'assets/images/logo-new.png';
   // public themeFooterLogo: string = 'assets/images/icon/logo-9.png';
-  public themeFooterLogo: string = 'assets/images/logo-new.png';
+  public themeFooterLogo: string = 'assets/images/footer-logo-new.png';
 
   public products: Product[] = [];
   public productCollections: any[] = [

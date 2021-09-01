@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../classes/product";
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -16,6 +17,7 @@ export class SettingsComponent implements OnInit {
   public search: boolean = false;
   public parsedProducts = [];
   public imageAddress = "";
+  public conversionRate;
 
   public languages = [{
     name: 'English',
@@ -44,7 +46,7 @@ export class SettingsComponent implements OnInit {
   }]
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
-    private translate: TranslateService,
+    private translate: TranslateService,public userService: UserService,
     public productService: ProductService) {
     this.productService.cartItems.subscribe(response => {
       this.products = response;
@@ -65,7 +67,10 @@ export class SettingsComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
   }
 
   public recreateParsedProductList() {

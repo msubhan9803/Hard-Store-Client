@@ -62,6 +62,8 @@ import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
-    DiscountPipe
+    DiscountPipe,
+    AedToDollarPipe
   ],
   providers: [
     EnvironmentUrlService,
@@ -120,7 +123,8 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     NgxSkeletonLoaderModule,
     TranslateModule,
     NgxIntlTelInputModule,
-    RatingModule.forRoot()
+    RatingModule.forRoot(),
+    NgxPayPalModule
   ],
   exports: [
     CommonModule,
@@ -135,6 +139,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     HttpClientModule,
     TranslateModule,
     RatingModule,
+    NgxPayPalModule,
     HeaderOneComponent,
     FooterOneComponent,
     HeaderTwoComponent,
@@ -163,7 +168,8 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
-    DiscountPipe
+    DiscountPipe,
+    AedToDollarPipe
   ]
 })
 export class SharedModule { }

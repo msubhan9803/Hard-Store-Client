@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
@@ -8,6 +8,8 @@ import { ProductService } from "../../shared/services/product.service";
 import { OrderService } from "../../shared/services/order.service";
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import Swal from 'sweetalert2';
+import { EnvironmentUrlService } from 'src/app/shared/services/enviroment-url.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -21,16 +23,23 @@ export class CheckoutComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   public payment: string = 'Stripe';
   public amount: any;
+  public showSuccess: any;
+  public showCancel: any;
+  public showError: any;
+  public conversionRate;
 
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
   PhoneNumberFormat = PhoneNumberFormat;
   preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+  protected _env: EnvironmentUrlService;
 
   constructor(
     private fb: FormBuilder,
     public productService: ProductService,
+    injector: Injector,
+    public userService: UserService,
     private orderService: OrderService
   ) {
     this.checkoutForm = this.fb.group({
@@ -45,12 +54,17 @@ export class CheckoutComponent implements OnInit {
       postalCode: ['', Validators.required],
       products: [[]]
     })
+
+    this._env = injector.get(EnvironmentUrlService);
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.productService.cartItems.subscribe(response => {
       this.products = response;
     });
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
     this.getTotal.subscribe(amount => this.amount = amount);
     this.initConfig();
   }
@@ -124,54 +138,65 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  // Paypal Payment Gateway
   private initConfig(): void {
     this.payPalConfig = {
-      currency: this.productService.Currency.currency,
-      clientId: environment.paypal_token,
-      createOrderOnClient: (data) => <ICreateOrderRequest>{
-        intent: 'CAPTURE',
-        purchase_units: [{
-          amount: {
-            currency_code: this.productService.Currency.currency,
-            value: this.amount,
-            breakdown: {
-              item_total: {
-                currency_code: this.productService.Currency.currency,
-                value: this.amount
-              }
-            }
-          }
-        }]
+      currency: 'EUR',
+      clientId: 'sb',
+      createOrderOnClient: () => < ICreateOrderRequest > {
+          intent: 'CAPTURE',
+          purchase_units: [{
+              amount: {
+                  currency_code: 'EUR',
+                  value: '9.99',
+                  breakdown: {
+                      item_total: {
+                          currency_code: 'EUR',
+                          value: '9.99'
+                      }
+                  }
+              },
+              items: [{
+                  name: 'Enterprise Subscription',
+                  quantity: '1',
+                  category: 'DIGITAL_GOODS',
+                  unit_amount: {
+                      currency_code: 'EUR',
+                      value: '9.99',
+                  },
+              }]
+          }]
       },
       advanced: {
-        commit: 'true'
+          commit: 'true'
       },
       style: {
-        label: 'paypal',
-        size: 'small', // small | medium | large | responsive
-        shape: 'rect', // pill | rect
+          label: 'paypal',
+          layout: 'vertical'
       },
       onApprove: (data, actions) => {
-        this.orderService.createOrder(this.products, this.checkoutForm.value, data.orderID, this.getTotal);
-        console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        actions.order.get().then(details => {
-          console.log('onApprove - you can get full order details inside onApprove: ', details);
-        });
+          console.log('onApprove - transaction was approved, but not authorized', data, actions);
+          actions.order.get().then(details => {
+              console.log('onApprove - you can get full order details inside onApprove: ', details);
+          });
+
       },
       onClientAuthorization: (data) => {
-        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+          console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+          this.showSuccess = true;
       },
       onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
+          console.log('OnCancel', data, actions);
+          this.showCancel = true;
+
       },
       onError: err => {
-        console.log('OnError', err);
+          console.log('OnError', err);
+          this.showError = true;
       },
       onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-      }
-    };
-  }
-
+          console.log('onClick', data, actions);
+          // this.resetStatus();
+      },
+  };
+}
 }

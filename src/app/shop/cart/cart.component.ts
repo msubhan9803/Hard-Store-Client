@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from "../../shared/services/product.service";
 import { Product } from "../../shared/classes/product";
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,9 +15,11 @@ export class CartComponent implements OnInit {
   public imageAddress = "";
   public parsedProducts = [];
   @Input() currency: any = this.productService.Currency;
+  public conversionRate;
 
   constructor(
-    public productService: ProductService
+    public productService: ProductService,
+    public userService: UserService
   ) {
     this.productService.cartItems.subscribe(response => {
       this.imageAddress = this.productService.getImageUrl();
@@ -37,8 +40,11 @@ export class CartComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.imageAddress = this.productService.getImageUrl();
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
   }
 
   public recreateParsedProductList() {

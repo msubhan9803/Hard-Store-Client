@@ -67,7 +67,7 @@ export class TrackorderComponent implements OnInit {
     },
   };
   public product_List = [];
-  public themeFooterLogo: string = 'assets/images/logo-new.png';
+  public themeFooterLogo: string = 'assets/images/footer-logo-new.png';
   public trackingId;
 
   constructor(

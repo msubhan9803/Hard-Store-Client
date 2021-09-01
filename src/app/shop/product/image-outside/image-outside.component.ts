@@ -7,6 +7,7 @@ import { SizeModalComponent } from "../../../shared/components/modal/size-modal/
 import { HelperMethodsService } from 'src/app/shared/services/helper-methods.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-image-outside',
@@ -27,6 +28,7 @@ export class ImageOutsideComponent implements OnInit {
   public products: Product[] = [];
   public reviewForm: FormGroup;
   public isSubmit = false;
+  public conversionRate;
 
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
 
@@ -53,15 +55,20 @@ export class ImageOutsideComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public productService: ProductService,
+    public userService: UserService,
     private fb: FormBuilder,
     public helperMethodsService: HelperMethodsService
   ) {
     this.route.data.subscribe(response => this.product = response.data);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.productId = this.route.snapshot.paramMap.get('id');
     this.imageAddress = this.productService.getImageUrl();
+
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
 
     this.productService.getAllProductsById(this.productId).subscribe(
       res => {
