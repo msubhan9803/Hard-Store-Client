@@ -238,10 +238,10 @@
                                             Subtotal <span class="count">
                                                 {{ getTotal | async |
                                                 currency:productService?.Currency.currency:'symbol'}}
-                                                <span class="text-muted">
+                                                <small class="text-muted">
                                                     {{ getTotal | async |
                                                     currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate}}
-                                                </span>
+                                                </small>
                                             </span>
                                         </li>
                                         <li *ngIf='products.length'>
@@ -263,11 +263,11 @@
                                         <li>Total <span class="count">
                                                 {{ getTotal | async |
                                                 currency:productService?.Currency.currency:'symbol'}}
-                                                <span class="text-muted">
+                                                <small class="text-muted">
                                                     {{ getTotal | async |
                                                     currency:productService?.Currency.currency:'symbol' | aedToDollar:
                                                     this.conversionRate}}
-                                                </span>
+                                                </small>
                                             </span></li>
                                     </ul>
                                 </div>

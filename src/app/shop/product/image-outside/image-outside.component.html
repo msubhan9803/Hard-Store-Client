@@ -57,20 +57,20 @@
                                         {{ product?.skuArray[this.currentVariant].price * currency?.price |
                                         currency:currency?.currency:'symbol'
                                         }}
+                                        <small>
+                                            {{ product?.skuArray[this.currentVariant].price * currency?.price |
+                                            currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                            }}
+                                        </small>
                                     </h3>
-                                    <h5>
-                                        {{ product?.skuArray[this.currentVariant].price * currency?.price |
-                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
-                                        }}
-                                    </h5>
                                     <h3 *ngIf="product?.sale">
                                         {{ product?.skuArray[this.currentVariant].specialPrice * currency?.price |
                                         currency:currency?.currency:'symbol' }}
+                                        <small>
+                                            {{ product?.skuArray[this.currentVariant].specialPrice * currency?.price |
+                                            currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
+                                        </small>
                                     </h3>
-                                    <h5>
-                                        {{ product?.skuArray[this.currentVariant].specialPrice * currency?.price |
-                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
-                                    </h5>
                                     <h3 *ngIf="!product?.sale">&nbsp;</h3>
                                 </div>
                                 <!-- <ul class="color-variant" *ngIf="Color(product?.variants).length">

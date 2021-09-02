@@ -47,20 +47,20 @@
                                     {{ product?.skuArray[0].price * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
+                                    <small>
+                                        {{ product?.skuArray[0].price * currency?.price |
+                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                        }}
+                                    </small>
                                 </h4>
-                                <h6>
-                                    {{ product?.skuArray[0].price * currency?.price |
-                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
-                                    }}
-                                </h6>
-                                <span *ngIf="product.sale">
+                                <h4 *ngIf="product.sale">
                                     {{ product?.skuArray[0].specialPrice * currency?.price |
                                     currency:currency?.currency:'symbol' }}
-                                </span>
-                                <h6 *ngIf="product.sale">
-                                    {{ product?.skuArray[0].specialPrice * currency?.price |
-                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
-                                </h6>
+                                    <small *ngIf="product.sale">
+                                        {{ product?.skuArray[0].specialPrice * currency?.price |
+                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
+                                    </small>
+                                </h4>
                                 <span *ngIf="!product.sale">&nbsp;</span>
                             </div>
 
