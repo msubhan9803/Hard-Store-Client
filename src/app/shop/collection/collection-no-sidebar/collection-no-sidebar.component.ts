@@ -17,34 +17,43 @@ export class CollectionNoSidebarComponent implements OnInit {
   public pageNo: number = 1;
   public paginate: any = {}; // Pagination use only
   public sortBy: string; // Sorting Order
+  public productCollections: any[] = [
+    "All",
+    "On Sale",
+    // "New",
+    "Best Seller",
+  ];
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    private viewScroller: ViewportScroller, public productService: ProductService) {   
-      // Get Query params..
-      this.route.queryParams.subscribe(params => {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private viewScroller: ViewportScroller,
+    public productService: ProductService
+  ) { }
 
-        this.sortBy = params.sortBy ? params.sortBy : 'ascending';
-        this.pageNo = params.page ? params.page : this.pageNo;
-
-        // Get Filtered Products..
-        this.productService.getProducts.subscribe(response => {         
-          // Sorting Filter
-          this.products = this.productService.sortProducts(response, this.sortBy);
-          // Paginate Products
-          this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
-          this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-        })
-      })
+  async ngOnInit(): Promise<void> {
+    await this.productService.getAllProductsAPI().toPromise().then(
+      (res: []) => {
+        this.products = res;
+        console.log("res: ", this.products)
+      }
+    );
   }
 
-  ngOnInit(): void {
+  // Product Tab collection
+  getCollectionProducts(collection) {
+    return this.products.filter((item) => {
+      if (item.collections.includes(collection)) {
+        return item;
+      }
+    })
   }
 
   // SortBy Filter
   sortByFilter(value) {
-    this.router.navigate([], { 
+    this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { sortBy: value ? value : null},
+      queryParams: { sortBy: value ? value : null },
       queryParamsHandling: 'merge', // preserve the existing query params in the route
       skipLocationChange: false  // do trigger navigation
     }).finally(() => {
@@ -54,7 +63,7 @@ export class CollectionNoSidebarComponent implements OnInit {
 
   // product Pagination
   setPage(page: number) {
-    this.router.navigate([], { 
+    this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { page: page },
       queryParamsHandling: 'merge', // preserve the existing query params in the route
@@ -72,7 +81,7 @@ export class CollectionNoSidebarComponent implements OnInit {
   // Change Layout View
   updateLayoutView(value: string) {
     this.layoutView = value;
-    if(value == 'list-view')
+    if (value == 'list-view')
       this.grid = 'col-lg-12';
     else
       this.grid = 'col-xl-3 col-md-6';

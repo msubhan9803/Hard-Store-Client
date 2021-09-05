@@ -40,11 +40,13 @@
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "node_modules/font-awesome/scss/font-awesome.scss",
               "node_modules/font-awesome/css/font-awesome.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/assets/scss/app.scss",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/isotope-layout/dist/isotope.pkgd.min.js"
+              "node_modules/isotope-layout/dist/isotope.pkgd.min.js",
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

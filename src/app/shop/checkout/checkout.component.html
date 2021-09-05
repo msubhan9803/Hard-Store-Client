@@ -50,6 +50,7 @@
                                     <div class="field-label">Phone</div>
                                     <input type="text" name="phone" [formControl]="checkoutForm.controls['phone']"
                                         value="" placeholder="" autocomplete="off">
+
                                     <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.required"
                                         class="text text-danger">
                                         Phone No is required.
@@ -240,7 +241,8 @@
                                                 currency:productService?.Currency.currency:'symbol'}}
                                                 <small class="text-muted">
                                                     {{ getTotal | async |
-                                                    currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate}}
+                                                    currency:productService?.Currency.currency:'symbol' | aedToDollar:
+                                                    this.conversionRate}}
                                                 </small>
                                             </span>
                                         </li>

@@ -14,15 +14,12 @@
 
       <li *ngFor="let menuItem of menuItems">
         <!-- <a [routerLink]="['/']" fragment="productsSection" *ngIf="menuItem.title == 'Products'" class="nav-link" (click)="this.helperMethodsService.scrollToSection(menuItem.toggleToSection)"> -->
-        <a href="javascript:void(0)" *ngIf="menuItem.title == 'Products'" class="nav-link" (click)="this.helperMethodsService.scrollToSection(menuItem.toggleToSection, '/')">
-          {{ menuItem.title }}
-        </a>
         <a href="javascript:void(0)" *ngIf="!menuItem.path && menuItem.title != 'Products'" class="nav-link" (click)="this.helperMethodsService.scrollToSection(menuItem.toggleToSection)">
           {{ menuItem.title }}
           <!-- <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
           <span class="sub-arrow" *ngIf="menuItem.children"></span> -->
         </a>
-        <a href="{{menuItem.path}}" *ngIf="menuItem.path && menuItem.title != 'Products'" class="nav-link">
+        <a href="{{menuItem.path}}" *ngIf="menuItem.path" class="nav-link">
           {{ menuItem.title }}
           <!-- <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>
           <span class="sub-arrow" *ngIf="menuItem.children"></span> -->

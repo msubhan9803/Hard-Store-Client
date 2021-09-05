@@ -64,6 +64,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
     TranslateModule,
     NgxIntlTelInputModule,
     RatingModule.forRoot(),
-    NgxPayPalModule
+    NgxPayPalModule,
+    Ng2TelInputModule
   ],
   exports: [
     CommonModule,
@@ -169,7 +171,8 @@ import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
     LayoutBoxComponent,
     TapToTopComponent,
     DiscountPipe,
-    AedToDollarPipe
+    AedToDollarPipe,
+    Ng2TelInputModule
   ]
 })
 export class SharedModule { }

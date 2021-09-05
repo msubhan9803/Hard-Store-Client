@@ -1,71 +1,71 @@
-<app-breadcrumb [title]="'Collection'" [breadcrumb]="'Collection'"></app-breadcrumb>
+<app-breadcrumb [title]="'Products'" [breadcrumb]="'Products'"></app-breadcrumb>
 <!-- section start -->
-<section class="section-b-space">
-    <div class="collection-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="collection-content col">
-                    <div class="page-main-content">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="top-banner-wrapper">
-                                    <a [routerLink]="['/shop/collection/left/sidebar']">
-                                        <img src="assets/images/collection-banner.jpg" class="img-fluid " alt="">
-                                    </a>
-                                    <div class="top-banner-content small-section">
-                                        <h4>fashion</h4>
-                                        <h5>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.</h5>
-                                        <p>
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry. Lorem Ipsum has been the industry's standard dummy text ever
-                                            since the 1500s, when an unknown printer took a galley of type and
-                                            scrambled it to make a type specimen book. It has survived not only five
-                                            centuries, but also the leap into electronic typesetting, remaining
-                                            essentially unchanged. It was popularised in the 1960s with the release
-                                            of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                            with desktop publishing software like Aldus PageMaker including versions
-                                            of Lorem Ipsum.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="collection-product-wrapper" id="products">
-                                    <app-grid 
-                                        [products]="products"
-                                        [paginate]="paginate"
-                                        [layoutView]="layoutView"
-                                        [sortBy]="sortBy"
-                                        (setGrid)="updateGridLayout($event)"
-                                        (setLayout)="updateLayoutView($event)"
-                                        (sortedBy)="sortByFilter($event)">
-                                    </app-grid>
-                                    <div class="product-wrapper-grid" [ngClass]="layoutView">
-                                        <div class="row">
-                                            <div class="col-grid-box"
-                                                [ngClass]="grid"
-                                                *ngFor="let product of products">
-                                                <div class="product-box">
-                                                    <app-product-box-one 
-                                                        [product]="product" 
-                                                        [currency]="productService?.Currency"
-                                                        [thumbnail]="false"
-                                                        [cartModal]="true"
-                                                        [loader]="true">
-                                                    </app-product-box-one>
-                                                </div>
-                                            </div>
+<section #productsSection class="full-banner parallax tools-parallax-product tools-grey border-box"
+    id="products-section" [ngStyle]="{'background-image': 'url(assets/images/product-background-img.jpg)'}">
+    <div class="container">
+        <div class="row">
+            <div class="col theme-tab">
+                <ngb-tabset [justify]="'center'" [type]="'pills'" class="tabs tab-title marijuana-tab">
+                    <ngb-tab *ngFor="let collection of productCollections">
+                        <ng-template ngbTabTitle>{{collection}}</ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="no-slider row" *ngIf="collection == 'On Sale'">
+                                <ng-container *ngFor="let product of this.products">
+                                    <div class="col-md-3" *ngIf="product.sale">
+                                        <div class="product-box product-wrap m-2">
+                                            <app-product-box-three [product]="product"
+                                                [currency]="productService?.Currency">
+                                            </app-product-box-three>
                                         </div>
                                     </div>
-                                    <app-pagination
-                                        [products]="products"
-                                        [paginate]="paginate"
-                                        (setPage)="setPage($event)">
-                                    </app-pagination>
+                                </ng-container>
+                                <div *ngIf="this.products.length == 0">
+                                    <div class="row pt-2 mt-3 text-center">
+                                        <div class="col-12">
+                                            <h4 class="text-white">No Products</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="no-slider row" *ngIf="collection != 'All' && collection != 'On Sale'">
+                                <ng-container *ngFor="let product of getCollectionProducts(collection)">
+                                    <div class="col-md-3">
+                                        <div class="product-box product-wrap m-2">
+                                            <app-product-box-three [product]="product"
+                                                [currency]="productService?.Currency">
+                                            </app-product-box-three>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="getCollectionProducts(collection).length == 0">
+                                    <div class="row pt-2 mt-3 text-center">
+                                        <div class="col-12">
+                                            <h4 class="text-white">No Products</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="no-slider row" *ngIf="collection == 'All'">
+                                <ng-container *ngFor="let product of this.products">
+                                    <div class="col-md-3">
+                                        <div class="product-box product-wrap m-2">
+                                            <app-product-box-three [product]="product"
+                                                [currency]="productService?.Currency">
+                                            </app-product-box-three>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="this.products.length == 0">
+                                    <div class="row pt-2 mt-3 text-center">
+                                        <div class="col-12">
+                                            <h4 class="text-white">No Products</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
             </div>
         </div>
     </div>

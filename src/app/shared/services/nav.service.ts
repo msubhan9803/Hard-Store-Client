@@ -35,9 +35,9 @@ export class NavService {
 
 	MENUITEMS: Menu[] = [
 		{ title: 'Home', type: 'sub', active: false, toggleToSection: "", path: "/" },
-		{ title: 'Products', type: 'sub', active: false, toggleToSection: "products-section", path: "/" },
-		{ title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
-		{ title: 'Contact', type: 'sub', active: false, toggleToSection: "contact-section" },
+		{ title: 'Products', type: 'sub', active: false, path: "/shop/collection/no/sidebar" },
+		// { title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
+		{ title: 'Contact', type: 'sub', active: false, path: "/pages/contact" },
 		{ title: 'Track Order', type: 'sub', active: false, toggleToSection: "", path: "/trackorder" },
 		// {
 		// 	title: 'home', type: 'sub', active: false, children: [
@@ -174,15 +174,17 @@ export class NavService {
 				{ path: '/pages/blog/no/sidebar', title: 'no-sidebar', type: 'link' },
 				{ path: '/pages/blog/details', title: 'blog-details', type: 'link' }
 			]
-		}
+		},
+		{ title: 'FAQ', type: 'sub', active: false, path: "/pages/faq" },
 	];
 
 	LEFTMENUITEMS: Menu[] = [
 
 		{ title: 'Home', type: 'sub', active: false, toggleToSection: "" },
-		{ title: 'Products', type: 'sub', active: false, toggleToSection: "products-section" },
-		{ title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
-		{ title: 'Contact', type: 'sub', active: false, toggleToSection: "contact-section" },
+		{ title: 'Products', type: 'sub', active: false, path: "/shop/collection/no/sidebar" },
+		// { title: 'Bundles', type: 'sub', active: false, toggleToSection: "" },
+		// { title: 'Contact', type: 'sub', active: false, toggleToSection: "contact-section" },
+		{ title: 'Contact', type: 'sub', active: false, path: "/pages/contact" },
 		{ title: 'Track Order', type: 'sub', active: false, toggleToSection: "", path: "/trackorder" },
 		{
 			title: 'blogs', type: 'sub', active: false, path: '/pages/blog/no/sidebar', children: [
@@ -191,7 +193,8 @@ export class NavService {
 				{ path: '/pages/blog/no/sidebar', title: 'no-sidebar', type: 'link' },
 				{ path: '/pages/blog/details', title: 'blog-details', type: 'link' }
 			]
-		}
+		},
+		{ title: 'FAQ', type: 'sub', active: false, path: "/pages/faq" }
 
 		// {
 		// 	title: 'clothing', type: 'sub', megaMenu: true, active: false, children: [
