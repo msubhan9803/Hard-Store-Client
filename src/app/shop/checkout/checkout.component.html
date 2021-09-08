@@ -46,21 +46,7 @@
                                         Minimum length is 3
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <div class="field-label">Phone</div>
-                                    <input type="text" name="phone" [formControl]="checkoutForm.controls['phone']"
-                                        value="" placeholder="" autocomplete="off">
-
-                                    <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.required"
-                                        class="text text-danger">
-                                        Phone No is required.
-                                    </div>
-                                    <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.pattern"
-                                        class="text text-danger">
-                                        Phone No is must be number.
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Email Address</div>
                                     <input type="text" name="Email" [formControl]="checkoutForm.controls['Email']"
                                         value="" placeholder="" autocomplete="off">
@@ -74,45 +60,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <!-- <div class="field-label">Country</div> -->
-                                    <select name="Country" [formControl]="checkoutForm.controls['Country']">
-                                        <option value="" selected>Select Country</option>
-                                        <option value="India">India</option>
-                                        <option value="USA">USA</option>
-                                        <option value="Australia">Australia</option>
-                                    </select>
-                                    <!-- <international-phone-number [formControl]="checkoutForm.controls['Country']"
-                                        placeholder="Enter phone number" [maxlength]="20" [locale]="'en'"
-                                        [allowDropdown]="true" [required]="true" name="phone_number">
-                                    </international-phone-number> -->
-
-                                    <!-- <ngx-intl-tel-input [cssClass]="'custom'"
-                                        [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
-                                        [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
-                                        [searchCountryFlag]="true"
-                                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-                                        [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India"
-                                        [maxLength]="15" [phoneValidation]="true" name="phone"
-                                        [formControl]="checkoutForm.controls['phone']"></ngx-intl-tel-input> -->
-
-                                    <div *ngIf="checkoutForm.controls.Country.touched && checkoutForm.controls.Country.errors?.required"
-                                        class="text text-danger">
-                                        Country is required
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Address</div>
-                                    <input type="text" name="Address" [formControl]="checkoutForm.controls['Address']"
+                                    <input type="text" name="address" [formControl]="checkoutForm.controls['Address']"
                                         value="" placeholder="" autocomplete="off">
                                     <div *ngIf="checkoutForm.controls.Address.touched && checkoutForm.controls.Address.errors?.required"
                                         class="text text-danger">
                                         Address is required
                                     </div>
-                                    <div *ngIf="checkoutForm.controls.Address.touched && checkoutForm.controls.Address.errors?.maxlength"
+                                    <div *ngIf="checkoutForm.controls.Address.touched && checkoutForm.controls.Address.errors?.maxLength"
                                         class="text text-danger">
-                                        Maximum 50 character
+                                        Invalid Address
                                     </div>
                                 </div>
+
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Town/City</div>
                                     <input type="text" name="City" [formControl]="checkoutForm.controls['City']"
@@ -139,6 +99,46 @@
                                     <div *ngIf="checkoutForm.controls.postalCode.touched && checkoutForm.controls.postalCode.errors?.required"
                                         class="text text-danger">
                                         Postalcode is required
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Country</div>
+                                    <ng-select [formControl]="checkoutForm.controls['Country']"
+                                        (change)="onChange($event)">
+                                        <ng-option *ngFor="let country of countryList; let arrayIndex = i"
+                                            [value]="country">
+                                            {{country.name}}</ng-option>
+                                    </ng-select>
+
+                                    <div *ngIf="checkoutForm.controls.Country.touched && checkoutForm.controls.Country.errors?.required"
+                                        class="text text-danger">
+                                        Country is required
+                                    </div>
+                                </div>
+                                <div class="form-group fcol-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Phone</div>
+
+                                    <!-- <div class="input-group mb-2">
+                                        {{ this.checkoutForm.controls['DailCode'].value }}
+                                        <input type="number" name="phone" class="form-control"
+                                            [formControl]="checkoutForm.controls['phone']" value="" placeholder=""
+                                            autocomplete="off">
+                                    </div> -->
+
+                                    <div class="input-box">
+                                        <span class="prefix">{{ this.checkoutForm.controls['DailCode'].value }}</span>
+                                        <input type="number" class="form-control" name="phone"
+                                            [formControl]="checkoutForm.controls['phone']" value="" placeholder=""
+                                            autocomplete="off">
+                                    </div>
+
+                                    <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.required"
+                                        class="text text-danger">
+                                        Phone No is required.
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.pattern"
+                                        class="text text-danger">
+                                        Phone No is must be number.
                                     </div>
                                 </div>
                             </div>
@@ -247,12 +247,19 @@
                                             </span>
                                         </li>
                                         <li *ngIf='products.length'>
-                                            Shipping <span class="text-muted">(free shipping)</span>
+                                            Shipping <span class="text-muted">(payment method)</span>
                                             <div class="shipping">
                                                 <div class="shopping-option">
-                                                    <input type="radio" name="shipping" checked="checked"
-                                                        id="free-shipping">
+                                                    <input type="radio" name="cashOnDeliver" #cashOnDeliver
+                                                        [checked]="paymentMethodCheckedPaypal" id="free-shipping"
+                                                        (change)="onPaymentMethodChange(cashOnDeliver)">
                                                     <label for="free-shipping">Cash on Delivery</label>
+                                                </div>
+                                                <div class="shopping-option">
+                                                    <input type="radio" name="paypal" #paypal
+                                                        [checked]="!paymentMethodCheckedPaypal" id="free-shipping"
+                                                        (change)="onPaymentMethodChange(paypal)">
+                                                    <label for="free-shipping">Paypal</label>
                                                 </div>
                                                 <!-- <div class="shopping-option">
                                                     <input type="radio" name="shipping" id="local-pickup">
@@ -300,16 +307,14 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-
                                     <div class="text-right">
                                         <!-- <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
                                             (click)="stripeCheckout()" *ngIf="payment == 'Stripe'">
                                             Place Order
                                         </button> -->
 
-                                        <button type="submit" class="btn-solid btn" [disabled]="!checkoutForm.valid"
-                                            (click)="onSubmit()">
+                                        <button *ngIf="paymentMethodCheckedPaypal" [disabled]="!checkoutForm.valid"
+                                            type="submit" class="btn-solid btn" (click)="onSubmit()">
                                             Place Order
                                         </button>
                                         <!-- <button type="submit" class="btn-solid btn" (click)="onSubmit()">
@@ -317,8 +322,13 @@
                                         </button> -->
                                         <!-- <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal> -->
                                     </div>
-
-
+                                    <div *ngIf="checkoutForm.valid" style="cursor: not-allowed !important;pointer-events: all !important;">
+                                        <ngx-paypal *ngIf="!paymentMethodCheckedPaypal" [config]="payPalConfig">
+                                        </ngx-paypal>
+                                    </div>
+                                    <div *ngIf="!checkoutForm.valid" class="text-right">
+                                        <span class="text-danger && !paymentMethodCheckedPaypal">Please fill all required fields</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

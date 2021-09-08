@@ -35,16 +35,21 @@
     <a href="{{'/shop/product/image/outside/' + product._id}}">
         <h6>{{ product?.title ? product?.title : "No Title" | titlecase }}</h6>
     </a>
+    <br />
 
-    <h4 [ngClass]="{'strikethrough': product.sale}">
+    <h5 [ngClass]="{'strikethrough': product.sale}">
         {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}
-        {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
-    </h4>
-    <span *ngIf="product.sale">
+        <small>
+            {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
+        </small>
+    </h5>
+    <h5 *ngIf="product.sale">
         {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' }}
-        {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
-    </span>
-    <span *ngIf="!product.sale">&nbsp;</span>
+        <small>
+            {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
+        </small>
+    </h5>
+    <h5 *ngIf="!product.sale">&nbsp;</h5>
 </div>
 
 <app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view>

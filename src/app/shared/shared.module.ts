@@ -65,6 +65,10 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { CheckoutService } from './services/checkout.service';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -107,7 +111,8 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     ToastService,
     ProductService,
     OrderService,
-    BlogService
+    BlogService,
+    CheckoutService
   ],
   imports: [
     CommonModule,
@@ -126,7 +131,10 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     NgxIntlTelInputModule,
     RatingModule.forRoot(),
     NgxPayPalModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    NgSelectModule,
+    NgxMaskModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -172,7 +180,10 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     TapToTopComponent,
     DiscountPipe,
     AedToDollarPipe,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    NgSelectModule,
+    NgxMaskModule,
+    NgMultiSelectDropDownModule
   ]
 })
 export class SharedModule { }

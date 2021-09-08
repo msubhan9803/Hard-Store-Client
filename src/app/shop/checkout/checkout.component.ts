@@ -10,6 +10,7 @@ import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-
 import Swal from 'sweetalert2';
 import { EnvironmentUrlService } from 'src/app/shared/services/enviroment-url.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { CheckoutService } from 'src/app/shared/services/checkout.service';
 
 @Component({
   selector: 'app-checkout',
@@ -27,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   public showCancel: any;
   public showError: any;
   public conversionRate;
+  public countryList = [];
 
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
@@ -34,21 +36,28 @@ export class CheckoutComponent implements OnInit {
   PhoneNumberFormat = PhoneNumberFormat;
   preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
   protected _env: EnvironmentUrlService;
+  selectedItem = [];
+  dropdownSettings: any = {};
+  closeDropdownSelection=false;
+  disabled=false;
+  paymentMethodCheckedPaypal = true;
 
   constructor(
     private fb: FormBuilder,
     public productService: ProductService,
     injector: Injector,
     public userService: UserService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private checkoutService: CheckoutService
   ) {
     this.checkoutForm = this.fb.group({
       first_Name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       last_Name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      phone: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       Address: ['', [Validators.required, Validators.maxLength(50)]],
-      Country: ['', Validators.required],
+      Country: ['United Arab Emirates', Validators.required],
+      DailCode: [''],
       City: ['', Validators.required],
       State: ['', Validators.required],
       postalCode: ['', Validators.required],
@@ -67,6 +76,16 @@ export class CheckoutComponent implements OnInit {
     })
     this.getTotal.subscribe(amount => this.amount = amount);
     this.initConfig();
+    this.countryList = this.checkoutService.countryList.filter(item => item.name);
+
+    this.selectedItem = ['Pune'];
+    this.dropdownSettings = {
+      singleSelection: true,
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      allowSearchFilter: true,
+      closeDropDownOnSelection: this.closeDropdownSelection
+    };
   }
 
   public get getTotal(): Observable<number> {
@@ -95,8 +114,11 @@ export class CheckoutComponent implements OnInit {
 
     let payload = this.checkoutForm.value;
     await this.getTotal.subscribe(res => payload.totalAmount = res);
-
-    this.orderService.createOrderAPI(this.checkoutForm.value).subscribe(
+    let checkoutFormValue = this.checkoutForm.value;
+    checkoutFormValue.phone = this.checkoutForm.value.DailCode + this.checkoutForm.value.phone;
+    // delete checkoutFormValue.DailCode;
+    // console.log("payload: ", checkoutFormValue)
+    this.orderService.createOrderAPI(checkoutFormValue).subscribe(
       res => {
         Swal.fire({
           icon: 'success',
@@ -120,12 +142,22 @@ export class CheckoutComponent implements OnInit {
     )
   }
 
+  onPaymentMethodChange(value) {
+    this.paymentMethodCheckedPaypal = !this.paymentMethodCheckedPaypal
+  }
+
   telInputObject(obj) {
     console.log(obj);
     obj.setCountry('in');
   }
-  onCountryChange(event) {
-    console.log(event)
+  onChange($event) {
+    console.log({ name: '(change)', value: $event });
+
+    this.checkoutForm.controls['DailCode'].setValue($event.dial_code)
+  }
+
+  onCountrySelected(index) {
+    console.log("index: ", index)
   }
 
   // Stripe Payment Gateway

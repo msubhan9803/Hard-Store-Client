@@ -1,0 +1,44 @@
+.input-box {
+    display         : flex;
+    align-items     : center;
+    max-width       : 300px;
+    background      : #fff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    padding-left    : 0.5rem;
+    overflow        : hidden;
+    font-family     : sans-serif;
+}
+
+.input-box .prefix {
+    font-weight : 300;
+    font-size: inherit;
+    color       : rgb(73, 73, 73);
+    width: 80px;
+}
+
+.input-box input {
+    flex-grow   : 1;
+    font-size: inherit;
+    background  : #fff;
+    border      : none;
+    outline     : none;
+    padding     : 0.5rem;
+}
+
+.input-box:focus-within {
+    border-color: #777;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin            : 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}
