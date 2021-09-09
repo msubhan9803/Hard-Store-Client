@@ -36,4 +36,11 @@ export class UserService {
 
     return this.http.get(url);
   }
+
+  // POST: contactUs/
+  public sendMessageContactUs(payload) {
+    let url = this._env.urlAddress + 'contactUs/';
+
+    return this.http.post(url, payload, { responseType: 'text' });
+  }
 }

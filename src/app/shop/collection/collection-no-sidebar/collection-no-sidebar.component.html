@@ -1,13 +1,13 @@
 <app-breadcrumb [title]="'Products'" [breadcrumb]="'Products'"></app-breadcrumb>
 <!-- section start -->
 <section #productsSection class="full-banner parallax tools-parallax-product tools-grey border-box"
-    id="products-section" [ngStyle]="{'background-image': 'url(assets/images/product-background-img.jpg)'}">
+    id="products-section" style="background-color: #0e0e0e14;">
     <div class="container">
         <div class="row">
             <div class="col theme-tab">
                 <ngb-tabset [justify]="'center'" [type]="'pills'" class="tabs tab-title marijuana-tab">
                     <ngb-tab *ngFor="let collection of productCollections">
-                        <ng-template ngbTabTitle>{{collection}}</ng-template>
+                        <!-- <ng-template ngbTabTitle>{{collection}}</ng-template> -->
                         <ng-template ngbTabContent>
                             <div class="no-slider row" *ngIf="collection == 'On Sale'">
                                 <ng-container *ngFor="let product of this.products">
