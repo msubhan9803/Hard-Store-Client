@@ -29,7 +29,7 @@ export class CheckoutComponent implements OnInit {
   public showError: any;
   public conversionRate;
   public countryList = [];
-
+  public totalAmount = 0;
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
@@ -38,8 +38,8 @@ export class CheckoutComponent implements OnInit {
   protected _env: EnvironmentUrlService;
   selectedItem = [];
   dropdownSettings: any = {};
-  closeDropdownSelection=false;
-  disabled=false;
+  closeDropdownSelection = false;
+  disabled = false;
   paymentMethodCheckedPaypal = true;
 
   constructor(
@@ -57,7 +57,7 @@ export class CheckoutComponent implements OnInit {
       Email: ['', [Validators.required, Validators.email]],
       Address: ['', [Validators.required, Validators.maxLength(50)]],
       Country: ['United Arab Emirates', Validators.required],
-      DailCode: [''],
+      DailCode: ['+971'],
       City: ['', Validators.required],
       State: ['', Validators.required],
       postalCode: ['', Validators.required],
@@ -68,14 +68,17 @@ export class CheckoutComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.productService.cartItems.subscribe(response => {
+    await this.productService.cartItems.toPromise().then(response => {
       this.products = response;
     });
     await this.userService.getCurrency().toPromise().then((res: any) => {
       this.conversionRate = res.conversionRate;
     })
-    this.getTotal.subscribe(amount => this.amount = amount);
-    this.initConfig();
+    await this.getTotal.toPromise().then(amount => {
+      this.amount = amount;
+      this.totalAmount = amount;
+    });
+    this.initConfig(this.totalAmount, this.products);
     this.countryList = this.checkoutService.countryList.filter(item => item.name);
 
     this.selectedItem = ['Pune'];
@@ -92,7 +95,7 @@ export class CheckoutComponent implements OnInit {
     return this.productService.cartTotalAmount();
   }
 
-  async onSubmit() {
+  async onSubmit(orderDetails?, paymentStatus?) {
     console.log("payload: ", this.checkoutForm)
 
     if (this.checkoutForm.invalid) return;
@@ -116,8 +119,14 @@ export class CheckoutComponent implements OnInit {
     await this.getTotal.subscribe(res => payload.totalAmount = res);
     let checkoutFormValue = this.checkoutForm.value;
     checkoutFormValue.phone = this.checkoutForm.value.DailCode + this.checkoutForm.value.phone;
-    // delete checkoutFormValue.DailCode;
-    // console.log("payload: ", checkoutFormValue)
+    checkoutFormValue.Country = this.checkoutForm.value.Country.name;
+
+    // Checking if Payment is Paid by Paypal and sending Order Details in payload
+    if (paymentStatus) {
+      checkoutFormValue.paymentStatus = paymentStatus;
+      checkoutFormValue.orderDetails = orderDetails;
+    }
+
     this.orderService.createOrderAPI(checkoutFormValue).subscribe(
       res => {
         Swal.fire({
@@ -126,8 +135,8 @@ export class CheckoutComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        this.checkoutForm.reset();
         this.products = [];
+        this.resetForm();
         this.productService.emptyCartAndProducts();
         // window.location.reload();
       },
@@ -178,32 +187,45 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  private initConfig(): void {
+  private initConfig(totalAmount, products): void {
+    let items = [];
+    for (let index = 0; index < products.length; index++) {
+      const product = products[index];
+      console.log("product: ", product)
+      let template = {
+        name: product.title,
+        quantity: product.quantity,
+        category: 'DIGITAL_GOODS',
+        unit_amount: {
+          currency_code: 'USD',
+          value: product.sale ? product.quantity * product.skuArray[0].specialPrice : product.quantity * product.skuArray[0].price
+        }
+      };
+      template.unit_amount.value = parseFloat((template.unit_amount.value * this.conversionRate).toFixed(2));
+
+      items.push(template)
+    }
+
+    console.log("payap config items: ", items)
+
+    let totalAmountConverted = (totalAmount * this.conversionRate).toFixed(2);
     this.payPalConfig = {
-      currency: 'EUR',
-      clientId: 'sb',
+      currency: 'USD',
+      clientId: 'AWgt3OgWP7ItdA_tTGJNehvgTzF8ERGXHxB5ByQw-mQOrogFw6T5pf_EcoyDrfA8C4hl5LyE3HOQKpRc',
       createOrderOnClient: () => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [{
           amount: {
-            currency_code: 'EUR',
-            value: '9.99',
+            currency_code: 'USD',
+            value: totalAmountConverted.toString(),
             breakdown: {
               item_total: {
-                currency_code: 'EUR',
-                value: '9.99'
+                currency_code: 'USD',
+                value: totalAmountConverted.toString()
               }
             }
           },
-          items: [{
-            name: 'Enterprise Subscription',
-            quantity: '1',
-            category: 'DIGITAL_GOODS',
-            unit_amount: {
-              currency_code: 'EUR',
-              value: '9.99',
-            },
-          }]
+          items: items
         }]
       },
       advanced: {
@@ -214,11 +236,11 @@ export class CheckoutComponent implements OnInit {
         layout: 'vertical'
       },
       onApprove: (data, actions) => {
-        // console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        // actions.order.get().then(details => {
-        //   console.log('onApprove - you can get full order details inside onApprove: ', details);
-        // });
-        this.onSubmit();
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then(details => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+          this.onSubmit(details, true);
+        });
       },
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
@@ -227,7 +249,6 @@ export class CheckoutComponent implements OnInit {
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
         this.showCancel = true;
-
       },
       onError: err => {
         console.log('OnError', err);
@@ -238,5 +259,11 @@ export class CheckoutComponent implements OnInit {
         // this.resetStatus();
       },
     };
+  }
+
+  resetForm() {
+    this.checkoutForm.reset();
+    this.checkoutForm.controls['Country'].setValue('United Arab Emirates')
+    this.checkoutForm.controls['DailCode'].setValue('+971')
   }
 }

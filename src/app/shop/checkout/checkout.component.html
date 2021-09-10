@@ -59,49 +59,7 @@
                                         Invalid Email
                                     </div>
                                 </div>
-                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">Address</div>
-                                    <input type="text" name="address" [formControl]="checkoutForm.controls['Address']"
-                                        value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.Address.touched && checkoutForm.controls.Address.errors?.required"
-                                        class="text text-danger">
-                                        Address is required
-                                    </div>
-                                    <div *ngIf="checkoutForm.controls.Address.touched && checkoutForm.controls.Address.errors?.maxLength"
-                                        class="text text-danger">
-                                        Invalid Address
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">Town/City</div>
-                                    <input type="text" name="City" [formControl]="checkoutForm.controls['City']"
-                                        value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.City.touched && checkoutForm.controls.City.errors?.required"
-                                        class="text text-danger">
-                                        City is required
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12 col-sm-6 col-xs-12">
-                                    <div class="field-label">State</div>
-                                    <input type="text" name="State" [formControl]="checkoutForm.controls['State']"
-                                        value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.State.touched && checkoutForm.controls.State.errors?.required"
-                                        class="text text-danger">
-                                        State is required
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12 col-sm-6 col-xs-12">
-                                    <div class="field-label">Postal Code</div>
-                                    <input type="text" name="postalCode"
-                                        [formControl]="checkoutForm.controls['postalCode']" value="" placeholder=""
-                                        autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.postalCode.touched && checkoutForm.controls.postalCode.errors?.required"
-                                        class="text text-danger">
-                                        Postalcode is required
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Country</div>
                                     <ng-select [formControl]="checkoutForm.controls['Country']"
                                         (change)="onChange($event)">
@@ -115,7 +73,7 @@
                                         Country is required
                                     </div>
                                 </div>
-                                <div class="form-group fcol-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Phone</div>
 
                                     <!-- <div class="input-group mb-2">
@@ -139,6 +97,48 @@
                                     <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.pattern"
                                         class="text text-danger">
                                         Phone No is must be number.
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Address</div>
+                                    <input type="text" name="address" [formControl]="checkoutForm.controls['Address']"
+                                        value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.Address.touched && checkoutForm.controls.Address.errors?.required"
+                                        class="text text-danger">
+                                        Address is required
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.Address.touched && checkoutForm.controls.Address.errors?.maxLength"
+                                        class="text text-danger">
+                                        Invalid Address
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Town/City</div>
+                                    <input type="text" name="City" [formControl]="checkoutForm.controls['City']"
+                                        value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.City.touched && checkoutForm.controls.City.errors?.required"
+                                        class="text text-danger">
+                                        City is required
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">State</div>
+                                    <input type="text" name="State" [formControl]="checkoutForm.controls['State']"
+                                        value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.State.touched && checkoutForm.controls.State.errors?.required"
+                                        class="text text-danger">
+                                        State is required
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Postal Code</div>
+                                    <input type="text" name="postalCode"
+                                        [formControl]="checkoutForm.controls['postalCode']" value="" placeholder=""
+                                        autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.postalCode.touched && checkoutForm.controls.postalCode.errors?.required"
+                                        class="text text-danger">
+                                        Postalcode is required
                                     </div>
                                 </div>
                             </div>
@@ -322,12 +322,14 @@
                                         </button> -->
                                         <!-- <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal> -->
                                     </div>
-                                    <div *ngIf="checkoutForm.valid" style="cursor: not-allowed !important;pointer-events: all !important;">
+                                    <div *ngIf="checkoutForm.valid"
+                                        style="cursor: not-allowed !important;pointer-events: all !important;">
                                         <ngx-paypal *ngIf="!paymentMethodCheckedPaypal" [config]="payPalConfig">
                                         </ngx-paypal>
                                     </div>
                                     <div *ngIf="!checkoutForm.valid" class="text-right">
-                                        <span class="text-danger && !paymentMethodCheckedPaypal">Please fill all required fields</span>
+                                        <span class="text-danger && !paymentMethodCheckedPaypal">Please fill all
+                                            required fields</span>
                                     </div>
                                 </div>
                             </div>

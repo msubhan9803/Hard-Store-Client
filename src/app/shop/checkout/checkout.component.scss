@@ -42,3 +42,10 @@ input[type=number] {
     -moz-appearance: textfield;
     /* Firefox */
 }
+
+::ng-deep .ng-select-single .ng-select-container {
+    height: 50px !important;
+}
+::ng-deep .ng-select input {
+    height: 35px !important;
+}

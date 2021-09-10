@@ -44,15 +44,15 @@
                                         <!-- <h2 class="td-color">
                                         {{ (product.price | discount:product) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
                                     </h2> -->
-                                        <h4 [ngClass]="{'strikethrough': product.sale}">
+                                        <h6 [ngClass]="{'strikethrough': product.sale}">
                                             {{ product.price * currency?.price |
                                             currency:currency?.currency:'symbol'
                                             }}
-                                        </h4>
-                                        <h4 *ngIf="product.sale">{{
+                                        </h6>
+                                        <h6 *ngIf="product.sale">{{
                                             product.specialPrice * currency?.price |
-                                            currency:currency?.currency:'symbol' }}</h4>
-                                        <h4 *ngIf="!product.sale">&nbsp;</h4>
+                                            currency:currency?.currency:'symbol' }}</h6>
+                                        <h6 *ngIf="!product.sale">&nbsp;</h6>
                                     </div>
                                     <div class="col-xs-3">
                                         <h2 class="td-color">
@@ -64,29 +64,29 @@
                                 </div>
                             </td>
                             <td>
-                                <!-- <h2>
-                                    {{ (product.price | discount:product) * productService?.Currency.price |
-                                    currency:productService?.Currency.currency:'symbol' }}
-                                </h2> -->
-                                <h4 [ngClass]="{'strikethrough': product.sale}">
+                                <h5 *ngIf="!product.sale" [ngClass]="{'strikethrough': product.sale}">
                                     {{ product.price * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
-                                </h4>
-                                <h6>
-                                    {{ product.price * currency?.price |
-                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
-                                    }}
-                                </h6>
-                                <h4 *ngIf="product.sale">{{
+
+                                    <small>
+                                        {{ product.price * currency?.price |
+                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                        }}
+                                    </small>
+                                </h5>
+                                <h5 *ngIf="product.sale">{{
                                     product.specialPrice * currency?.price |
                                     currency:currency?.currency:'symbol' }}
-                                </h4>
-                                <h6 *ngIf="product.sale">{{
-                                    product.specialPrice * currency?.price |
-                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
-                                </h6>
-                                <h4 *ngIf="!product.sale">&nbsp;</h4>
+
+                                    <small>
+                                        {{
+                                        product.specialPrice * currency?.price |
+                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                        }}
+
+                                    </small>
+                                </h5>
                             </td>
                             <td>
                                 <div class="qty-box">
@@ -119,26 +119,27 @@
                                     productService?.Currency.price | currency:productService?.Currency.currency:'symbol'
                                     }}
                                 </h2> -->
-                                <h4 class="td-color" *ngIf="!product.sale">
+                                <h5 class="td-color" *ngIf="!product.sale">
                                     {{ (product.price * product.quantity) * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
-                                </h4>
-                                <h4 class="td-color" *ngIf="!product.sale">
-                                    {{ (product.price * product.quantity) * currency?.price |
-                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
-                                    }}
-                                </h4>
-                                <h4 class="td-color" *ngIf="product.sale">
+
+                                    <small>
+                                        {{ (product.price * product.quantity) * currency?.price |
+                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                        }}
+                                    </small>
+                                </h5>
+                                <h5 class="td-color" *ngIf="product.sale">
                                     {{ (product.specialPrice * product.quantity) * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
-                                </h4>
-                                <h4 class="td-color" *ngIf="product.sale">
-                                    {{ (product.specialPrice * product.quantity) * currency?.price |
-                                    currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
-                                    }}
-                                </h4>
+                                    <small>
+                                        {{ (product.specialPrice * product.quantity) * currency?.price |
+                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                        }}
+                                    </small>
+                                </h5>
                             </td>
                         </tr>
                     </tbody>
@@ -148,8 +149,13 @@
                         <tr>
                             <td>total price :</td>
                             <td>
-                                <h2> {{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</h2>
-                                <h4> {{ getTotal | async | currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate}}</h4>
+                                <h5>
+                                    {{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}
+                                    <small>
+                                        {{ getTotal | async | currency:productService?.Currency.currency:'symbol' |
+                                        aedToDollar: this.conversionRate}}
+                                    </small>
+                                </h5>
                             </td>
                         </tr>
                     </tfoot>
