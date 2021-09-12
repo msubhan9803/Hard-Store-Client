@@ -528,7 +528,8 @@ button {
 
 .btn-solid {
     padding: 13px 29px;
-    color: $white;
+    // color: $white;
+    color: #fff !important;
     letter-spacing: 0.05em;
     border: 2px solid var(--theme-deafult);
     background-image: -webkit-linear-gradient(30deg, var(--theme-deafult) 50%, transparent 50%);
@@ -540,7 +541,7 @@ button {
     transition: background 300ms ease-in-out;
     &:hover {
         background-position: 100%;
-        color: $black;
+        color: #000 !important;
         background-color: $white;
     }
     &.black-btn {

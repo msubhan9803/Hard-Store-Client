@@ -37,11 +37,11 @@
     </a>
     <br />
 
-    <h5 [ngClass]="{'strikethrough': product.sale}">
+    <h5 [ngClass]="{'strikethrough': product.sale, 'text-danger': product.sale}">
         {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}
-        <small>
+        <!-- <small>
             {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
-        </small>
+        </small> -->
     </h5>
     <h5 *ngIf="product.sale">
         {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' }}

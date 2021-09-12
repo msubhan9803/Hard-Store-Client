@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith, delay } from 'rxjs/operators';
@@ -409,5 +409,22 @@ export class ProductService {
     state.cart = [];
     localStorage.setItem("cartItems", JSON.stringify([]));
     this.storageSub.next('localStorageChanged');
+  }
+
+  // GET: products/getFaqsByType
+  public getFaqsByType(type) {
+    let url = this._env.urlAddress + 'products/getFaqsByType/' + type;
+    return this.http.get(url);
+  }
+
+  // GET: products/getFaqsByType
+  public searchFaq(searchValue) {
+    let url = this._env.urlAddress + 'products/searchFaq';
+    let params = new HttpParams({
+      fromObject: {
+        question: searchValue
+      }
+    })
+    return this.http.get(url, { params: params });
   }
 }

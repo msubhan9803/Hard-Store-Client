@@ -69,6 +69,7 @@ import { CheckoutService } from './services/checkout.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { PageTitleComponent } from './components/page-title/pagetitle.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
+    PageTitleComponent,
     DiscountPipe,
     AedToDollarPipe
   ],
@@ -178,6 +180,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
+    PageTitleComponent,
     DiscountPipe,
     AedToDollarPipe,
     Ng2TelInputModule,
