@@ -186,6 +186,7 @@
             <section class="tab-product m-0">
                 <div class="row">
                     <div class="col-sm-12 col-lg-12" id="detail-section">
+                        <!-- <div class="col-sm-10 offset-sm-1 col-lg-10 offset-lg-1" id="detail-section"> -->
                         <ngb-tabset [type]="'tabs'" class="nav-material">
                             <ngb-tab>
                                 <ng-template ngbTabTitle>Description</ng-template>
@@ -194,32 +195,142 @@
                                 </ng-template>
                             </ngb-tab>
                             <ngb-tab>
-                                <ng-template ngbTabTitle>FAQs</ng-template>
+                                <ng-template ngbTabTitle>Shipping & Return</ng-template>
                                 <ng-template ngbTabContent>
-                                    <div class="container">
+                                    <div class="container my-2 shipping-faq-content">
                                         <div class="row">
-                                            <div class="col-12 mt-2">
-                                                <h2>Product FAQs</h2>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3" *ngFor="let productFaq of productData">
                                             <div class="col-12">
-                                                <h5 class="mt-4">{{ productFaq.question }}</h5>
-                                                <p class="p-0 mt-2">{{ productFaq.answer }}</p>
+                                                <h2>A. Ship In UAE</h2>
+                                                <h4>1. Standard Shipping</h4>
+                                                <h6>Handling Day: 1 business days, Arriving Day: 1-2 business days</h6>
+                                                <h6>Cost: Free</h6>
+                                                <h6>Country/Region: Free</h6>
                                             </div>
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="container">
+                                        <br />
                                         <div class="row">
-                                            <div class="col-12 mt-3">
-                                                <h2>Shipping FAQs</h2>
+                                            <div class="col-12">
+                                                <h2>B. Ship From Sourcing Place</h2>
+                                                <h4>1. Standard Shipping</h4>
+                                                <h6>Handling Day:1-3 Business Days, Arriving Day: 15-35 Business Days
+                                                </h6>
+                                                <h6>Cost: Free</h6>
+                                                <h6>Country/Region: Sourcing Place</h6>
                                             </div>
                                         </div>
-                                        <div class="row mb-3" *ngFor="let shippingFaq of shippingData">
+                                        <br />
+                                        <div class="row">
                                             <div class="col-12">
-                                                <h5 class="mt-4">{{ shippingFaq.question }}</h5>
-                                                <p class="p-0 mt-2">{{ shippingFaq.answer }}</p>
+                                                <h4>COVID-19 | Shipping</h4>
+                                                <p class="p-0">
+                                                    As the world adjusts to the impact of the coronavirus (COVID-19),
+                                                    shipping is inevitably affected. Every country and region is facing
+                                                    shipping delays of various degrees. UAE Slimmer team will do our
+                                                    best to
+                                                    keep you updated and informed about your order during this time as
+                                                    new information becomes available.
+                                                    <br />
+                                                    Regions heavily affected by the pandemic will be subjected to
+                                                    possible delays. Thank you for your understanding and we apologize
+                                                    for any
+                                                    inconvenience this may cause you.
+                                                    <br />
+                                                    If you have any questions or concerns about your order, please email
+                                                    us at service@UAE Slimmer and our team will be happy to assist you, 7
+                                                    days
+                                                    a week.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4>Shipping FAQ</h4>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <h6>1. When will I receive my order?</h6>
+                                                <p>For Standard Shipping from UAE warehouse: Most items are usually
+                                                    shipping in 1-3 business days. For Express Shipping UAE warehouse:
+                                                    Most items are usually shipping in 1 business day. For Standard
+                                                    Shipping from Sourcing Place: Most items are usually shipping in
+                                                    15-35 business days. We do recommend allowing up to 3 weeks for your
+                                                    order in peak times, such as a special offer or promotion.
+                                                </p>
+                                                <br />
+                                                <p>
+                                                    If your order is backordered or not shipping for two or more
+                                                    business days, please feel free to contact us immediately at our
+                                                    Support Center: +971 4 570 9887 and we will do everything we can to
+                                                    accommodate your request.
+                                                </p>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <h6>2. How do I track my order?</h6>
+                                                <p>
+                                                    Your delivery confirmation email will contain your tracking number
+                                                    and order details.
+                                                </p>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <h6>3. Taxes and other charges?</h6>
+                                                <p>
+                                                    Depending on the country of delivery, you may be required to pay
+                                                    extra tax or charges such as VAT and/or import duties.
+                                                </p>
+                                            </div>
+                                            <div class="col-12 mb-4">
+                                                <h6>4. About the Shipping fee?</h6>
+                                                <p>
+                                                    Standard Shipping is free shipping.
+                                                </p>
+                                                <br />
+                                                <!-- <p>
+                                                    Express Shipping Charges for Dhs. 20.00.
+                                                </p>
+                                                <br />
+                                                <p>
+                                                    Additional Charges for COD: Dhs.10.
+                                                </p>
+                                                <br /> -->
+                                                <p>
+                                                    UAE Slimmer guarantees free returns and replacements service if you are
+                                                    not 100% satisfied with our products. Kindly return the purchase for
+                                                    a refund up to seven (7) days from the date of the order delivered.
+                                                    If you have any problem with the item please feel free to contact us
+                                                    immediately at +971 4 570 9887.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h3>Returns Process.</h3>
+                                                <p>
+                                                    Please contact us if you want to return an item. Return without
+                                                    prior discussion and authorization will not be accepted.
+                                                </p>
+                                                <br />
+                                                <p>When returning a product, please do the following:</p>
+                                                <ul class="p-4">
+                                                    <li>
+                                                        <p>Please email service@uaeslimmer. we will keep you updated by email.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Please put a form inside your returned package with: the reason
+                                                            for return, the purchase date, the original invoice number, and
+                                                            the item number for the product.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Proof of purchase from UAE Slimmer is required for all returns.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Ship the package to the designated address, the address will be
+                                                            provided by email after your return application is submitted.</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Please prepay shipping – UAE Slimmer does not accept Cash on
+                                                            Delivery (C.O.D.s).</p>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

@@ -138,7 +138,7 @@ export class CheckoutComponent implements OnInit {
         this.products = [];
         this.resetForm();
         this.productService.emptyCartAndProducts();
-        // window.location.reload();
+        window.location.reload();
       },
       err => {
         Swal.fire({

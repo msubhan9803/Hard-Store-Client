@@ -9,3 +9,23 @@
     width: 100%;
     object-fit: cover;
 }
+
+::ng-deep .owl-carousel .owl-wrapper {
+    display: flex !important;
+}
+::ng-deep .owl-carousel .owl-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: initial;
+}
+
+.shipping-faq-content p {
+    padding: 0px !important;
+    line-height: 1.5 !important;
+}
+
+.shipping-faq-content li {
+    display: list-item !important;
+    padding-bottom: 10px !important;
+}

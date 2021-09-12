@@ -32,8 +32,8 @@ export class AgeVerificationComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngAfterViewInit(): void {
-  	if(localStorage.getItem("ageVerification") !== 'true')
-       this.openModal();
+  	// if(localStorage.getItem("ageVerification") !== 'true')
+    //    this.openModal();
   }
 
   openModal() {
