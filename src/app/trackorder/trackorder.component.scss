@@ -297,3 +297,26 @@
         width      : 200px;
     }
 }
+
+@media (max-width: 480px) {
+    .searchbar {
+        height          : 40px;
+        padding         : 10px;
+    }
+    
+    .search_input {
+        width      : 250px;
+        line-height: 20px !important;
+        padding    : 0 10px;
+        transition : width 0.4s linear;
+    }
+    
+    .searchbar:hover>.search_input {
+        width      : 250px;
+    }
+    .search_icon {
+        height         : 20px;
+        width          : 20px;
+        border-radius  : 50%;
+    }
+}
