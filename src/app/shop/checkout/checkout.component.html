@@ -223,13 +223,13 @@
                                                 product.quantity) *
                                                 productService?.Currency.price |
                                                 currency:productService?.Currency.currency:'symbol' }}
-                                                <span class="text-muted">
+                                                <small class="text-muted">
                                                     {{ (product.skuArray[product.variantIndex].specialPrice *
                                                     product.quantity) *
                                                     productService?.Currency.price |
                                                     currency:productService?.Currency.currency:'symbol' | aedToDollar:
                                                     this.conversionRate }}
-                                                </span>
+                                                </small>
                                             </span>
                                         </li>
                                     </ul>

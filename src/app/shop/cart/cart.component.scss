@@ -1,0 +1,11 @@
+.cart-buttons {
+    .btn {
+        font-size: 0.65rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .total-price {
+        font-size: 0.85rem !important;
+    }
+}
