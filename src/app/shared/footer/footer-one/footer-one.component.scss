@@ -17,3 +17,13 @@
         padding-right: 0;
     }
 } 
+@media only screen and (max-width: 480px){
+    .footer-contant {
+        text-align: center;
+    }
+    .footer-social {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+} 

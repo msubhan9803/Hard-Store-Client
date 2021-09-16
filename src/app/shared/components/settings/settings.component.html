@@ -46,6 +46,16 @@
         </ul>
       </div>
     </li> -->
+    <li class="mobile-setting">
+      <div>
+        <a [routerLink]="['/trackorder']"><i class="fa fa-truck" aria-hidden="true"></i>Track Order</a>
+      </div>
+    </li>
+    <li class="mobile-search">
+      <div>
+        <a [routerLink]="['/shop/compare']"><i class="fa fa-random" aria-hidden="true"></i>Compare</a>
+      </div>
+    </li>
     <li class="onhover-div mobile-cart">
       <div>
         <a [routerLink]="['/shop/cart']">
@@ -86,10 +96,11 @@
         <li>
           <div class="total text-right">
             <h6>subtotal : <span>
-              {{ getTotal | async | currency:productService?.Currency.currency:'symbol' }}
-              <br />
-              {{ getTotal | async | currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
-            </span>
+                {{ getTotal | async | currency:productService?.Currency.currency:'symbol' }}
+                <br />
+                {{ getTotal | async | currency:productService?.Currency.currency:'symbol' | aedToDollar:
+                this.conversionRate }}
+              </span>
             </h6>
           </div>
         </li>
