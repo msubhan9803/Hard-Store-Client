@@ -67,8 +67,10 @@ export class TrackorderComponent implements OnInit {
     },
   };
   public product_List = [];
-  public themeFooterLogo: string = 'assets/images/footer-logo-new.png';
+  public themeFooterLogo: string = 'assets/images/footer-enlarged.png';
   public trackingId;
+  public live = false;
+  public total = 0;
 
   constructor(
     private orderService: OrderService,
@@ -124,9 +126,12 @@ export class TrackorderComponent implements OnInit {
           }
         });
 
-        console.log("this.tracking_Status: ", this.tracking_Status)
-
         this.product_List = res.products;
+
+        this.total = 0;
+        this.product_List.forEach(product => {
+          this.total += (product.unit_Cost - (product.unit_Cost - product.discount)) * product.quantity;
+        })
 
         this.showTimeLine = true;
         this.showProducts = true;

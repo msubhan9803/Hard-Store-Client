@@ -70,6 +70,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { PageTitleComponent } from './components/page-title/pagetitle.component';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -136,7 +137,8 @@ import { PageTitleComponent } from './components/page-title/pagetitle.component'
     Ng2TelInputModule,
     NgSelectModule,
     NgxMaskModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -186,7 +188,8 @@ import { PageTitleComponent } from './components/page-title/pagetitle.component'
     Ng2TelInputModule,
     NgSelectModule,
     NgxMaskModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }

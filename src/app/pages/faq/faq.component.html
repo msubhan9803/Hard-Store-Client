@@ -27,6 +27,11 @@
                     </ngb-panel>
                 </ngb-accordion>
             </div>
+            <div class="col-12" *ngIf="faqList.length == 0">
+                <div class="text-center">
+                    No FAQ found
+                </div>
+            </div>
         </div>
     </div>
 
@@ -69,6 +74,11 @@
                         </ng-template>
                     </ngb-tab>
                 </ngb-tabset>
+            </div>
+            <div class="col-12" *ngIf="faqList.length == 0">
+                <div class="text-center">
+                    No FAQ found
+                </div>
             </div>
         </div>
     </div>

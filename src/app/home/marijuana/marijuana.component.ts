@@ -16,7 +16,7 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
   // public themeLogo: string = 'assets/images/icon/logo-3.png';
   public themeLogo: string = 'assets/images/logo-new.png';
   // public themeFooterLogo: string = 'assets/images/icon/logo-9.png';
-  public themeFooterLogo: string = 'assets/images/footer-logo-new.png';
+  public themeFooterLogo: string = 'assets/images/footer-enlarged.png';
 
   public products: Product[] = [];
   public productCollections: any[] = [
@@ -50,12 +50,12 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
     title: 'special offer',
     subTitle: 'Buy UAESlimmers',
     // image: 'assets/images/slider/28.jpg'
-    image: 'assets/images/header-background-img.jpg'
+    image: 'assets/images/banner-1.jpg'
   }, {
     title: 'special offer',
     subTitle: 'Buy UAESlimmers',
     // image: 'assets/images/slider/28.jpg'
-    image: 'assets/images/header-background-img.jpg'
+    image: 'assets/images/banner-2.jpg'
   }
   ];
 

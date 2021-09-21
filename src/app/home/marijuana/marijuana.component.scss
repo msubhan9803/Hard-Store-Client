@@ -6,3 +6,11 @@
     padding-left: 0px !important;
     padding-right: 0px !important;
 }
+
+::ng-deep .owl-theme .owl-nav [class*=owl-]:hover {
+    background: #555454;
+}
+
+::ng-deep .owl-theme .owl-nav [class*=owl-] {
+    background: #7a7a7a;
+}

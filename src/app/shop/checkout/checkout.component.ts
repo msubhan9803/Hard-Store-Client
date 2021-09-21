@@ -201,12 +201,12 @@ export class CheckoutComponent implements OnInit {
           value: product.sale ? product.quantity * product.skuArray[0].specialPrice : product.quantity * product.skuArray[0].price
         }
       };
-      template.unit_amount.value = parseFloat((template.unit_amount.value * this.conversionRate).toFixed(2));
+      // template.unit_amount.value = parseFloat((template.unit_amount.value * this.conversionRate).toFixed(2));
+      template.unit_amount.value = 0.50;
 
       items.push(template)
+      console.log("items: ", items)
     }
-
-    console.log("payap config items: ", items)
 
     let totalAmountConverted = (totalAmount * this.conversionRate).toFixed(2);
     this.payPalConfig = {
@@ -217,11 +217,14 @@ export class CheckoutComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'USD',
-            value: totalAmountConverted.toString(),
+            // This is actual amount
+            // value: totalAmountConverted.toString(),
+            value: "0.50",
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: totalAmountConverted.toString()
+                // value: totalAmountConverted.toString()
+                value: "0.50"
               }
             }
           },

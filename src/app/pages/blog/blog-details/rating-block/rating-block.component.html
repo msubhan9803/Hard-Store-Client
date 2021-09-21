@@ -1,0 +1,21 @@
+<div class="container-fluid border-bottom">
+    <div class="row mt-1">
+        <div class="col-md-8">
+            <rating [(ngModel)]="this.reviewObj.Rating" [readonly]="isReadonly" [titles]="['one','two','three']"
+                style="color: #fcff4b;font-size: 20px;"></rating>
+        </div>
+
+        <div class="col-md-4 text-right">
+            {{ this.reviewObj.createdAt | date }}
+        </div>
+    </div>
+    <div class="row mt-1">
+        by&nbsp;&nbsp;<span class="text-muted">{{ this.reviewObj.Name }}</span>
+    </div>
+    <div class="row mt-1">
+        {{ this.reviewObj.Title }}
+    </div>
+    <div class="row mt-1">
+        {{ this.reviewObj.Comment }}
+    </div>
+</div>

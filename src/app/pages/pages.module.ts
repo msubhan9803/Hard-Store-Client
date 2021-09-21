@@ -41,6 +41,7 @@ import { MasonryGridFourComponent } from './portfolio/masonry-grid-four/masonry-
 import { MasonryFullWidthComponent } from './portfolio/masonry-full-width/masonry-full-width.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { Ng5SliderModule } from 'ng5-slider';
+import { RatingBlockComponent } from './blog/blog-details/rating-block/rating-block.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     MasonryGridTwoComponent,
     MasonryGridThreeComponent,
     MasonryGridFourComponent,
-    MasonryFullWidthComponent
+    MasonryFullWidthComponent,
+    RatingBlockComponent
   ],
   imports: [
     CommonModule,
