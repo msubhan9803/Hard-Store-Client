@@ -96,8 +96,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   async onSubmit(orderDetails?, paymentStatus?) {
-    console.log("payload: ", this.checkoutForm)
-
     if (this.checkoutForm.invalid) return;
 
     for (let index = 0; index < this.products.length; index++) {
@@ -119,13 +117,16 @@ export class CheckoutComponent implements OnInit {
     await this.getTotal.subscribe(res => payload.totalAmount = res);
     let checkoutFormValue = this.checkoutForm.value;
     checkoutFormValue.phone = this.checkoutForm.value.DailCode + this.checkoutForm.value.phone;
-    checkoutFormValue.Country = this.checkoutForm.value.Country.name;
+    checkoutFormValue.Country = this.checkoutForm.value.Country.name ? this.checkoutForm.value.Country.name : this.checkoutForm.value.Country;
 
     // Checking if Payment is Paid by Paypal and sending Order Details in payload
     if (paymentStatus) {
       checkoutFormValue.paymentStatus = paymentStatus;
       checkoutFormValue.orderDetails = orderDetails;
     }
+
+    // Setting Source
+    checkoutFormValue.source = "web";
 
     this.orderService.createOrderAPI(checkoutFormValue).subscribe(
       res => {
@@ -205,7 +206,6 @@ export class CheckoutComponent implements OnInit {
       template.unit_amount.value = 0.50;
 
       items.push(template)
-      console.log("items: ", items)
     }
 
     let totalAmountConverted = (totalAmount * this.conversionRate).toFixed(2);
