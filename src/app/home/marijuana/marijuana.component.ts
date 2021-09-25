@@ -47,12 +47,12 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
   }
 
   public sliders = [{
-    title: 'special offer',
+    title: '',
     subTitle: 'Buy UAESlimmers',
     // image: 'assets/images/slider/28.jpg'
     image: 'assets/images/banner-1.jpg'
   }, {
-    title: 'special offer',
+    title: '',
     subTitle: 'Buy UAESlimmers',
     // image: 'assets/images/slider/28.jpg'
     image: 'assets/images/banner-2.jpg'
