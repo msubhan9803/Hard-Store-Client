@@ -73,6 +73,9 @@ export class ImageOutsideComponent implements OnInit {
     this.productService.getAllProductsById(this.productId).subscribe(
       res => {
         this.product = res;
+        let discountPer = 100 - (this.product?.skuArray[this.currentVariant].specialPrice / this.product?.skuArray[this.currentVariant].price * 100);
+        discountPer = parseFloat(discountPer.toFixed(2));
+        this.product.discount = discountPer;
         // this.currentVariantImage = this.product.variants[this.currentVariant].isThumbnailImageIndex;
       }
     )

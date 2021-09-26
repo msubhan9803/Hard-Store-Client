@@ -47,11 +47,11 @@
                                     {{ product?.skuArray[0].price * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
-                                    <!-- <small>
+                                    <small>
                                         {{ product?.skuArray[0].price * currency?.price |
                                         currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
                                         }}
-                                    </small> -->
+                                    </small>
                                 </h4>
                                 <h4 *ngIf="product.sale">
                                     {{ product?.skuArray[0].specialPrice * currency?.price |

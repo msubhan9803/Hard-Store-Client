@@ -192,6 +192,7 @@ export let ProductSlider: any = {
     loop: false,
     dots: false,
     navSpeed: 300,
+    autoplay: true,
     responsive: {
         991: {
             items: 4
