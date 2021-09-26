@@ -11,9 +11,12 @@ export class AedToDollarPipe implements PipeTransform {
   ) { }
 
   transform(value: string, conversionRate = 0) {
-    let price = parseFloat(value.replace("AED", ""))
+    let price = "";
+    price = value.replace("AED", "");
+    if (value.length > 7) {
+      price = price.replace(",", "");
+    }
 
-    // return conversionRate? `${value} ($${(conversionRate * price).toFixed(2)})` : " ";
-    return conversionRate? `($${(conversionRate * price).toFixed(2)})` : " ";
+    return conversionRate ? `($${(conversionRate * parseFloat(price)).toFixed(2)})` : " ";
   }
 }

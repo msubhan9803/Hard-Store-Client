@@ -69,11 +69,11 @@
                             currency:currency?.currency:'symbol'
                             }}
 
-                            <!-- <small>
-                                        {{ product.price * currency?.price |
-                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
-                                        }}
-                                    </small> -->
+                            <small>
+                                {{ product.price * currency?.price |
+                                currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                }}
+                            </small>
                         </h5>
                         <h5 *ngIf="product.sale">{{
                             product.specialPrice * currency?.price |
@@ -124,11 +124,11 @@
                             currency:currency?.currency:'symbol'
                             }}
 
-                            <!-- <small>
-                                        {{ (product.price * product.quantity) * currency?.price |
-                                        currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
-                                        }}
-                                    </small> -->
+                            <small>
+                                {{ (product.price * product.quantity) * currency?.price |
+                                currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
+                                }}
+                            </small>
                         </h5>
                         <h5 class="td-color" *ngIf="product.sale">
                             {{ (product.specialPrice * product.quantity) * currency?.price |

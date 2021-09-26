@@ -209,14 +209,14 @@
                                                 productService?.Currency.price |
                                                 currency:productService?.Currency.currency:'symbol'
                                                 }}
-                                                <!-- <span class="text-muted">
+                                                <small class="text-muted">
                                                     {{ (product.skuArray[product.variantIndex].price * product.quantity)
                                                     *
                                                     productService?.Currency.price |
                                                     currency:productService?.Currency.currency:'symbol' | aedToDollar:
                                                     this.conversionRate
                                                     }}
-                                                </span> -->
+                                                </small>
                                             </span>
                                             <span class="td-color" *ngIf="product.sale">
                                                 {{ (product.skuArray[product.variantIndex].specialPrice *

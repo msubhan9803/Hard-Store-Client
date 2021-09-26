@@ -49,3 +49,8 @@ input[type=number] {
 ::ng-deep .ng-select input {
     height: 35px !important;
 }
+
+.qty li span {
+    width: 40% !important;
+    text-align: right;
+}
