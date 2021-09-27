@@ -78,6 +78,12 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  // GET: category/averageRating
+  public averageRating(productId) {
+    let url = this._env.urlAddress + 'products/averageRating/' + productId;
+    return this.http.get(url);
+  }
+
   // POST: product/writeReview
   public writeReview(payload) {
     let url = this._env.urlAddress + 'products/writeReview';

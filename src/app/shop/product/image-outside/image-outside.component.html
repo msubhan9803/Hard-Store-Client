@@ -52,6 +52,14 @@
                                     {{ product?.skuArray[this.currentVariant].price * currency?.price |
                                     currency:currency?.currency:'symbol' }}
                                 </h3> -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex flex-row">
+                                            <bar-rating [rate]="product?.starAvg" [readOnly]="true"></bar-rating>
+                                            <span class="my-auto">({{ product?.totalReviews }})</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-m-2">
                                     <span [ngClass]="{'strikethrough': product?.sale, 'text-danger': product?.sale}">
                                         {{ product?.skuArray[this.currentVariant].price * currency?.price |
@@ -138,7 +146,7 @@
                                     <a class="btn btn-solid" (click)="buyNow(product, currentVariant)">buy
                                         now</a>
                                 </div>
-                                
+
                                 <span>Arriving in 1-3 business days</span>
 
                                 <div class="border-product">
@@ -241,7 +249,8 @@
                                                     inconvenience this may cause you.
                                                     <br />
                                                     If you have any questions or concerns about your order, please email
-                                                    us at service@UAE Slimmer and our team will be happy to assist you, 7
+                                                    us at service@UAE Slimmer and our team will be happy to assist you,
+                                                    7
                                                     days
                                                     a week.
                                                 </p>
@@ -302,7 +311,8 @@
                                                 </p>
                                                 <br />
                                                 <p>
-                                                    UAE Slimmer guarantees free returns and replacements service if you are
+                                                    UAE Slimmer guarantees free returns and replacements service if you
+                                                    are
                                                     not 100% satisfied with our products. Kindly return the purchase for
                                                     a refund up to seven (7) days from the date of the order delivered.
                                                     If you have any problem with the item please feel free to contact us
@@ -324,19 +334,25 @@
                                                 <p>When returning a product, please do the following:</p>
                                                 <ul class="p-4">
                                                     <li>
-                                                        <p>Please email service@uaeslimmer. we will keep you updated by email.</p>
+                                                        <p>Please email service@uaeslimmer. we will keep you updated by
+                                                            email.</p>
                                                     </li>
                                                     <li>
-                                                        <p>Please put a form inside your returned package with: the reason
-                                                            for return, the purchase date, the original invoice number, and
+                                                        <p>Please put a form inside your returned package with: the
+                                                            reason
+                                                            for return, the purchase date, the original invoice number,
+                                                            and
                                                             the item number for the product.</p>
                                                     </li>
                                                     <li>
-                                                        <p>Proof of purchase from UAE Slimmer is required for all returns.</p>
+                                                        <p>Proof of purchase from UAE Slimmer is required for all
+                                                            returns.</p>
                                                     </li>
                                                     <li>
-                                                        <p>Ship the package to the designated address, the address will be
-                                                            provided by email after your return application is submitted.</p>
+                                                        <p>Ship the package to the designated address, the address will
+                                                            be
+                                                            provided by email after your return application is
+                                                            submitted.</p>
                                                     </li>
                                                     <li>
                                                         <p>Please prepay shipping – UAE Slimmer does not accept Cash on
@@ -418,8 +434,8 @@
                                             <div class="col-md-12  mb-2">
                                                 <label for="review">Comment</label>
                                                 <textarea class="form-control" formControlName="Comment"
-                                                    placeholder="Wrire Your Review"
-                                                    id="exampleFormControlTextarea1" rows="6"></textarea>
+                                                    placeholder="Wrire Your Review" id="exampleFormControlTextarea1"
+                                                    rows="6"></textarea>
                                                 <div *ngIf="isSubmit && reviewForm.controls.Comment.errors?.required"
                                                     class="text text-danger">
                                                     Comment is required.

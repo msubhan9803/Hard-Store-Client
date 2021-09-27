@@ -79,6 +79,10 @@ export class ImageOutsideComponent implements OnInit {
         // this.currentVariantImage = this.product.variants[this.currentVariant].isThumbnailImageIndex;
       }
     )
+    this.productService.averageRating(this.productId).subscribe((res: any) => {
+      this.product.starAvg = parseInt(res.starAvg);
+      this.product.totalReviews = parseInt(res.totalReviews);
+    })
     this.productService.getAllProductsAPI().subscribe(
       (res: []) => {
         console.log("res: ", res)

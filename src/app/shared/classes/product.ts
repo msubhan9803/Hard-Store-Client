@@ -19,6 +19,8 @@ export interface Product {
     images?: Images[];
     skuArray?: any[];
     variantIndex?: any;
+    starAvg?: any;
+    totalReviews?: any;
 }
 
 export interface Variants {

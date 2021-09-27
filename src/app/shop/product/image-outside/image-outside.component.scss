@@ -29,3 +29,8 @@
     display: list-item !important;
     padding-bottom: 10px !important;
 }
+
+::ng-deep .br-unit {
+    width: 20px;
+    height: 20px;
+}
