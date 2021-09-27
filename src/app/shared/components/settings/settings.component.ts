@@ -105,8 +105,9 @@ export class SettingsComponent implements OnInit {
     return this.productService.cartTotalAmount();
   }
 
-  removeItem(product: any) {
-    this.productService.removeCartItem(product);
+  removeItem(index: any) {
+    console.log(`Ts file Delete product at Index ${index}`)
+    this.productService.removeCartItem(index);
   }
 
   changeCurrency(currency: any) {

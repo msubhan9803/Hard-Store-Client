@@ -68,7 +68,7 @@
         <h5>Your cart is currently empty.</h5>
       </ul>
       <ul class="show-div shopping-cart" *ngIf='products.length'>
-        <li *ngFor="let product of parsedProducts">
+        <li *ngFor="let product of parsedProducts; let arrayIndex = index">
           <div class="media">
             <a [routerLink]="['/shop/product/image/outside/', product._id]">
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
@@ -89,7 +89,7 @@
               </h6>
             </div>
           </div>
-          <div class="close-circle" (click)="removeItem(product)">
+          <div class="close-circle" (click)="removeItem(arrayIndex)">
             <a href="javascript:void(0)"><i class="fa fa-times" aria-hidden="true"></i></a>
           </div>
         </li>

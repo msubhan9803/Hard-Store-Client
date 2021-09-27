@@ -106,9 +106,12 @@ export class CheckoutComponent implements OnInit {
         product_Id: currentProduct._id,
         unit_Cost: currentProduct.skuArray[0].price,
         quantity: currentProduct.quantity,
-        discount: currentProduct.skuArray[0].specialPrice,
-        amount: currentProduct.quantity * currentProduct.skuArray[0].price
+        discount: currentProduct.sale ? currentProduct.skuArray[0].price - currentProduct.skuArray[0].specialPrice : 0,
+        sale: currentProduct.sale,
+        amount: currentProduct.quantity * currentProduct.skuArray[0].price,
+        sub_Total: 0
       }
+      product.sub_Total = (product.unit_Cost - product.discount) * product.quantity;
 
       this.checkoutForm.value.products.push(product)
     }
@@ -128,6 +131,7 @@ export class CheckoutComponent implements OnInit {
     // Setting Source
     checkoutFormValue.source = "web";
 
+    console.log("checkoutFormValue: ", checkoutFormValue)
     this.orderService.createOrderAPI(checkoutFormValue).subscribe(
       res => {
         Swal.fire({
