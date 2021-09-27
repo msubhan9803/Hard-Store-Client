@@ -126,6 +126,8 @@ export class CheckoutComponent implements OnInit {
     if (paymentStatus) {
       checkoutFormValue.paymentStatus = paymentStatus;
       checkoutFormValue.orderDetails = orderDetails;
+    } else {
+      checkoutFormValue.paymentStatus = false;
     }
 
     // Setting Source
@@ -193,6 +195,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   private initConfig(totalAmount, products): void {
+    console.log("============")
+    console.log("totalAmount: ", totalAmount)
     let items = [];
     for (let index = 0; index < products.length; index++) {
       const product = products[index];
@@ -203,32 +207,33 @@ export class CheckoutComponent implements OnInit {
         category: 'DIGITAL_GOODS',
         unit_amount: {
           currency_code: 'USD',
-          value: product.sale ? product.quantity * product.skuArray[0].specialPrice : product.quantity * product.skuArray[0].price
+          value: product.sale ? (product.skuArray[0].specialPrice * this.conversionRate).toFixed(2) : (product.skuArray[0].price * this.conversionRate).toFixed(2)
+          // value: product.sale ? product.skuArray[0].specialPrice : product.skuArray[0].price
         }
       };
+      console.log("template (before): ", template)
       // template.unit_amount.value = parseFloat((template.unit_amount.value * this.conversionRate).toFixed(2));
-      template.unit_amount.value = 0.50;
-
+      // console.log("template (after): ", template)
       items.push(template)
     }
 
     let totalAmountConverted = (totalAmount * this.conversionRate).toFixed(2);
+    console.log("totalAmountConverted: ", totalAmountConverted)
+
     this.payPalConfig = {
       currency: 'USD',
-      clientId: 'AWgt3OgWP7ItdA_tTGJNehvgTzF8ERGXHxB5ByQw-mQOrogFw6T5pf_EcoyDrfA8C4hl5LyE3HOQKpRc',
+      clientId: 'Ac1lp7WNuBgLKMMzxmUykmTFYcRlGE0_xFP_gTDCl1uHMfabmbt8BTSr3k0KGnP1Hltx0mC2k7bwcr2g',
       createOrderOnClient: () => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [{
           amount: {
             currency_code: 'USD',
             // This is actual amount
-            // value: totalAmountConverted.toString(),
-            value: "0.50",
+            value: totalAmountConverted.toString(),
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                // value: totalAmountConverted.toString()
-                value: "0.50"
+                value: totalAmountConverted.toString()
               }
             }
           },
