@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, Injectable, PLATFORM_ID, Inject, Input } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
   public parsedProducts = [];
   public imageAddress = "";
   public conversionRate;
+  @Input() currency: any = this.productService.Currency;
 
   public languages = [{
     name: 'English',

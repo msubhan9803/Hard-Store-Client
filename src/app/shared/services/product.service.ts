@@ -21,7 +21,7 @@ export class ProductService {
   protected _env: EnvironmentUrlService;
   protected http: HttpClient;
   httpHeaders: any;
-  private storageSub = new Subject<string>();
+  public storageSub = new Subject<string>();
   public storageSubObs: Observable<any>
 
   constructor(
@@ -93,7 +93,7 @@ export class ProductService {
 
   // Product
   private get products(): Observable<Product[]> {
-    this.Products = this.http.get<Product[]>('assets/data/products.json').pipe(map(data => data));
+    // this.Products = this.http.get<Product[]>('assets/data/products.json').pipe(map(data => data));
     this.Products.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
     return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
   }
@@ -207,14 +207,14 @@ export class ProductService {
     const alreadyProduct = state.cart.find(item => item._id === product._id);
 
     if (alreadyProduct) {
-      alreadyProduct.quantity = alreadyProduct.quantity + 1;
+      alreadyProduct.quantity = alreadyProduct.quantity + quantity;
       state.cart.forEach((item, index) => {
         if (item._id === alreadyProduct._id) {
           state.cart[index] = alreadyProduct;
         }
       })
     } else {
-      const qty = quantity ? quantity : 1;
+      const qty = quantity;
       state.cart.push({
         ...product,
         quantity: qty,
@@ -223,8 +223,8 @@ export class ProductService {
     }
 
     localStorage.setItem("cartItems", JSON.stringify(state.cart));
-    this.storageSub.next('localStorageChanged');
     this.toastrService.success('Product added to cart');
+    this.storageSub.next('localStorageChanged');
 
     return true;
   }

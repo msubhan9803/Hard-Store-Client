@@ -68,11 +68,11 @@
         <h5>Your cart is currently empty.</h5>
       </ul>
       <ul class="show-div shopping-cart" *ngIf='products.length'>
-        <li *ngFor="let product of parsedProducts; let arrayIndex = index">
+        <li *ngFor="let product of products; let arrayIndex = index">
           <div class="media">
             <a [routerLink]="['/shop/product/image/outside/', product._id]">
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
-              <img [src]="product.imageAddress" height="20px" [alt]="">
+              <img [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]" height="20px" [alt]="">
             </a>
             <div class="media-body m-2">
               <a [routerLink]="['/shop/product/image/outside/', product._id]">
@@ -81,16 +81,18 @@
               <h6>
                 <span>
                   {{ product?.quantity }} x
-                  {{ product?.price * productService?.Currency.price | discount:product |
-                  currency:productService?.Currency.currency:'symbol' }}
-                  {{ product?.price * productService?.Currency.price | discount:product |
+                  {{ product?.skuArray[0].price * currency?.price |
+                    currency:currency?.currency:'symbol'
+                    }}
+                  {{ product?.skuArray[0].price * productService?.Currency.price |
                   currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
                 </span>
               </h6>
             </div>
           </div>
-          <div class="close-circle" (click)="removeItem(arrayIndex)">
-            <a href="javascript:void(0)"><i class="fa fa-times" aria-hidden="true"></i></a>
+          <div class="close-circle" style="cursor: pointer;" (click)="removeItem(arrayIndex)">
+            <!-- <i class="fa fa-times" aria-hidden="true"></i> -->
+            x
           </div>
         </li>
         <li>

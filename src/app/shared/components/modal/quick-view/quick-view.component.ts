@@ -46,6 +46,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
 
   openModal() {
     this.modalOpen = true;
+    this.counter = 1;
     if (isPlatformBrowser(this.platformId)) { // For SSR 
       this.modalService.open(this.QuickView, {
         size: 'lg',
@@ -117,7 +118,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
 
   // Add to cart
   async addToCart(product: any) {
-    let quantity = this.counter || 1;
+    let quantity = this.counter > 1 ? this.counter : 1;
     let variantIndex = 0;
     const status = await this.productService.addToCart(product, quantity, variantIndex);
     // if (status)

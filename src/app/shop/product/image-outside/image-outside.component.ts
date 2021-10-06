@@ -60,6 +60,7 @@ export class ImageOutsideComponent implements OnInit {
     public helperMethodsService: HelperMethodsService
   ) {
     this.route.data.subscribe(response => this.product = response.data);
+    this.counter = 1;
   }
 
   async ngOnInit(): Promise<void> {
@@ -175,7 +176,7 @@ export class ImageOutsideComponent implements OnInit {
 
   // Add to cart
   async addToCart(product: any, variantIndex: number) {
-    let quantity = this.counter || 1;
+    let quantity = this.counter > 1 ? this.counter : 1;
     const status = await this.productService.addToCart(product, quantity, variantIndex);
     // if(status)
     //   this.router.navigate(['/shop/cart']);

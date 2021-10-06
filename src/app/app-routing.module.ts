@@ -3,7 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { ShopComponent } from "./shop/shop.component";
 import { PagesComponent } from "./pages/pages.component";
-import { ElementsComponent } from "./elements/elements.component";
 import { TrackorderComponent } from "./trackorder/trackorder.component";
 
 const routes: Routes = [
@@ -38,12 +37,6 @@ const routes: Routes = [
     component: TrackorderComponent,
     loadChildren: () =>
       import("./trackorder/trackorder.module").then((m) => m.TrackorderModule),
-  },
-  {
-    path: "elements",
-    component: ElementsComponent,
-    loadChildren: () =>
-      import("./elements/elements.module").then((m) => m.ElementsModule),
   },
   {
     path: "**", // Navigate to Home Page if not found any page

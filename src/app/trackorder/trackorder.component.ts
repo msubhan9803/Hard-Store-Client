@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
@@ -6,6 +6,7 @@ import { monthNames } from '../shared/data/other';
 import { HelperMethodsService } from '../shared/services/helper-methods.service';
 import { OrderService } from '../shared/services/order.service';
 import { ProductService } from '../shared/services/product.service';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-trackorder',
@@ -17,8 +18,10 @@ export class TrackorderComponent implements OnInit {
   public showProducts = false;
   public searchValue = "";
   public imageAddress = "";
+  @Input() currency: any = this.productService.Currency;
   public monthNames = monthNames;
   public order;
+  public conversionRate;
   public tracking_Status = {
     order_Confirmed: {
       date: null,
@@ -75,11 +78,11 @@ export class TrackorderComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private productService: ProductService,
+    public userService: UserService,
     public helperMethodsService: HelperMethodsService,
     private actRoute: ActivatedRoute
   ) {
     this.trackingId = this.actRoute.snapshot.params.id;
-    console.log("this.trackingId: ", this.trackingId)
 
     if(this.trackingId) {
       this.searchValue = this.trackingId;
@@ -87,11 +90,14 @@ export class TrackorderComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.imageAddress = this.productService.getImageUrl();
     document.documentElement.style.setProperty('--theme-deafult', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
   }
 
   public searchOrder(e?) {
@@ -127,6 +133,7 @@ export class TrackorderComponent implements OnInit {
         });
 
         this.product_List = res.products;
+        console.log("this.product_List: ", this.product_List)
 
         this.total = 0;
         this.product_List.forEach(product => {

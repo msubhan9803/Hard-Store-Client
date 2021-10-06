@@ -59,64 +59,8 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
   }
   ];
 
-  // Collection banner
-  public collections = [{
-    image: 'assets/images/collection/marijuana/1.jpg',
-    save: 'save 50%',
-    title: 'oils',
-    link: '/home/left-sidebar/collection/marijuana',
-    class: 'p-left'
-  }, {
-    image: 'assets/images/collection/marijuana/2.jpg',
-    save: 'save 20%',
-    title: 'liquid',
-    link: '/home/left-sidebar/collection/marijuana',
-    class: 'p-right'
-  }];
-
   // Blog
-  public blogs = [
-    // {
-    //   image: 'assets/images/blog/40.jpg',
-    //   date: '25 January 2018',
-    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    //   by: 'John Dio'
-    // }, {
-    //   image: 'assets/images/blog/41.jpg',
-    //   date: '26 January 2018',
-    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    //   by: 'John Dio'
-    // }, {
-    //   image: 'assets/images/blog/42.jpg',
-    //   date: '27 January 2018',
-    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    //   by: 'John Dio'
-    // }, {
-    //   image: 'assets/images/blog/40.jpg',
-    //   date: '28 January 2018',
-    //   title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    //   by: 'John Dio'
-    // }
-  ];
-
-  // Logo
-  public logos = [{
-    image: 'assets/images/logos/1.png',
-  }, {
-    image: 'assets/images/logos/2.png',
-  }, {
-    image: 'assets/images/logos/3.png',
-  }, {
-    image: 'assets/images/logos/4.png',
-  }, {
-    image: 'assets/images/logos/5.png',
-  }, {
-    image: 'assets/images/logos/6.png',
-  }, {
-    image: 'assets/images/logos/7.png',
-  }, {
-    image: 'assets/images/logos/8.png',
-  }];
+  public blogs = [];
 
   async ngOnInit(): Promise<void> {
     // Change color for this layout
@@ -127,14 +71,6 @@ export class MarijuanaComponent implements OnInit, OnDestroy {
     await this.productService.getAllProductsAPI().toPromise().then(
       (res: []) => {
         this.products = res;
-        console.log("res: ", this.products)
-
-        // this.products.filter((item) => {
-        //   item.collection.filter((collection) => {
-        //     const index = this.productCollections.indexOf(collection);
-        //     if (index === -1) this.productCollections.push(collection);
-        //   })
-        // })
       }
     );
 
