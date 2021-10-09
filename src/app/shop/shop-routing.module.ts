@@ -5,6 +5,7 @@ import { CollectionNoSidebarComponent } from './collection/collection-no-sidebar
 import { CartComponent } from './cart/cart.component';
 import { CompareComponent } from './compare/compare.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,11 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
-  }
+  },
+  { 
+    path: 'order/success/:id', 
+    component: OrderSuccessComponent 
+  },
 ];
 
 @NgModule({

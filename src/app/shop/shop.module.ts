@@ -32,6 +32,7 @@ import { CompareComponent } from './compare/compare.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HelperMethodsService } from '../shared/services/helper-methods.service';
 import { RatingBlockComponent } from './product/widgets/rating-block/rating-block.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { RatingBlockComponent } from './product/widgets/rating-block/rating-bloc
     CartComponent,
     CompareComponent,
     CheckoutComponent,
-    RatingBlockComponent
+    RatingBlockComponent,
+    OrderSuccessComponent
   ],
   providers: [
     HelperMethodsService

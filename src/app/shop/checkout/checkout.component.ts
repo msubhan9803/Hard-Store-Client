@@ -133,9 +133,9 @@ export class CheckoutComponent implements OnInit {
     // Setting Source
     checkoutFormValue.source = "web";
 
-    console.log("checkoutFormValue: ", checkoutFormValue)
+    // console.log("checkoutFormValue: ", checkoutFormValue)
     this.orderService.createOrderAPI(checkoutFormValue).subscribe(
-      res => {
+      (res: any) => {
         Swal.fire({
           icon: 'success',
           title: 'Successfully Placed Order',
@@ -145,7 +145,8 @@ export class CheckoutComponent implements OnInit {
         this.products = [];
         this.resetForm();
         this.productService.emptyCartAndProducts();
-        window.location.reload();
+        // window.location.reload();
+        window.location.href = `shop/order/success/${res._id}`;
       },
       err => {
         Swal.fire({
