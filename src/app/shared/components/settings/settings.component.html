@@ -72,19 +72,29 @@
           <div class="media">
             <a [routerLink]="['/shop/product/image/outside/', product._id]">
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
-              <img [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]" height="20px" [alt]="">
+              <img
+                [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]"
+                height="20px" [alt]="">
             </a>
             <div class="media-body m-2">
               <a [routerLink]="['/shop/product/image/outside/', product._id]">
                 <h4>{{ product?.title }}</h4>
               </a>
               <h6>
-                <span>
+                <span *ngIf="!product?.sale">
                   {{ product?.quantity }} x
                   {{ product?.skuArray[0].price * currency?.price |
-                    currency:currency?.currency:'symbol'
-                    }}
+                  currency:currency?.currency:'symbol'
+                  }}
                   {{ product?.skuArray[0].price * productService?.Currency.price |
+                  currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
+                </span>
+                <span *ngIf="product?.sale">
+                  {{ product?.quantity }} x
+                  {{ product?.skuArray[0].specialPrice * currency?.price |
+                  currency:currency?.currency:'symbol'
+                  }}
+                  {{ product?.skuArray[0].specialPrice * productService?.Currency.price |
                   currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
                 </span>
               </h6>

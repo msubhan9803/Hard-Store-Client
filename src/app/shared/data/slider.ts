@@ -189,7 +189,7 @@ export let  CompareSlider: any = {
 
 // Product Slider
 export let ProductSlider: any = {
-    loop: false,
+    loop: true,
     dots: false,
     navSpeed: 300,
     autoplay: true,

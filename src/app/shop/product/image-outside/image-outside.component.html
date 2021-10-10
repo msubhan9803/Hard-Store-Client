@@ -55,8 +55,8 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="d-flex flex-row">
-                                            <bar-rating [rate]="product?.starAvg" [readOnly]="true"></bar-rating>
-                                            <span class="my-auto">({{ product?.totalReviews }})</span>
+                                            <bar-rating [rate]="product?.starAvg ? product?.starAvg : 0" [readOnly]="true"></bar-rating>
+                                            <span class="my-auto" *ngIf="product?.totalReviews">({{ product?.totalReviews }})</span>
                                         </div>
                                     </div>
                                 </div>
@@ -453,7 +453,7 @@
                 </div>
             </section>
 
-            <section class="full-banner parallax tools-parallax-product tools-grey border-box" id="products-section">
+            <section class="full-banner parallax tools-parallax-product tools-grey border-box related-product" id="products-section">
                 <h4 class="pb-4">Related Products</h4>
                 <owl-carousel-o [options]="ProductSlider" class="no-arrow">
                     <ng-container *ngFor="let product of this.products">

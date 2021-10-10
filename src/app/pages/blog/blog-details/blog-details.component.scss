@@ -1,0 +1,11 @@
+.blog-detail-img {
+    max-height: 300px !important;
+    height: 100%;
+}
+
+.blog-detail-img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    overflow: hidden !important;
+}

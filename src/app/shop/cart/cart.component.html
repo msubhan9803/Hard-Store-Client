@@ -32,8 +32,8 @@
                         </a>
                     </td>
                     <td>
-                        <a href="javascript:void(0)">{{
-                            product.title | titlecase }}</a>
+                        <a href="javascript:void(0)">{{ product.title | titlecase }}</a>
+
                         <div class="mobile-cart-content row justify-content-center align-items-center">
                             <div class="col-xs-3">
                                 <div class="qty-box">
@@ -64,20 +64,25 @@
                         </div>
                     </td>
                     <td>
-                        <h5 *ngIf="!product.sale" [ngClass]="{'strikethrough': product.sale}">
-                            {{ product.price * currency?.price |
-                            currency:currency?.currency:'symbol'
-                            }}
+                        <p *ngIf="!product.sale" [ngClass]="{'strikethrough': product.sale}">
+                            <b>
+                                {{ product.price * currency?.price |
+                                currency:currency?.currency:'symbol'
+                                }}
+                            </b>
 
                             <small>
                                 {{ product.price * currency?.price |
                                 currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
                                 }}
                             </small>
-                        </h5>
-                        <h5 *ngIf="product.sale">{{
-                            product.specialPrice * currency?.price |
-                            currency:currency?.currency:'symbol' }}
+                        </p>
+                        <p *ngIf="product.sale">
+                            <b>
+                                {{
+                                product.specialPrice * currency?.price |
+                                currency:currency?.currency:'symbol' }}
+                            </b>
 
                             <small>
                                 {{
@@ -86,7 +91,7 @@
                                 }}
 
                             </small>
-                        </h5>
+                        </p>
                     </td>
                     <td>
                         <div class="qty-box">

@@ -4,9 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 blog-detail">
-                <img src="{{this.blogDetails.imgUrl}}" class="img-fluid" alt="" />
+                <div class="blog-detail-img mb-4">
+                    <img src="{{this.blogDetails.imgUrl}}" class="img-fluid" alt="" />
+                </div>
                 <h3>{{this.blogDetails.title}}</h3>
-                <span class="badge badge-pill badge-primary" *ngFor="let object of this.blogDetails.tags">
+                <span class="badge badge-pill badge-success" *ngFor="let object of this.blogDetails.tags">
                     {{ object }}
                 </span>
                 <ul class="post-social">
@@ -18,7 +20,7 @@
                 <p><span [innerHTML]="this.blogDetails.description"></span></p>
             </div>
         </div>
-        <section class="tab-product m-0">
+        <!-- <section class="tab-product m-0">
             <div class="row">
                 <div class="col-sm-12 col-lg-12" id="detail-section">
                     <ngb-tabset [type]="'tabs'" class="nav-material">
@@ -72,8 +74,8 @@
                                         </div>
                                         <div class="col-md-6  mb-2">
                                             <label for="email">Email</label>
-                                            <input type="email" formControlName="Email" class="form-control"
-                                                id="email" placeholder="Email" required>
+                                            <input type="email" formControlName="Email" class="form-control" id="email"
+                                                placeholder="Email" required>
                                             <div *ngIf="isSubmit && reviewForm.controls.Email.errors?.required"
                                                 class="text text-danger">
                                                 Email is required.
@@ -81,8 +83,8 @@
                                         </div>
                                         <div class="col-md-12  mb-2">
                                             <label for="review">Review Title</label>
-                                            <input type="text" formControlName="Title" class="form-control"
-                                                id="review" placeholder="Enter your Review Subjects" required>
+                                            <input type="text" formControlName="Title" class="form-control" id="review"
+                                                placeholder="Enter your Review Subjects" required>
                                             <div *ngIf="isSubmit && reviewForm.controls.Title.errors?.required"
                                                 class="text text-danger">
                                                 Title is required.
@@ -108,7 +110,7 @@
                     </ngb-tabset>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- <div class="row blog-contact">
             <div class="col-sm-12">
                 <h2>Leave Your Comment</h2>

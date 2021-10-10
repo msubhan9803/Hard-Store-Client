@@ -23,10 +23,11 @@ export class CompareComponent implements OnInit {
   }
 
   async addToCart(product: any) {
-    const status = await this.productService.addToCart(product);
-    if(status) {
-      this.router.navigate(['/shop/cart']);
-    }
+    let quantity = 1;
+    const status = await this.productService.addToCart(product, quantity, 0);
+    // if(status) {
+    //   this.router.navigate(['/shop/cart']);
+    // }
   }
 
   removeItem(product: any) {

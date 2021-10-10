@@ -34,3 +34,7 @@
     width: 20px;
     height: 20px;
 }
+
+::ng-deep .related-product .owl-item {
+    max-width: 260px !important;
+}
