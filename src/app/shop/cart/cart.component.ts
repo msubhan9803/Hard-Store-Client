@@ -75,6 +75,10 @@ export class CartComponent implements OnInit {
     return this.productService.cartTotalAmount();
   }
 
+  public recalculateTotal(index) {
+    this.productService.updateCartQuantity(this.products[index], index, this.products[index].quantity);
+  }
+
   // Increament
   // increment(product, qty = 1) {
   //   this.productService.updateCartQuantity(product, qty);

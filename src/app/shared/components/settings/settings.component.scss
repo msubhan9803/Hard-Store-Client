@@ -1,0 +1,9 @@
+.mobile-close-circle {
+  display: none;
+}
+
+@media only screen and (max-width: 425px) {
+  .mobile-close-circle {
+    display: block;
+  }
+}

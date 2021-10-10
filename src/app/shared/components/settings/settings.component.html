@@ -64,11 +64,11 @@
         </a>
       </div>
       <span class="cart_qty_cls">{{ products.length }}</span>
-      <ul class="show-div shopping-cart" *ngIf='!products.length'>
+      <ul class="show-div shopping-cart" *ngIf='products.length'>
         <h5>Your cart is currently empty.</h5>
       </ul>
       <ul class="show-div shopping-cart" *ngIf='products.length'>
-        <li *ngFor="let product of products; let arrayIndex = index">
+        <li class="my-4" *ngFor="let product of products; let arrayIndex = index">
           <div class="media">
             <a [routerLink]="['/shop/product/image/outside/', product._id]">
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
@@ -98,11 +98,10 @@
                   currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
                 </span>
               </h6>
+              <div class="close-circle" style="cursor: pointer;" (click)="removeItem(arrayIndex)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </div>
             </div>
-          </div>
-          <div class="close-circle" style="cursor: pointer;" (click)="removeItem(arrayIndex)">
-            <!-- <i class="fa fa-times" aria-hidden="true"></i> -->
-            x
           </div>
         </li>
         <li>
