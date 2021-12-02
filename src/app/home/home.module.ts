@@ -11,6 +11,8 @@ import { BlogComponent } from "./widgets/blog/blog.component";
 import { LogoComponent } from "./widgets/logo/logo.component";
 import { ServicesComponent } from "./widgets/services/services.component";
 import { CollectionComponent } from "./widgets/collection/collection.component";
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CategoriesGridComponent } from './widgets/categories-grid/categories-grid.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { CollectionComponent } from "./widgets/collection/collection.component";
     LogoComponent,
     ServicesComponent,
     CollectionComponent,
+    LandingPageComponent,
+    CategoriesGridComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
 })

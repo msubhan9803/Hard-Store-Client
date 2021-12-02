@@ -71,6 +71,9 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { PageTitleComponent } from './components/page-title/pagetitle.component';
 import { TimeagoModule } from 'ngx-timeago';
+import { HeaderFiveComponent } from './header/header-five/header-five.component';
+import { FooterFiveComponent } from './footer/footer-five/footer-five.component';
+import { SettingsTwoComponent } from './components/settings-two/settings-two.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +88,7 @@ import { TimeagoModule } from 'ngx-timeago';
     LeftMenuComponent,
     MenuComponent,
     SettingsComponent,
+    SettingsTwoComponent,
     BreadcrumbComponent,
     CategoriesComponent,
     ProductBoxOneComponent,
@@ -106,7 +110,9 @@ import { TimeagoModule } from 'ngx-timeago';
     TapToTopComponent,
     PageTitleComponent,
     DiscountPipe,
-    AedToDollarPipe
+    AedToDollarPipe,
+    HeaderFiveComponent,
+    FooterFiveComponent
   ],
   providers: [
     EnvironmentUrlService,
@@ -189,7 +195,10 @@ import { TimeagoModule } from 'ngx-timeago';
     NgSelectModule,
     NgxMaskModule,
     NgMultiSelectDropDownModule,
-    TimeagoModule
+    TimeagoModule,
+    HeaderFiveComponent,
+    FooterFiveComponent,
+    SettingsTwoComponent
   ]
 })
 export class SharedModule { }

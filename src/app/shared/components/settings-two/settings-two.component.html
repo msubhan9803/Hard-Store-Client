@@ -1,65 +1,14 @@
 <div class="icon-nav">
   <ul>
-    <!-- <li class="onhover-div mobile-search search-widgets" id="search-widgets">
-      <div (click)="searchToggle()">
-        <img src="assets/images/icon/search.png" class="img-fluid" alt="">
-        <i class="ti-search"></i>
-      </div>
-      <div class="input-group">
-        <input class="form-control border" type="search" style="height: 40px; border-radius: 2px;" placeholder="search &#xF007;" id="example-search-input">
-      </div>
-      <div id="search-overlay" class="search-overlay" [ngStyle]="{'display': search ? 'block' : 'none' }">
-        <div>
-          <span class="closebtn" title="Close Overlay" (click)="searchToggle()">×</span>
-          <div class="overlay-content">
-            <div class="container">
-              <div class="row">
-                <div class="col-xl-12">
-                  <form>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Search a Product">
-                    </div>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li> -->
-    <!-- <li class="onhover-div mobile-setting">
-      <div><img src="assets/images/icon/setting.png" class="img-fluid" alt="settong">
-        <i class="ti-settings"></i></div>
-      <div class="show-div setting">
-        <h6>language</h6>
-        <ul>
-          <li *ngFor="let language of languages">
-            <a href="javascript:void(0)" (click)="changeLanguage(language.code)">{{ language.name }}</a>
-          </li>
-        </ul>
-        <h6>currency</h6>
-        <ul class="list-inline">
-          <li *ngFor="let currency of currencies">
-            <a href="javascript:void(0)" (click)="changeCurrency(currency)">{{ currency.name }}</a>
-          </li>
-        </ul>
-      </div>
-    </li> -->
     <li class="mobile-setting">
       <div>
         <a [routerLink]="['/trackorder']"><i class="fa fa-truck" aria-hidden="true"></i>Track Order</a>
       </div>
     </li>
-    <!-- <li class="mobile-search">
-      <div>
-        <a [routerLink]="['/shop/compare']"><i class="fa fa-random" aria-hidden="true"></i>Compare</a>
-      </div>
-    </li> -->
     <li class="onhover-div mobile-cart">
-      <div>
+      <div class="shopping-cart">
         <a [routerLink]="['/shop/cart']">
-          <img src="assets/images/icon/cart.png" class="img-fluid" alt="">
+          <!-- <img src="assets/images/icon/cart.png" class="img-fluid" alt=""> -->
           <i class="ti-shopping-cart"></i>
         </a>
       </div>
@@ -74,7 +23,7 @@
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
               <img
                 [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]"
-                height="20px" [alt]="">
+                width="100px" [alt]="">
             </a>
             <div class="media-body m-2">
               <a [routerLink]="['/shop/product/image/outside/', product._id]">

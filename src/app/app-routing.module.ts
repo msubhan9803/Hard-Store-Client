@@ -8,7 +8,12 @@ import { TrackorderComponent } from "./trackorder/trackorder.component";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "home/uaeslimmers",
+    redirectTo: "home/hardtaker",
+    pathMatch: "full",
+  },
+  {
+    path: "",
+    redirectTo: "home/marijuana",
     pathMatch: "full",
   },
   {
