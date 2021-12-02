@@ -44,12 +44,13 @@
   padding: 8px;
   padding-top: 12px;
   padding-bottom: 12px;
+  height: fit-content;
 }
 
 .logo {
   text-align: center;
   width: 160px;
-  height: 45px;
+  height: 100%;
   background: linear-gradient(90deg, #3fad51 50%, #3c49a1 50%);
   color: #fff !important;
   text-decoration: none;
@@ -63,9 +64,15 @@
   font-weight: 700;
 }
 
+.input-group-sm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .input-group-sm > input,
 .input-group-sm > button {
-  height: 40px !important;
+  height: 90% !important;
 }
 .input-group-sm > button {
   background-color: #f57224;
