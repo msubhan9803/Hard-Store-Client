@@ -1,10 +1,12 @@
+@import "../../../../assets//scss//theme//variables";
+
 .navbar-section {
   font-family: "Roboto", sans-serif !important;
 }
 
 .navbar-offer {
   text-align: center;
-  background-color: rgb(54, 72, 89);
+  background-color: $primary-light;
   color: rgb(255, 255, 255);
   font-size: 15px;
   line-height: 0.5 !important;
@@ -17,7 +19,7 @@
 }
 
 .navbar-header-top {
-  background-color: #172237;
+  background-color: $primary-ultra-dark;
   color: #fff !important;
   padding: 8px;
   line-height: 0.5 !important;
@@ -39,7 +41,7 @@
 }
 
 .navbar-header-bottom {
-  background-color: #172237;
+  background-color: $primary-ultra-dark;
   color: #fff !important;
   padding: 8px;
   padding-top: 12px;
@@ -51,10 +53,11 @@
   text-align: center;
   width: 160px;
   height: 100%;
-  background: linear-gradient(90deg, #3fad51 50%, #3c49a1 50%);
+  background: linear-gradient(90deg, $primary-light 50%, $primary-dark 50%);
   color: #fff !important;
   text-decoration: none;
   border-radius: 5px;
+  border: 1px solid $primary-light !important;
   font-family: monospace;
   font-size: 1.25em;
   display: flex;
@@ -75,11 +78,11 @@
   height: 90% !important;
 }
 .input-group-sm > button {
-  background-color: #f57224;
-  border-color: #f57224;
+  background-color: $primary-light;
+  border-color: $primary-light;
 }
 .input-group-sm > button:hover {
-  background-color: #ff864c;
+  background-color: $primary-ultra-light;
 }
 .input-group-sm > button > i {
   color: #fff;
@@ -88,6 +91,7 @@
 
 .right-side-icons {
     height: 45px !important;
+    font-size: 1.25rem;
 }
 
 .navbar-section-2 {

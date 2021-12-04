@@ -98,7 +98,7 @@ body {
     position: relative;
     background: $white;
     font-size: 14px;
-    overflow-x: hidden;
+    overflow-x: unset;
 }
 
 h1 {
@@ -532,8 +532,7 @@ button {
     color: #fff !important;
     letter-spacing: 0.05em;
     border: 2px solid var(--theme-deafult);
-    background-image: -webkit-linear-gradient(30deg, var(--theme-deafult) 50%, transparent 50%);
-    background-image: linear-gradient(30deg, var(--theme-deafult) 50%, transparent 50%);
+    background-image: linear-gradient(to right, $primary-light, $primary-dark);
     background-size: 850px;
     background-repeat: no-repeat;
     background-position: 0;
@@ -541,7 +540,7 @@ button {
     transition: background 300ms ease-in-out;
     &:hover {
         background-position: 100%;
-        color: #000 !important;
+        color: rgb(206, 204, 204) !important;
         background-color: $white;
     }
     &.black-btn {
@@ -5009,7 +5008,7 @@ footer {
     display: none;
     color: #fff;
     text-align: center;
-    background: var(--theme-deafult);
+    background: $primary-main;
     border: none;
     font-size: 22px;
     padding: 7px;
@@ -5208,13 +5207,13 @@ footer {
 
 .cart_qty_cls {
     position: absolute;
-    background: var(--theme-deafult);
+    background: $primary-light;
     width: 20px;
     height: 20px;
-    color: #fff;
+    color: rgb(255, 255, 255);
     border-radius: 20px;
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 14px;
     font-weight: 600;
     top: 20%;
@@ -13043,8 +13042,8 @@ footer {
             }
             button {
                 width: 55%;
-                background-color: #eef0f1;
-                color: $grey2;
+                background-color: $primary-main;
+                color: $white;
                 border-radius: 5px;
                 margin: 0 5px;
                 transition: all 0.5s ease;
@@ -13052,7 +13051,7 @@ footer {
                     display: none;
                 }
                 &:hover {
-                    background-color: var(--theme-deafult);
+                    background-color: $primary-main;
                     color: $white;
                     transition: all 0.5s ease;
                 }
@@ -13098,7 +13097,7 @@ footer {
             .img-wrapper {
                 .front {
                     img {
-                        opacity: 0.05;
+                        opacity: 0.35;
                         transition: all 0.5s ease;
                     }
                 }
@@ -13392,7 +13391,7 @@ footer {
     &.tools-grey {
         .ribbon {
             span {
-                background-image: linear-gradient(to right, var(--theme-gradient1), var(--theme-gradient2));
+                background-image: linear-gradient(to right, $primary-light, $primary-dark);
             }
         }
         .product-box {
@@ -13402,17 +13401,17 @@ footer {
             .cart-info {
                 a {
                     &:hover {
-                        background-image: linear-gradient(to right, var(--theme-gradient1), var(--theme-gradient2));
+                        background-image: linear-gradient(to right, $primary-main, $primary-dark);
                     }
                 }
                 button {
                     &:hover {
-                        background-image: linear-gradient(to right, var(--theme-gradient1), var(--theme-gradient2));
+                        background-image: linear-gradient(to right, $primary-main, $primary-dark);
                     }
                 }
             }
             .quick-view-part {
-                background-image: linear-gradient(to right, var(--theme-gradient1), var(--theme-gradient2));
+                background-image: linear-gradient(to right, $primary-light, $primary-main);
             }
         }
     }

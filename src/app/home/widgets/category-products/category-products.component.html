@@ -1,0 +1,74 @@
+<section #productsSection class="full-banner parallax tools-parallax-product tools-grey border-box"
+    id="products-section">
+    <div class="container">
+        <div class="row">
+            <div class="col theme-tab">
+                <ngb-tabset [justify]="'center'" [type]="'pills'" class="tabs tab-title marijuana-tab">
+                    <ngb-tab *ngFor="let collection of productCollections">
+                        <ng-template ngbTabTitle>{{collection}}</ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="no-slider row" *ngIf="collection == 'On Sale'">
+                                <ng-container *ngFor="let product of getCollectionProducts(collection)">
+                                    <div class="col-md-3" *ngIf="product.sale">
+                                        <div class="product-box product-wrap m-2">
+                                            <app-product-box-three [product]="product"
+                                                [currency]="productService?.Currency">
+                                            </app-product-box-three>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="getCollectionProducts(collection).length == 0">
+                                    <div class="row pt-2 mt-3 text-center">
+                                        <div class="col-12">
+                                            <h4 class="text-center">No Products</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="no-slider row" *ngIf="collection == 'Best Seller'">
+                                <ng-container *ngFor="let product of getCollectionProducts(collection)">
+                                    <div class="col-md-3">
+                                        <div class="product-box product-wrap m-2">
+                                            <app-product-box-three [product]="product"
+                                                [currency]="productService?.Currency">
+                                            </app-product-box-three>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="getCollectionProducts(collection).length == 0">
+                                    <div class="row pt-2 mt-3 text-center">
+                                        <div class="col-12">
+                                            <h4 class="">No Products</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="no-slider row" *ngIf="collection == 'All'">
+                                <ng-container *ngFor="let product of getCollectionProducts(collection)">
+                                    <div class="col-md-3">
+                                        <div class="product-box product-wrap m-2">
+                                            <app-product-box-three [product]="product"
+                                                [currency]="productService?.Currency">
+                                            </app-product-box-three>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="getCollectionProducts(collection).length == 0">
+                                    <div class="row pt-2 mt-3 text-center">
+                                        <div class="col-12">
+                                            <h4 class="">No Products</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+        
+        <div class="row justify-content-end">
+            <button class="view-more-button primary text-white">View More</button>
+        </div>
+    </div>
+</section>

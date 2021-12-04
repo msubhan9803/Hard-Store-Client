@@ -1,5 +1,122 @@
+@import "../../../../assets//scss//theme//variables";
+
 .categories-section {
-    color: #fff !important;
-    font-family: "Roboto", sans-serif !important;
-    font-weight: 700;
+  color: #fff !important;
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 700;
+  height: 60vh;
+}
+
+.categories-section > .row {
+  height: max-content;
+}
+
+// .category {
+//   box-shadow: 4px 4px 20px 0px #0006 !important;
+//   cursor: pointer;
+// }
+
+.category:hover {
+  //   border: 2px solid #172237 !important;
+}
+
+//Colors
+$background: #fefefe;
+$text: #4b507a;
+
+$cyan: #60daaa;
+$red: #f45e61;
+$blue: #4b5cbba4;
+// $blue: #1e3663;
+
+// Basic styles
+.category {
+  box-shadow: 4px 4px 20px 0px #0006 !important;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  margin: 1em;
+  padding: 1em 2em;
+
+  // Using inset box-shadow instead of border for sizing simplicity
+  box-shadow: inset 0 0 0 2px $red;
+  color: $red;
+  font-size: inherit;
+  font-weight: 700;
+
+  // Required, since we're setting absolute on pseudo-elements
+  position: relative;
+  vertical-align: middle;
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.draw {
+  transition: color 0.25s;
+  &::before,
+  &::after {
+    border: 5px solid transparent;
+    width: 0;
+    height: 0;
+  }
+  &::before {
+    top: 0;
+    left: 0;
+  }
+  &::after {
+    bottom: 0;
+    right: 0;
+  }
+  &:hover {
+    color: $cyan;
+  }
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover::before {
+    border-top-color: $cyan;
+    border-right-color: $cyan;
+    transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+  }
+
+  &:hover::after {
+    border-bottom-color: $cyan;
+    border-left-color: $cyan;
+    transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s,
+      height 0.25s ease-out 0.75s;
+  }
+}
+
+.meet {
+  &:hover {
+    color: $primary-main;
+  }
+  &::after {
+    top: 0;
+    left: 0;
+  }
+  &:hover::before {
+    border-top-color: $primary-light;
+    border-right-color: $primary-light;
+  }
+  &:hover::after {
+    border-bottom-color: $primary-light;
+    border-left-color: $primary-light;
+    transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
+  }
+}
+
+.category h4 {
+  font-weight: 900;
+  color: $primary-main;
 }

@@ -13,6 +13,7 @@ import { ServicesComponent } from "./widgets/services/services.component";
 import { CollectionComponent } from "./widgets/collection/collection.component";
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CategoriesGridComponent } from './widgets/categories-grid/categories-grid.component';
+import { CategoryProductsComponent } from './widgets/category-products/category-products.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CategoriesGridComponent } from './widgets/categories-grid/categories-gr
     CollectionComponent,
     LandingPageComponent,
     CategoriesGridComponent,
+    CategoryProductsComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
 })
