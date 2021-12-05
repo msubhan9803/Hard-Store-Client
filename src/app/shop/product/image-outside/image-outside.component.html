@@ -5,17 +5,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
-                        <ng-container
-                            *ngFor="let image of this.product?.variants[this.currentVariant].imagesPreview; index as i">
-                            <ng-template carouselSlide [id]="i">
-                                <div>
-                                    <img [defaultImage]="this.imageAddress + product.variants[currentVariant].imagesPreview[currentVariantImage]"
-                                        [lazyLoad]="this.imageAddress + image" [alt]="image.alt" class="img-fluid">
-                                </div>
-                            </ng-template>
-                        </ng-container>
-                    </owl-carousel-o>
+                    <div class="image-carousel">
+                        <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
+                            <ng-container
+                                *ngFor="let image of this.product?.variants[this.currentVariant].imagesPreview; index as i">
+                                <ng-template carouselSlide [id]="i">
+                                    <div>
+                                        <img [defaultImage]="this.imageAddress + product.variants[currentVariant].imagesPreview[currentVariantImage]"
+                                            [lazyLoad]="this.imageAddress + image" [alt]="image.alt" class="img-fluid">
+                                    </div>
+                                </ng-template>
+                            </ng-container>
+                        </owl-carousel-o>
+                    </div>
 
                     <!-- <div class="row">
                         <div class="col-6 offset-3 p-0">
@@ -55,8 +57,10 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="d-flex flex-row mobile-rating-star">
-                                            <bar-rating [rate]="product?.starAvg ? product?.starAvg : 0" [readOnly]="true"></bar-rating>
-                                            <span class="my-auto" *ngIf="product?.totalReviews">({{ product?.totalReviews }})</span>
+                                            <bar-rating [rate]="product?.starAvg ? product?.starAvg : 0"
+                                                [readOnly]="true"></bar-rating>
+                                            <span class="my-auto" *ngIf="product?.totalReviews">({{
+                                                product?.totalReviews }})</span>
                                         </div>
                                     </div>
                                 </div>
@@ -453,7 +457,8 @@
                 </div>
             </section>
 
-            <section class="full-banner parallax tools-parallax-product tools-grey border-box related-product" id="products-section">
+            <section class="full-banner parallax tools-parallax-product tools-grey border-box related-product"
+                id="products-section">
                 <h4 class="pb-4">Related Products</h4>
                 <owl-carousel-o [options]="ProductSlider" class="no-arrow">
                     <ng-container *ngFor="let product of this.products">

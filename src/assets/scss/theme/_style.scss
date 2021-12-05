@@ -6622,6 +6622,7 @@ footer {
             button {
                 background: $white !important;
                 border: 1px solid #ced4da;
+                height: 50px !important;
             }
         }
         .form-control {
@@ -7530,9 +7531,10 @@ footer {
                 }
             }
             .nav-link.active {
-                color: var(--theme-deafult);
+                color: $primary-dark;
                 background-color: transparent;
-                border-bottom: 2px solid var(--theme-deafult);
+                border-bottom: 2px solid $primary-main;
+                font-weight: 500;
                 &~.material-border {
                     transition: all 0.3s ease;
                     opacity: 1;

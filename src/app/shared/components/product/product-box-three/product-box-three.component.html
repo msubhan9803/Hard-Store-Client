@@ -62,8 +62,8 @@
                 <span>&nbsp;Buy on Whatsapp</span>
             </div>
         </button>
-        <button class="add-to-cart-btn" title="Add to cart" (click)="CartModal.openModal(product)">
-            <i class="ti-shopping-cart"></i> 
+        <button class="add-to-cart-btn" title="Add to cart" (click)="addToCart(product, 0)" *ngIf="!cartModal">
+            <i class="ti-shopping-cart"></i>
             <span>Add to cart</span>
         </button>
     </div>

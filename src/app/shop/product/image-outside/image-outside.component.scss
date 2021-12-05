@@ -1,3 +1,5 @@
+@import "../../../../assets//scss//theme//variables";
+
 .center-image {
   display: flex !important;
   flex-direction: row !important;
@@ -8,6 +10,10 @@
   height: 500px !important;
   width: 100%;
   object-fit: cover;
+}
+
+::ng-deep .image-carousel {
+  max-height: 200px !important;
 }
 
 ::ng-deep .owl-carousel .owl-wrapper {
@@ -43,4 +49,8 @@
   .mobile-rating-star {
     justify-content: center !important;
   }
+}
+
+.quantity-left-minus, .quantity-right-plus {
+  height: 100% !important;
 }
