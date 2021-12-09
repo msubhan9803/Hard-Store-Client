@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../classes/product';
-import { Categories } from '../../data/constants';
+import { Collections } from '../../data/constants';
 import { ProductService } from '../../services/product.service';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  selector: 'app-collections',
+  templateUrl: './collections.component.html',
+  styleUrls: ['./collections.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class CollectionsComponent implements OnInit {
 
   public products: Product[] = [];
   public collapse: boolean = true;
@@ -22,7 +22,7 @@ export class CategoriesComponent implements OnInit {
 
   get filterbyCategory() {
     // const category = [...new Set(this.products.map(product => product.collections))]
-    const category = Categories;
+    const category = Collections;
     return category
   }
 

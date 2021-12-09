@@ -24,6 +24,7 @@ import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { CollectionsComponent } from './components/collections/collections.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { ProductBoxOneComponent } from './components/product/product-box-one/product-box-one.component';
 import { ProductBoxTwoComponent } from './components/product/product-box-two/product-box-two.component';
@@ -91,6 +92,7 @@ import { SettingsTwoComponent } from './components/settings-two/settings-two.com
     SettingsTwoComponent,
     BreadcrumbComponent,
     CategoriesComponent,
+    CategoriesComponent,
     ProductBoxOneComponent,
     ProductBoxTwoComponent,
     ProductBoxThreeComponent,
@@ -112,7 +114,8 @@ import { SettingsTwoComponent } from './components/settings-two/settings-two.com
     DiscountPipe,
     AedToDollarPipe,
     HeaderFiveComponent,
-    FooterFiveComponent
+    FooterFiveComponent,
+    CollectionsComponent
   ],
   providers: [
     EnvironmentUrlService,
@@ -171,6 +174,7 @@ import { SettingsTwoComponent } from './components/settings-two/settings-two.com
     FooterFourComponent,
     BreadcrumbComponent,
     CategoriesComponent,
+    CollectionsComponent,
     ProductBoxOneComponent,
     ProductBoxTwoComponent,
     ProductBoxThreeComponent,

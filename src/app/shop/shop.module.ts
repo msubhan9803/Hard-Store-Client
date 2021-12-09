@@ -33,6 +33,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { HelperMethodsService } from '../shared/services/helper-methods.service';
 import { RatingBlockComponent } from './product/widgets/rating-block/rating-block.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
+import { CollectionLeftSidebarComponent } from './collection/collection-left-sidebar/collection-left-sidebar.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
     CompareComponent,
     CheckoutComponent,
     RatingBlockComponent,
-    OrderSuccessComponent
+    OrderSuccessComponent,
+    CollectionLeftSidebarComponent
   ],
   providers: [
     HelperMethodsService

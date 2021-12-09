@@ -6,6 +6,7 @@ import { CartComponent } from './cart/cart.component';
 import { CompareComponent } from './compare/compare.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
+import { CollectionLeftSidebarComponent } from './collection/collection-left-sidebar/collection-left-sidebar.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'collection/no/sidebar',
     component: CollectionNoSidebarComponent
+  },
+  {
+    path: 'collection/left/sidebar',
+    component: CollectionLeftSidebarComponent
   },
   {
     path: 'compare',

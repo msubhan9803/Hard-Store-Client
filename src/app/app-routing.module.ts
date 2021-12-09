@@ -11,11 +11,11 @@ const routes: Routes = [
     redirectTo: "home/hardtaker",
     pathMatch: "full",
   },
-  {
-    path: "",
-    redirectTo: "home/marijuana",
-    pathMatch: "full",
-  },
+  // {
+  //   path: "",
+  //   redirectTo: "home/marijuana",
+  //   pathMatch: "full",
+  // },
   {
     path: "home",
     loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: "**", // Navigate to Home Page if not found any page
-    redirectTo: "home/uaeslimmers",
+    redirectTo: "home/hardtaker",
   }
 ];
 
