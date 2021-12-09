@@ -120,3 +120,9 @@ $blue: #4b5cbba4;
   font-weight: 900;
   color: $primary-main;
 }
+
+@media (max-width: 480px) {
+  .categories-section {
+      height: auto !important;
+  }
+}

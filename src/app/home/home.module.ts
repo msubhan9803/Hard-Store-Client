@@ -14,6 +14,7 @@ import { CollectionComponent } from "./widgets/collection/collection.component";
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CategoriesGridComponent } from './widgets/categories-grid/categories-grid.component';
 import { CategoryProductsComponent } from './widgets/category-products/category-products.component';
+import { ProductSliderComponent } from './widgets/product-slider/product-slider.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CategoryProductsComponent } from './widgets/category-products/category-
     LandingPageComponent,
     CategoriesGridComponent,
     CategoryProductsComponent,
+    ProductSliderComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
 })

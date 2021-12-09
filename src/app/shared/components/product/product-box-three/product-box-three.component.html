@@ -2,7 +2,7 @@
     <div class="img-wrapper">
         <!-- <div class="ribbon" *ngIf="this.product.new"><span>new</span></div> -->
         <div class="ribbon" *ngIf="this.product.sale"><span>sale</span></div>
-        <div class="front product-img" style="height: 300px;">
+        <div class="front product-img">
             <a href="{{'/shop/product/image/outside/' + product._id}}">
                 <img [defaultImage]="'assets/images/placeholder.jpg'"
                     [lazyLoad]="this.imageAddress + this.product.variants[0].imagesPreview[0]" class="img-fluid" alt="">

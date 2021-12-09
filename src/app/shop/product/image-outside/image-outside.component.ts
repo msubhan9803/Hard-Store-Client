@@ -87,7 +87,7 @@ export class ImageOutsideComponent implements OnInit {
     this.productService.getAllProductsAPI().subscribe(
       (res: []) => {
         console.log("res: ", res)
-        this.products = res;
+        this.products = res.concat(res);
       }
     );
     this.productService.getReviewsByProductId(this.productId).subscribe(

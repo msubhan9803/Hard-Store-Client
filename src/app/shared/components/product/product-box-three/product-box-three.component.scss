@@ -1,7 +1,7 @@
 @import "../../../../../assets/scss//theme/variables";
 
 .product {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 .product-img {
@@ -11,8 +11,15 @@
   justify-content: center;
 }
 
+.product-img {
+  height: 300px;
+  // width: 100%;
+}
+
 .product-img img {
-//   max-height: 300px;
+  // max-height: 250px;
+  width: 70%;
+  margin: auto;
 }
 
 .product-info {

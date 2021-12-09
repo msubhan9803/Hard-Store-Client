@@ -190,23 +190,31 @@ export let  CompareSlider: any = {
 // Product Slider
 export let ProductSlider: any = {
     loop: true,
+    nav: true,
     dots: false,
-    navSpeed: 300,
+    // rewind: true,
+    // navSpeed: 700,
     autoplay: true,
+    autoplaySpeed: 500,
+    autoplayTimeout: 2000,
+    autoplayHoverPause: true,
+    navContainerClass: 'owl-nav',
+    navClass: [ 'owl-prev', 'owl-next' ],
+    navText: [ '<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>' ],
     responsive: {
-        991: {
-            items: 4
-        },
-        767: {
-            items: 3
-        },
-        420: {
-            items: 2
-        }, 
         0: {
             items: 1
+        },
+        400: {
+            items: 2
+        },
+        740: {
+            items: 3
+        },
+        940: {
+            items: 4
         }
-    }
+    },
 }
 
 // Product Slider
