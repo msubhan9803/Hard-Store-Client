@@ -14,13 +14,14 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 
 export class ProductBoxThreeComponent implements OnInit {
-  @Input() product: Product;
+  @Input() product: any;
   @Input() currency: any = this.productService.Currency; // Default Currency
   @Input() cartModal: boolean = false; // Default False
+  public imageAddress = "";
 
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
-  public imageAddress = "";
+  public imageUrl = "";
   public conversionRate;
 
   constructor(
@@ -28,13 +29,15 @@ export class ProductBoxThreeComponent implements OnInit {
     private router: Router,
     public userService: UserService,
     public toastService: ToastService
-  ) { }
+  ) {
+  }
 
   async ngOnInit(): Promise<void> {
     this.imageAddress = this.productService.getImageUrl();
     await this.userService.getCurrency().toPromise().then((res: any) => {
       this.conversionRate = res.conversionRate;
     })
+    this.imageUrl = this.product.images.find((image: any) => image.IsThmubnail == true).URL;
   }
 
   // addToCart(product: any) {
@@ -42,9 +45,9 @@ export class ProductBoxThreeComponent implements OnInit {
   // }
 
   // Add to cart
-  async addToCart(product: any, variantIndex: number) {
+  async addToCart(product: any) {
     let quantity = 1;
-    const status = await this.productService.addToCart(product, quantity, variantIndex);
+    const status = await this.productService.addToCart(product, quantity);
     // if (status)
     //   this.router.navigate(['/shop/cart']);
   }
@@ -56,5 +59,4 @@ export class ProductBoxThreeComponent implements OnInit {
   addToCompare(product: any) {
     this.productService.addToCompare(product);
   }
-
 }

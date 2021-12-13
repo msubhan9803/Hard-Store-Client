@@ -177,7 +177,7 @@ export class ImageOutsideComponent implements OnInit {
   // Add to cart
   async addToCart(product: any, variantIndex: number) {
     let quantity = this.counter > 1 ? this.counter : 1;
-    const status = await this.productService.addToCart(product, quantity, variantIndex);
+    const status = await this.productService.addToCart(product, quantity);
     // if(status)
     //   this.router.navigate(['/shop/cart']);
   }
@@ -185,7 +185,7 @@ export class ImageOutsideComponent implements OnInit {
   // Buy Now
   async buyNow(product: any, variantIndex: number) {
     let quantity = this.counter || 1;
-    const status = await this.productService.addToCart(product, quantity, variantIndex);
+    const status = await this.productService.addToCart(product, quantity);
     if (status)
       this.router.navigate(['/shop/checkout']);
   }

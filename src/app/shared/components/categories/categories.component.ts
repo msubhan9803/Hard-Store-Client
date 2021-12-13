@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Product } from '../../classes/product';
 import { Categories } from '../../data/constants';
 import { ProductService } from '../../services/product.service';
@@ -13,11 +13,24 @@ export class CategoriesComponent implements OnInit {
   public products: Product[] = [];
   public collapse: boolean = true;
 
-  constructor(public productService: ProductService) { 
+  @Output() categoriesFilter  : EventEmitter<any> = new EventEmitter<any>();
+
+  constructor(public productService: ProductService) {
     this.productService.getAllProductsAPI().subscribe((product: any) => this.products = product);
   }
 
   ngOnInit(): void {
+  }
+
+  appliedFilter(event) {
+    let index = this.products.indexOf(event.target.value);  // checked and unchecked value
+    if (event.target.checked)
+      this.products.push(event.target.value); // push in array cheked value
+    else
+      this.products.splice(index, 1);  // removed in array unchecked value
+
+    let colors = this.products.length ? { color: this.products.join(",") } : { color: null };
+    this.categoriesFilter.emit(colors);
   }
 
   get filterbyCategory() {
@@ -26,4 +39,10 @@ export class CategoriesComponent implements OnInit {
     return category
   }
 
+  // check if the item are selected
+  checked(item) {
+    if (this.products.indexOf(item) != -1) {
+      return true;
+    }
+  }
 }

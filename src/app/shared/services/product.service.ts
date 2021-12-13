@@ -60,7 +60,7 @@ export class ProductService {
 
   // GET: category/getProducts
   public getAllProductsAPI() {
-    let url = this._env.urlAddress + 'products/getProducts';
+    let url = this._env.urlAddress + 'product/GetProducts';
     // this.toastrService.success('Product get request .');
     return this.http.get(url);
   }
@@ -75,6 +75,12 @@ export class ProductService {
   // GET: category/getProductById
   public getAllProductsById(productId) {
     let url = this._env.urlAddress + 'products/getProductById/' + productId;
+    return this.http.get(url);
+  }
+
+  // GET: products/getCategories
+  public getCategories() {
+    let url = this._env.urlAddress + 'product/getCategories';
     return this.http.get(url);
   }
 
@@ -203,7 +209,7 @@ export class ProductService {
   }
 
   // Add to Cart
-  public addToCart(product, quantity?, variantIndex?): any {
+  public addToCart(product, quantity?): any {
     const alreadyProduct = state.cart.find(item => item._id === product._id);
 
     if (alreadyProduct) {
@@ -217,8 +223,7 @@ export class ProductService {
       const qty = quantity;
       state.cart.push({
         ...product,
-        quantity: qty,
-        variantIndex: variantIndex
+        quantity: qty
       })
     }
 
@@ -274,7 +279,7 @@ export class ProductService {
   public cartTotalAmount(): Observable<number> {
     return this.cartItems.pipe(map((product: Product[]) => {
       return product.reduce((prev, curr: Product) => {
-        let price = curr.sale ? curr.skuArray[0].specialPrice : curr.skuArray[0].price;
+        let price = curr.sale ? (curr?.price - curr?.discount) : curr.price;
         // if (curr.discount) {
         //   price = curr.skuArray[0].price - (curr.skuArray[0].price * curr.discount / 100)
         // }
@@ -362,7 +367,7 @@ export class ProductService {
     ------------- Product Pagination  -----------
     ---------------------------------------------
   */
-  public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 16) {
+  public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 8) {
     // calculate total pages
     let totalPages = Math.ceil(totalItems / pageSize);
 

@@ -82,10 +82,11 @@ export class SettingsTwoComponent implements OnInit {
 
       let tempProduct = {
         _id: product._id,
-        imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex],
+        imageAddress: this.imageAddress + product.images.find(img => img.IsThmubnail == true).URL,
         title: product.title,
-        price: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].price,
-        quantity: product.quantity
+        price: product.price,
+        quantity: product.quantity,
+        discount: product.discount
       }
 
       this.parsedProducts.push(tempProduct);
@@ -107,7 +108,6 @@ export class SettingsTwoComponent implements OnInit {
   }
 
   removeItem(index: any) {
-    console.log(`Ts file Delete product at Index ${index}`)
     this.productService.removeCartItem(index);
   }
 
@@ -115,4 +115,8 @@ export class SettingsTwoComponent implements OnInit {
     this.productService.Currency = currency
   }
 
+  getThumbnailImage(product) {
+    let url = product.images.find(img => img.IsThmubnail == true).URL;
+    return this.imageAddress + url;
+  }
 }

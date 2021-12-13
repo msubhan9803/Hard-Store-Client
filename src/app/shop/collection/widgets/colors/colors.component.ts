@@ -22,15 +22,16 @@ export class ColorsComponent implements OnInit {
   }
 
   get filterbycolor() {
-    const uniqueColors = []
-    this.products.filter((product) => {
-      product.variants.filter((variant) => {
-        if (variant.color) {
-          const index = uniqueColors.indexOf(variant.color)
-          if (index === -1) uniqueColors.push(variant.color)
-        }
-      })
-    })
+    // const uniqueColors = []
+    const uniqueColors = this.products
+    // this.products.filter((product) => {
+    //   product.variants.filter((variant) => {
+    //     if (variant.color) {
+    //       const index = uniqueColors.indexOf(variant.color)
+    //       if (index === -1) uniqueColors.push(variant.color)
+    //     }
+    //   })
+    // })
     return uniqueColors
   }
 

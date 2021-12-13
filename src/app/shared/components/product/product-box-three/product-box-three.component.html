@@ -5,7 +5,7 @@
         <div class="front product-img">
             <a href="{{'/shop/product/image/outside/' + product._id}}">
                 <img [defaultImage]="'assets/images/placeholder.jpg'"
-                    [lazyLoad]="this.imageAddress + this.product.variants[0].imagesPreview[0]" class="img-fluid" alt="">
+                    [lazyLoad]="this.imageAddress + this.imageUrl" class="img-fluid" alt="">
             </a>
         </div>
         <!-- <div class="cart-info cart-wrap">
@@ -39,16 +39,16 @@
         <br />
 
         <h5 *ngIf="product.sale">
-            {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' }}
+            {{ (product?.price - product?.discount) * currency?.price | currency:currency?.currency:'symbol' }}
             <small>
-                {{ product?.skuArray[0].specialPrice * currency?.price | currency:currency?.currency:'symbol' |
+                {{ (product?.price - product?.discount)* currency?.price | currency:currency?.currency:'symbol' |
                 aedToDollar: this.conversionRate }}
             </small>
         </h5>
         <h5 [ngClass]="{'strikethrough': product.sale, 'text-danger': product.sale}">
-            {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' }}
+            {{ (product?.price - product?.discount) * currency?.price | currency:currency?.currency:'symbol' }}
             <small>
-                {{ product?.skuArray[0].price * currency?.price | currency:currency?.currency:'symbol' | aedToDollar:
+                {{ (product?.price - product?.discount) * currency?.price | currency:currency?.currency:'symbol' | aedToDollar:
                 this.conversionRate }}
             </small>
         </h5>
@@ -62,7 +62,7 @@
                 <span>&nbsp;Buy on Whatsapp</span>
             </div>
         </button>
-        <button class="add-to-cart-btn" title="Add to cart" (click)="addToCart(product, 0)" *ngIf="!cartModal">
+        <button class="add-to-cart-btn" title="Add to cart" (click)="addToCart(product)" *ngIf="!cartModal">
             <i class="ti-shopping-cart"></i>
             <span>Add to cart</span>
         </button>

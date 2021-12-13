@@ -24,7 +24,7 @@ export class CompareComponent implements OnInit {
 
   async addToCart(product: any) {
     let quantity = 1;
-    const status = await this.productService.addToCart(product, quantity, 0);
+    const status = await this.productService.addToCart(product, quantity);
     // if(status) {
     //   this.router.navigate(['/shop/cart']);
     // }

@@ -8,8 +8,8 @@
     <li class="onhover-div mobile-cart">
       <div class="shopping-cart-icon">
         <!-- <a [routerLink]="['/shop/cart']"> -->
-          <!-- <img src="assets/images/icon/cart.png" class="img-fluid" alt=""> -->
-          <i class="ti-shopping-cart"></i>
+        <!-- <img src="assets/images/icon/cart.png" class="img-fluid" alt=""> -->
+        <i class="ti-shopping-cart"></i>
         <!-- </a> -->
       </div>
       <span class="cart_qty_cls">{{ products.length }}</span>
@@ -21,9 +21,7 @@
           <div class="media">
             <a [routerLink]="['/shop/product/image/outside/', product._id]">
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
-              <img
-                [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]"
-                width="100px" [alt]="">
+              <img [src]="getThumbnailImage(product)" width="100px" [alt]="">
             </a>
             <div class="media-body m-2">
               <a [routerLink]="['/shop/product/image/outside/', product._id]">
@@ -32,22 +30,23 @@
               <h6>
                 <span *ngIf="!product?.sale">
                   {{ product?.quantity }} x
-                  {{ product?.skuArray[0].price * currency?.price |
+                  {{ product?.price * currency?.price |
                   currency:currency?.currency:'symbol'
                   }}
-                  {{ product?.skuArray[0].price * productService?.Currency.price |
+                  {{ product?.price * productService?.Currency.price |
                   currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
                 </span>
                 <span *ngIf="product?.sale">
                   {{ product?.quantity }} x
-                  {{ product?.skuArray[0].specialPrice * currency?.price |
+                  {{ (product?.price - product?.discount) * currency?.price |
                   currency:currency?.currency:'symbol'
                   }}
-                  {{ product?.skuArray[0].specialPrice * productService?.Currency.price |
+                  {{ (product?.price - product?.discount) * productService?.Currency.price |
                   currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
                 </span>
               </h6>
-              <div class="close-circle" style="cursor: pointer; color: #000; font-weight: 300;" (click)="removeItem(arrayIndex)">
+              <div class="close-circle" style="cursor: pointer; color: #000; font-weight: 300;"
+                (click)="removeItem(arrayIndex)">
                 <!-- <i class="fa fa-times" aria-hidden="true"></i> -->
                 x
               </div>

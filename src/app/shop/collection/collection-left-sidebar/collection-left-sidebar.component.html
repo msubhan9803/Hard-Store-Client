@@ -13,8 +13,9 @@
                                     <i class="fa fa-angle-left" aria-hidden="true"></i> back
                                 </span>
                             </div>
+
                             <!-- Category filter start -->
-                            <app-categories></app-categories>
+                            <app-categories (categoriesFilter)="updateFilter($event)"></app-categories>
                         </div>
                         <!-- silde-bar colleps block end here -->
                         <!-- side-bar colleps block stat -->

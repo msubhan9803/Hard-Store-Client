@@ -82,10 +82,11 @@ export class SettingsComponent implements OnInit {
 
       let tempProduct = {
         _id: product._id,
-        imageAddress: this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex],
+        imageAddress: this.imageAddress + product.images.find(img => img.IsThmubnail == true).URL,
         title: product.title,
-        price: product.skuArray.filter(sku => sku.variantIndex == variantIndex)[0].price,
-        quantity: product.quantity
+        price: product.price,
+        quantity: product.quantity,
+        discount: product.discount
       }
 
       this.parsedProducts.push(tempProduct);

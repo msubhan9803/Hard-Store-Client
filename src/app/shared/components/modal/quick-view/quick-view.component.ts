@@ -119,8 +119,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
   // Add to cart
   async addToCart(product: any) {
     let quantity = this.counter > 1 ? this.counter : 1;
-    let variantIndex = 0;
-    const status = await this.productService.addToCart(product, quantity, variantIndex);
+    const status = await this.productService.addToCart(product, quantity);
     // if (status)
     //   this.router.navigate(['/shop/cart'])
   }

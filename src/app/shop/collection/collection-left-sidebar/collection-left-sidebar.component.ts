@@ -76,6 +76,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // Append filter value to Url
   updateFilter(tags: any) {
+    console.log("Component: CollectionLeftSidebarComponent | tags: ", tags)
     tags.page = null; // Reset Pagination
     this.router.navigate([], {
       relativeTo: this.route,

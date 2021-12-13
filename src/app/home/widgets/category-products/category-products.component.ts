@@ -13,6 +13,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class CategoryProductsComponent implements OnInit {
   public products: Product[] = [];
+  public categories = [];
   public productCollections: any[] = [
     "All",
     "On Sale",
@@ -37,11 +38,13 @@ export class CategoryProductsComponent implements OnInit {
 
     await this.productService.getAllProductsAPI().toPromise().then(
       (res: []) => {
-        this.products = res.concat(res);
+        this.products = res;
 
         console.log("getCollectionProducts(collection): ", this.productCollections.forEach((collection, index) => console.log("index: " + index + " collection: " + collection, this.getCollectionProducts(collection))))
       }
     );
+
+    this.productService.getCategories().subscribe((res: []) => this.categories = res);
   }
 
   ngOnDestroy(): void {
