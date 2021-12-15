@@ -1,5 +1,12 @@
-@media only screen and (max-width: 425px){
-    .tap-top-mobile {
-        margin-bottom: 20px;
+@media only screen and (max-width: 425px) {
+    .tap-top {
+      // margin-bottom: 20px;
+      display: block !important;
+      top: calc(45% + 16px) !important;
+      margin-bottom: 0px !important;
+      right: 0 !important;
+      bottom: unset !important;
+
+      margin-bottom: 0px !important;
     }
-}
+  }

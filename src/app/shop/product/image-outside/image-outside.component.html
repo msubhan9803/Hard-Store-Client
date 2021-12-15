@@ -5,14 +5,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="image-carousel">
+                    <div class="image-carousel" style="height: 500px;">
                         <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
                             <ng-container
-                                *ngFor="let image of this.product?.variants[this.currentVariant].imagesPreview; index as i">
+                                *ngFor="let image of this.product?.images; index as i">
                                 <ng-template carouselSlide [id]="i">
-                                    <div>
-                                        <img [defaultImage]="this.imageAddress + product.variants[currentVariant].imagesPreview[currentVariantImage]"
-                                            [lazyLoad]="this.imageAddress + image" [alt]="image.alt" class="img-fluid">
+                                    <div class="p-4">
+                                        <img style="width: auto; max-height: 500px; margin: auto;" [defaultImage]="this.imageAddress + image.URL"
+                                            [lazyLoad]="this.imageAddress + image.URL" [alt]="image.alt" class="img-fluid">
                                     </div>
                                 </ng-template>
                             </ng-container>
@@ -66,21 +66,21 @@
                                 </div>
                                 <div class="col-m-2">
                                     <span [ngClass]="{'strikethrough': product?.sale, 'text-danger': product?.sale}">
-                                        {{ product?.skuArray[this.currentVariant].price * currency?.price |
+                                        {{ product?.price * currency?.price |
                                         currency:currency?.currency:'symbol'
                                         }}
                                         <small>
-                                            {{ product?.skuArray[this.currentVariant].price * currency?.price |
+                                            {{ product?.price * currency?.price |
                                             currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
                                             }}
                                         </small>
                                     </span>
                                     &nbsp; {{product?.discount}}% off
                                     <h3 *ngIf="product?.sale">
-                                        {{ product?.skuArray[this.currentVariant].specialPrice * currency?.price |
+                                        {{ (product?.price - product?.discount) * currency?.price |
                                         currency:currency?.currency:'symbol' }}
                                         <small>
-                                            {{ product?.skuArray[this.currentVariant].specialPrice * currency?.price |
+                                            {{ (product?.price - product?.discount) * currency?.price |
                                             currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
                                         </small>
                                     </h3>

@@ -73,8 +73,8 @@ export class ProductService {
   }
 
   // GET: category/getProductById
-  public getAllProductsById(productId) {
-    let url = this._env.urlAddress + 'products/getProductById/' + productId;
+  public getProductById(productId) {
+    let url = this._env.urlAddress + 'product/GetProductById/' + productId;
     return this.http.get(url);
   }
 

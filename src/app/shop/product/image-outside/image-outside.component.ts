@@ -16,7 +16,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class ImageOutsideComponent implements OnInit {
 
-  public product: Product = {};
+  public product: any = {};
   public counter: number = 1;
   public activeSlide: any = 0;
   public selectedSize: any;
@@ -71,10 +71,11 @@ export class ImageOutsideComponent implements OnInit {
       this.conversionRate = res.conversionRate;
     })
 
-    this.productService.getAllProductsById(this.productId).subscribe(
+    this.productService.getProductById(this.productId).subscribe(
       res => {
+        console.log("res: ", res)
         this.product = res;
-        let discountPer = 100 - (this.product?.skuArray[this.currentVariant].specialPrice / this.product?.skuArray[this.currentVariant].price * 100);
+        let discountPer = 100 - ((this.product?.price - this.product?.discount) / this.product?.price * 100);
         discountPer = parseFloat(discountPer.toFixed(2));
         this.product.discount = discountPer;
         // this.currentVariantImage = this.product.variants[this.currentVariant].isThumbnailImageIndex;
@@ -86,7 +87,6 @@ export class ImageOutsideComponent implements OnInit {
     })
     this.productService.getAllProductsAPI().subscribe(
       (res: []) => {
-        console.log("res: ", res)
         this.products = res.concat(res);
       }
     );

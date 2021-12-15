@@ -37,7 +37,8 @@ export class ProductBoxThreeComponent implements OnInit {
     await this.userService.getCurrency().toPromise().then((res: any) => {
       this.conversionRate = res.conversionRate;
     })
-    this.imageUrl = this.product.images.find((image: any) => image.IsThmubnail == true).URL;
+    this.imageUrl = this.imageAddress + this.product.images.find((image: any) => image.IsThmubnail == true).URL;
+    // console.log("imageUrl: ", this.imageUrl)
   }
 
   // addToCart(product: any) {

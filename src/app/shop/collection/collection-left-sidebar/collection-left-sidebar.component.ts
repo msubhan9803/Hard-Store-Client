@@ -54,7 +54,6 @@ export class CollectionLeftSidebarComponent implements OnInit {
         console.log("response: ", response)
         // Sorting Filter
         this.products = this.productService.sortProducts(response, this.sortBy);
-        this.products = this.products.concat(this.products).concat(this.products);
 
         // Category Filter
         // if (params.category)
