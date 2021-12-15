@@ -16,7 +16,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class QuickViewComponent implements OnInit, OnDestroy {
 
-  @Input() product: Product;
+  @Input() product: any;
   @Input() currency: any;
   @ViewChild("quickView", { static: false }) QuickView: TemplateRef<any>;
 
@@ -25,6 +25,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
   public ImageSrc: string;
   public counter: number = 1;
   public modalOpen: boolean = false;
+  public imageUrl = "";
   public imageAddress = "";
   public conversionRate;
 
@@ -42,6 +43,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
     await this.userService.getCurrency().toPromise().then((res: any) => {
       this.conversionRate = res.conversionRate;
     })
+    this.imageUrl = this.imageAddress + this.product.images.find((image: any) => image.IsThmubnail == true).URL;
   }
 
   openModal() {

@@ -4,11 +4,10 @@
             <button type="button" class="close" (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <div class="row">
+            <div class="row p-4">
                 <div class="col-lg-6  col-xs-12">
                     <div class="quick-view-img">
-                        <img [src]="this.imageAddress + product.variants[variantIndex].imagesPreview[product.variants[variantIndex].isThumbnailImageIndex]"
-                            [alt]="" class="img-fluid">
+                        <img [src]="this.imageUrl" [alt]="" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 rtl-text">
@@ -19,11 +18,11 @@
                             <del *ngIf="product?.discount"><span class="money">{{ product.price * currency?.price |
                                     currency:currency?.currency:'symbol' }}</span></del>
                         </h3>
-                        <ul class="color-variant" *ngIf="Color(product.variants).length">
+                        <!-- <ul class="color-variant" *ngIf="Color(product.variants).length">
                             <li [class]="color" *ngFor="let color of Color(product.variants)"
                                 [ngStyle]="{'background-color': color}" (click)="ChangeVariants(color, product)">
                             </li>
-                        </ul>
+                        </ul> -->
                         <div class="border-product">
                             <h6 class="product-title">product details</h6>
                             <div *ngIf="this.product?.description.length > 200"
@@ -32,32 +31,32 @@
                             </div>
                         </div>
                         <div class="product-description border-product">
-                            <div class="size-box" *ngIf="Size(product.variants).length">
+                            <!-- <div class="size-box" *ngIf="Size(product.variants).length">
                                 <ul>
                                     <li *ngFor="let size of Size(product.variants)">
                                         <a href="javascript:void(0)">{{ size | titlecase }}</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <h5 class="avalibility" *ngIf="counter <= product.stock"><span>In Stock</span></h5>
                             <h5 class="avalibility" *ngIf="counter > product.stock"><span>Out of Stock</span></h5>
 
                             <div class="col-m-2">
                                 <h4 [ngClass]="{'strikethrough': product.sale, 'text-danger': product.sale}">
-                                    {{ product?.skuArray[0].price * currency?.price |
+                                    {{ product?.price * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
                                     <small>
-                                        {{ product?.skuArray[0].price * currency?.price |
+                                        {{ product?.price * currency?.price |
                                         currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
                                         }}
                                     </small>
                                 </h4>
                                 <h4 *ngIf="product.sale">
-                                    {{ product?.skuArray[0].specialPrice * currency?.price |
+                                    {{ (product?.price - product?.discount) * currency?.price |
                                     currency:currency?.currency:'symbol' }}
                                     <small *ngIf="product.sale">
-                                        {{ product?.skuArray[0].specialPrice * currency?.price |
+                                        {{ (product?.price - product?.discount) * currency?.price |
                                         currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate }}
                                     </small>
                                 </h4>

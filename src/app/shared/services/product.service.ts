@@ -67,7 +67,7 @@ export class ProductService {
 
   // GET: products/getReviews
   public getReviewsByProductId(productId) {
-    let url = this._env.urlAddress + 'products/getReviews/' + productId;
+    let url = this._env.urlAddress + 'product/getReviews/' + productId;
     // this.toastrService.success('Product get request .');
     return this.http.get(url);
   }
@@ -92,7 +92,7 @@ export class ProductService {
 
   // POST: product/writeReview
   public writeReview(payload) {
-    let url = this._env.urlAddress + 'products/writeReview';
+    let url = this._env.urlAddress + 'product/writeReview';
     // this.toastrService.success('Product get request .');
     return this.http.post(url, payload);
   }

@@ -8,6 +8,7 @@ import { HelperMethodsService } from 'src/app/shared/services/helper-methods.ser
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/shared/services/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-image-outside',
@@ -57,6 +58,7 @@ export class ImageOutsideComponent implements OnInit {
     public productService: ProductService,
     public userService: UserService,
     private fb: FormBuilder,
+    private spinner: NgxSpinnerService,
     public helperMethodsService: HelperMethodsService
   ) {
     this.route.data.subscribe(response => this.product = response.data);
@@ -103,11 +105,13 @@ export class ImageOutsideComponent implements OnInit {
     this.isSubmit = true;
     if (this.reviewForm.invalid) return;
 
+    this.spinner.show();
     let payload = this.reviewForm.value;
     payload.ProductId = this.productId;
 
     this.productService.writeReview(payload).subscribe(
       res => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'success',
           title: 'Successfully Added Review',
@@ -117,6 +121,7 @@ export class ImageOutsideComponent implements OnInit {
         window.location.reload();
       },
       err => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'error',
           title: err.error.message,

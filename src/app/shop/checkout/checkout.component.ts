@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { EnvironmentUrlService } from 'src/app/shared/services/enviroment-url.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CheckoutService } from 'src/app/shared/services/checkout.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-checkout',
@@ -48,6 +49,7 @@ export class CheckoutComponent implements OnInit {
     injector: Injector,
     public userService: UserService,
     private orderService: OrderService,
+    private spinner: NgxSpinnerService,
     private checkoutService: CheckoutService
   ) {
     this.checkoutForm = this.fb.group({
@@ -98,6 +100,7 @@ export class CheckoutComponent implements OnInit {
   async onSubmit(orderDetails?, paymentStatus?) {
     if (this.checkoutForm.invalid) return;
 
+    this.spinner.show();
     for (let index = 0; index < this.products.length; index++) {
       let currentProduct = this.products[index];
 
@@ -136,6 +139,7 @@ export class CheckoutComponent implements OnInit {
     // console.log("checkoutFormValue: ", checkoutFormValue)
     this.orderService.createOrderAPI(checkoutFormValue).subscribe(
       (res: any) => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'success',
           title: 'Successfully Placed Order',
@@ -149,6 +153,7 @@ export class CheckoutComponent implements OnInit {
         window.location.href = `shop/order/success/${res._id}`;
       },
       err => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'error',
           title: 'Internal Server Error',

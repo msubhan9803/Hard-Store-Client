@@ -75,6 +75,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import { HeaderFiveComponent } from './header/header-five/header-five.component';
 import { FooterFiveComponent } from './footer/footer-five/footer-five.component';
 import { SettingsTwoComponent } from './components/settings-two/settings-two.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -147,7 +148,8 @@ import { SettingsTwoComponent } from './components/settings-two/settings-two.com
     NgSelectModule,
     NgxMaskModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    NgxSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -202,7 +204,8 @@ import { SettingsTwoComponent } from './components/settings-two/settings-two.com
     TimeagoModule,
     HeaderFiveComponent,
     FooterFiveComponent,
-    SettingsTwoComponent
+    SettingsTwoComponent,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }
