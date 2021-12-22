@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { OnInit, Pipe, PipeTransform } from '@angular/core';
 import { UserService } from '../services/user.service';
 
@@ -7,7 +8,8 @@ import { UserService } from '../services/user.service';
 export class AedToDollarPipe implements PipeTransform {
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private currencyPipe: CurrencyPipe
   ) { }
 
   transform(value: string, conversionRate = 0) {
@@ -17,6 +19,13 @@ export class AedToDollarPipe implements PipeTransform {
       price = price.replace(",", "");
     }
 
-    return conversionRate ? `($${(conversionRate * parseFloat(price)).toFixed(2)})` : " ";
+    // console.log("with comma: ", this.formatNumberToCurrency((conversionRate * parseFloat(price)).toFixed(2)))
+
+    return conversionRate ? `($${this.formatNumberToCurrency((conversionRate * parseFloat(price)).toFixed(2))})` : " ";
+  }
+
+  formatNumberToCurrency(value) {
+    // return this.currencyPipe.transform(value, 'Rs');
+    return this.currencyPipe.transform(value, 'Rs', "");
   }
 }
