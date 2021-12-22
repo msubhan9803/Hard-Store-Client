@@ -26,6 +26,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public sortBy: string; // Sorting Order
   public mobileSidebar: boolean = false;
   public loader: boolean = true;
+  public categories = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -33,10 +34,8 @@ export class CollectionLeftSidebarComponent implements OnInit {
     private viewScroller: ViewportScroller,
     public productService: ProductService
   ) {
-    console.log("herere")
     // Get Query params..
     this.route.queryParams.subscribe(params => {
-
       this.brands = params.brand ? params.brand.split(",") : [];
       this.colors = params.color ? params.color.split(",") : [];
       this.size = params.size ? params.size.split(",") : [];
@@ -69,7 +68,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.productService.getCategories().subscribe((res: []) => {
+      this.categories = res;
+    });
   }
 
 
@@ -169,4 +171,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
     this.mobileSidebar = !this.mobileSidebar;
   }
 
+  getCategoryData(categoryName) {
+    return this.categories.find(category => category.CategoryName == categoryName);
+  }
 }

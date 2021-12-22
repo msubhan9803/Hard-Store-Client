@@ -36,15 +36,12 @@ export class CategoryProductsComponent implements OnInit {
     document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
 
-    await this.productService.getCategories().subscribe((res: []) => {
-      this.categories = res;
-      this.productService.getAllProductsAPI().toPromise().then(
-        (res: []) => {
-          this.products = res;
-          // console.log("getCollectionProducts(collection): ", this.productCollections.forEach((collection, index) => console.log("index: " + index + " collection: " + collection, this.getCollectionProducts(collection))))
-        }
-      );
-    });
+    await this.productService.getAllProductsAPI().toPromise().then(
+      (res: []) => {
+        this.products = res;
+        // console.log("getCollectionProducts(collection): ", this.productCollections.forEach((collection, index) => console.log("index: " + index + " collection: " + collection, this.getCollectionProducts(collection))))
+      }
+    );
   }
 
   ngOnDestroy(): void {

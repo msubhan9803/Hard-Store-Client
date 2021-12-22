@@ -69,9 +69,7 @@ export class ImageOutsideComponent implements OnInit {
     this.productId = this.route.snapshot.paramMap.get('id');
     this.imageAddress = this.productService.getImageUrl();
 
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
 
     this.productService.getProductById(this.productId).subscribe(
       res => {
@@ -184,7 +182,7 @@ export class ImageOutsideComponent implements OnInit {
     let quantity = this.counter > 1 ? this.counter : 1;
     const status = await this.productService.addToCart(product, quantity);
     // if(status)
-    //   this.router.navigate(['/shop/cart']);
+    //   this.router.navigate(['/cart']);
   }
 
   // Buy Now
@@ -192,7 +190,7 @@ export class ImageOutsideComponent implements OnInit {
     let quantity = this.counter || 1;
     const status = await this.productService.addToCart(product, quantity);
     if (status)
-      this.router.navigate(['/shop/checkout']);
+      this.router.navigate(['/checkout']);
   }
 
   // Add to Wishlist

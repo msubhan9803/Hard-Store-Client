@@ -26,13 +26,14 @@
             <tbody>
                 <tr *ngFor="let product of products; let arrayIndex = index">
                     <td>
-                        <a [routerLink]="['/shop/product/image/outside/', product._id]">
-                            <img [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]"
-                                height="20px" [alt]="">
+                        <a [routerLink]="['/product/', product._id]">
+                            <!-- <img [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]"
+                                height="20px" [alt]=""> -->
+                            <img [src]="getThumbnailImage(product)" width="100px" [alt]="">
                         </a>
                     </td>
                     <td>
-                        <a [routerLink]="['/shop/product/image/outside/', product._id]">
+                        <a [routerLink]="['/product/', product._id]">
                             <h4>{{ product?.title | titlecase }}</h4>
                         </a>
 
@@ -41,18 +42,17 @@
                                 <div class="qty-box">
                                     <div class="input-group">
                                         <input type="text" name="quantity" class="form-control input-number"
-                                            [(ngModel)]="product.quantity"
-                                            style="width: 36px; padding: 5px;">
+                                            [(ngModel)]="product.quantity" style="width: 36px; padding: 5px;">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-3 mt-2">
                                 <p [ngClass]="{'strikethrough': product.sale, 'text-danger': product?.sale}">
-                                    {{ product.skuArray[0].price * currency?.price |
+                                    {{ product?.price * currency?.price |
                                     currency:currency?.currency:'symbol'
                                     }}
                                     <small>
-                                        {{ product?.skuArray[0].price * productService?.Currency.price |
+                                        {{ product?.price * productService?.Currency.price |
                                         currency:productService?.Currency.currency:'symbol' | aedToDollar:
                                         this.conversionRate
                                         }}
@@ -60,10 +60,10 @@
                                 </p>
                                 <p *ngIf="product.sale">
                                     {{
-                                    product.skuArray[0].specialPrice * currency?.price |
+                                        (product?.price - product?.discount) * currency?.price |
                                     currency:currency?.currency:'symbol' }}
                                     <small>
-                                        {{ product?.skuArray[0].specialPrice * productService?.Currency.price |
+                                        {{ (product?.price - product?.discount) * productService?.Currency.price |
                                         currency:productService?.Currency.currency:'symbol' | aedToDollar:
                                         this.conversionRate
                                         }}
@@ -82,26 +82,26 @@
                     <td>
                         <h5 *ngIf="!product.sale" [ngClass]="{'strikethrough': product.sale}">
                             <b>
-                                {{ product?.skuArray[0].price * currency?.price |
+                                {{ product?.price * currency?.price |
                                 currency:currency?.currency:'symbol'
                                 }}
                             </b>
 
                             <small>
-                                {{ product?.skuArray[0].price * productService?.Currency.price |
+                                {{ product?.price * productService?.Currency.price |
                                 currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate
                                 }}
                             </small>
                         </h5>
                         <h5 *ngIf="product.sale">
                             <b>
-                                {{ product?.skuArray[0].specialPrice * currency?.price |
+                                {{ (product?.price - product?.discount) * currency?.price |
                                 currency:currency?.currency:'symbol'
                                 }}
                             </b>
 
                             <small>
-                                {{ product?.skuArray[0].specialPrice * productService?.Currency.price |
+                                {{ (product?.price - product?.discount) * productService?.Currency.price |
                                 currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate
                                 }}
                             </small>
@@ -117,7 +117,8 @@
                                     </button>
                                 </span>
                                 <input type="number" name="quantity" class="form-control input-number" disabled
-                                    [(ngModel)]="product.quantity" (change)="recalculateTotal(arrayIndex)" step="1" min="1" max="10000">
+                                    [(ngModel)]="product.quantity" (change)="recalculateTotal(arrayIndex)" step="1"
+                                    min="1" max="10000">
                                 <span class="input-group-prepend">
                                     <button type="button" class="btn quantity-right-plus" data-type="plus"
                                         (click)="increment(arrayIndex)">
@@ -134,22 +135,22 @@
                     </td>
                     <td>
                         <h5 class="td-color" *ngIf="!product.sale">
-                            {{ product?.quantity * product?.skuArray[0].price * currency?.price |
+                            {{ product?.quantity * product?.price * currency?.price |
                             currency:currency?.currency:'symbol'
                             }}
 
                             <small>
-                                {{ (product?.skuArray[0].price * product.quantity) * currency?.price |
+                                {{ (product?.price * product.quantity) * currency?.price |
                                 currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
                                 }}
                             </small>
                         </h5>
                         <h5 class="td-color" *ngIf="product.sale">
-                            {{ (product?.skuArray[0].specialPrice * product.quantity) * currency?.price |
+                            {{ ((product?.price - product?.discount) * product.quantity) * currency?.price |
                             currency:currency?.currency:'symbol'
                             }}
                             <small>
-                                {{ (product?.skuArray[0].specialPrice * product.quantity) * currency?.price |
+                                {{ ((product?.price - product?.discount) * product.quantity) * currency?.price |
                                 currency:currency?.currency:'symbol' | aedToDollar: this.conversionRate
                                 }}
                             </small>
@@ -181,7 +182,7 @@
                 <a [routerLink]="['/shop/collection/no/sidebar']" class="btn btn-solid">continue shopping</a>
             </div>
             <div class="col-6" style="padding-right: 0px;">
-                <a [routerLink]="['/shop/checkout']" class="btn btn-solid">check out</a>
+                <a [routerLink]="['/checkout']" class="btn btn-solid">check out</a>
             </div>
         </div>
     </div>

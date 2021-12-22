@@ -42,9 +42,7 @@ export class CartComponent implements OnInit {
 
   async ngOnInit() {
     this.imageAddress = this.productService.getImageUrl();
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
   }
 
   public recreateParsedProductList() {
@@ -97,5 +95,10 @@ export class CartComponent implements OnInit {
 
   public removeItem(index: any) {
     this.productService.removeCartItem(index);
+  }
+
+  getThumbnailImage(product) {
+    let url = product.images.find(img => img.IsThmubnail == true).URL;
+    return this.imageAddress + url;
   }
 }

@@ -64,7 +64,7 @@ export class NavService {
 		// },
 		// {
 		// 	title: 'Shop', type: 'sub', active: false, children: [
-		// 		{ path: '/shop/collection/left/sidebar', title: 'left-sidebar', type: 'link' },
+		// 		{ path: '/products', title: 'left-sidebar', type: 'link' },
 		// 		{ path: '/shop/collection/right/sidebar', title: 'right-sidebar', type: 'link' },
 		// 		{ path: '/shop/collection/no/sidebar', title: 'no-sidebar', type: 'link' },
 		// 		{ path: '/shop/collection/infinitescroll', title: 'Infinite Scroll', type: 'link' }
@@ -82,7 +82,7 @@ export class NavService {
 		// 		{ path: '/shop/product/three/column/trim-dress', title: 'three-column', type: 'link' },
 		// 		{ path: '/shop/product/four/image/belted-dress', title: 'four-image', type: 'link' },
 		// 		{ path: '/shop/product/bundle/trim-dress', title: 'bundle-product', type: 'link' },
-		// 		{ path: '/shop/product/image/outside/trim-dress', title: 'image-outside', type: 'link' }
+		// 		{ path: '/product/trim-dress', title: 'image-outside', type: 'link' }
 		// 	]
 		// },
 		// {
@@ -153,7 +153,7 @@ export class NavService {
 		// 		{ path: '/pages/search', title: 'search', type: 'link' },
 		// 		{ path: '/pages/typography', title: 'typography', type: 'link', badge: true, badgeText: 'new' },
 		// 		{ path: '/pages/review', title: 'review', type: 'link', badge: true, badgeText: 'new' },
-		// 		{ path: '/pages/order/success', title: 'order-success', type: 'link' },
+		// 		{ path: '/order/success', title: 'order-success', type: 'link' },
 		// 			{ 
 		// 				title: 'compare', type: 'sub', active: false, children: [
 		// 					{ path: '/pages/compare/one', title: 'compare-1', type: 'link' },

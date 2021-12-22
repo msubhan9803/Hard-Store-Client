@@ -95,9 +95,7 @@ export class TrackorderComponent implements OnInit {
     document.documentElement.style.setProperty('--theme-deafult', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient1', '#5d7227');
     document.documentElement.style.setProperty('--theme-gradient2', '#203f15');
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
   }
 
   public searchOrder(e?) {

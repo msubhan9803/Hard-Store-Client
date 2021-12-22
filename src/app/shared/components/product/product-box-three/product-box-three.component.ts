@@ -34,9 +34,7 @@ export class ProductBoxThreeComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.imageAddress = this.productService.getImageUrl();
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
     this.imageUrl = this.imageAddress + this.product.images.find((image: any) => image.IsThmubnail == true).URL;
     // console.log("imageUrl: ", this.imageUrl)
   }
@@ -50,7 +48,7 @@ export class ProductBoxThreeComponent implements OnInit {
     let quantity = 1;
     const status = await this.productService.addToCart(product, quantity);
     // if (status)
-    //   this.router.navigate(['/shop/cart']);
+    //   this.router.navigate(['/cart']);
   }
 
   addToWishlist(product: any) {

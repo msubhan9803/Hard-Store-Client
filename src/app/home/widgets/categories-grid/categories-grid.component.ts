@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BlogService } from 'src/app/shared/services/blog.service';
+import { HelperMethodsService } from 'src/app/shared/services/helper-methods.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-categories-grid',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesGridComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public productService: ProductService,
+    public blogService: BlogService,
+    public helperMethodsService: HelperMethodsService,
+    private route: ActivatedRoute
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
   }
-
 }

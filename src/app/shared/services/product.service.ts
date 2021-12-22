@@ -8,10 +8,10 @@ import { EnvironmentUrlService } from './enviroment-url.service';
 import { Router } from '@angular/router';
 
 const state = {
-  products: JSON.parse(localStorage['products'] || '[]'),
-  wishlist: JSON.parse(localStorage['wishlistItems'] || '[]'),
-  compare: JSON.parse(localStorage['compareItems'] || '[]'),
-  cart: JSON.parse(localStorage['cartItems'] || '[]')
+  products: JSON.parse(localStorage['hrdtkr_products'] || '[]'),
+  wishlist: JSON.parse(localStorage['hrdtkr_wishlistItems'] || '[]'),
+  compare: JSON.parse(localStorage['hrdtkr_compareItems'] || '[]'),
+  cart: JSON.parse(localStorage['hrdtkr_cartItems'] || '[]')
 }
 
 @Injectable({
@@ -100,8 +100,8 @@ export class ProductService {
   // Product
   private get products(): Observable<Product[]> {
     // this.Products = this.http.get<Product[]>('assets/data/products.json').pipe(map(data => data));
-    this.Products.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
-    return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
+    this.Products.subscribe(next => { localStorage['hrdtkr_products'] = JSON.stringify(next) });
+    return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['hrdtkr_products'] || '[]')));
   }
 
   // Get Products
@@ -143,7 +143,7 @@ export class ProductService {
       })
     }
     this.toastrService.success('Product has been added in wishlist.');
-    localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+    localStorage.setItem("hrdtkr_wishlistItems", JSON.stringify(state.wishlist));
     return true
   }
 
@@ -151,7 +151,7 @@ export class ProductService {
   public removeWishlistItem(product: Product): any {
     const index = state.wishlist.indexOf(product);
     state.wishlist.splice(index, 1);
-    localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+    localStorage.setItem("hrdtkr_wishlistItems", JSON.stringify(state.wishlist));
     return true
   }
 
@@ -181,7 +181,7 @@ export class ProductService {
     }
     console.log("compareItems: ", compareItem)
     this.toastrService.success('Product has been added in compare.');
-    localStorage.setItem("compareItems", JSON.stringify(state.compare));
+    localStorage.setItem("hrdtkr_compareItems", JSON.stringify(state.compare));
     return true
   }
 
@@ -189,7 +189,7 @@ export class ProductService {
   public removeCompareItem(product: Product): any {
     const index = state.compare.indexOf(product);
     state.compare.splice(index, 1);
-    localStorage.setItem("compareItems", JSON.stringify(state.compare));
+    localStorage.setItem("hrdtkr_compareItems", JSON.stringify(state.compare));
     return true
   }
 
@@ -227,7 +227,7 @@ export class ProductService {
       })
     }
 
-    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    localStorage.setItem("hrdtkr_cartItems", JSON.stringify(state.cart));
     this.toastrService.success('Product added to cart');
     this.storageSub.next('localStorageChanged');
 
@@ -248,7 +248,7 @@ export class ProductService {
           state.cart[index].quantity = qty
         }
 
-        localStorage.setItem("cartItems", JSON.stringify(state.cart));
+        localStorage.setItem("hrdtkr_cartItems", JSON.stringify(state.cart));
         this.storageSub.next('localStorageChanged');
         return true
       }
@@ -270,7 +270,7 @@ export class ProductService {
   public removeCartItem(index: number): any {
     console.log(`Delete product at Index ${index}`)
     state.cart.splice(index, 1);
-    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    localStorage.setItem("hrdtkr_cartItems", JSON.stringify(state.cart));
     this.storageSub.next('localStorageChanged');
     return true
   }
@@ -418,7 +418,7 @@ export class ProductService {
   public emptyCartAndProducts() {
     this.Products = [];
     state.cart = [];
-    localStorage.setItem("cartItems", JSON.stringify([]));
+    localStorage.setItem("hrdtkr_cartItems", JSON.stringify([]));
     this.storageSub.next('localStorageChanged');
   }
 

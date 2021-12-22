@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { EnvironmentUrlService } from './enviroment-url.service';
 
 const state = {
-  checkoutItems: JSON.parse(localStorage['checkoutItems'] || '[]')
+  checkoutItems: JSON.parse(localStorage['hrdtkr_checkoutItems'] || '[]')
 }
 
 @Injectable({
@@ -73,9 +73,9 @@ export class OrderService {
       totalAmount: amount
     };
     state.checkoutItems = item;
-    localStorage.setItem("checkoutItems", JSON.stringify(item));
-    console.log("checkoutItems: ", localStorage.getItem("checkoutItems"));
-    localStorage.removeItem("cartItems");
-    this.router.navigate(['/shop/checkout/success', orderId]);
+    localStorage.setItem("hrdtkr_checkoutItems", JSON.stringify(item));
+    // console.log("checkoutItems: ", localStorage.getItem("hrdtkr_checkoutItems"));
+    localStorage.removeItem("hrdtkr_cartItems");
+    this.router.navigate(['/checkout/success', orderId]);
   }
 }

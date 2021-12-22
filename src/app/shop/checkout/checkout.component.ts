@@ -73,9 +73,7 @@ export class CheckoutComponent implements OnInit {
     await this.productService.cartItems.toPromise().then(response => {
       this.products = response;
     });
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
     await this.getTotal.toPromise().then(amount => {
       this.amount = amount;
       this.totalAmount = amount;
@@ -150,7 +148,7 @@ export class CheckoutComponent implements OnInit {
         this.resetForm();
         this.productService.emptyCartAndProducts();
         // window.location.reload();
-        window.location.href = `shop/order/success/${res._id}`;
+        window.location.href = `order/success/${res._id}`;
       },
       err => {
         this.spinner.hide();

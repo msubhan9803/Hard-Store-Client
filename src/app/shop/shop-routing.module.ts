@@ -10,18 +10,18 @@ import { CollectionLeftSidebarComponent } from './collection/collection-left-sid
 
 const routes: Routes = [
   {
-    path: 'product/image/outside/:id',
+    path: 'product/:id',
     component: ImageOutsideComponent,
     // resolve: {
     //   data: Resolver
     // }
   },
+  // {
+  //   path: 'collection/no/sidebar',
+  //   component: CollectionNoSidebarComponent
+  // },
   {
-    path: 'collection/no/sidebar',
-    component: CollectionNoSidebarComponent
-  },
-  {
-    path: 'collection/left/sidebar',
+    path: 'products',
     component: CollectionLeftSidebarComponent
   },
   {

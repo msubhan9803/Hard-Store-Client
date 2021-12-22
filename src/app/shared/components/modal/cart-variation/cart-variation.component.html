@@ -13,7 +13,7 @@
             <ul class="cart_product">
                 <li *ngFor="let product of parsedProducts">
                     <div class="media">
-                        <a [routerLink]="['/shop/product/image/outside/', product._id]">
+                        <a [routerLink]="['/product/', product._id]">
                             <!-- <img class="mr-3" [src]="product.images[0].src" [alt]="product.images[0].alt"> -->
                             <img [src]="product.imageAddress" [alt]="">
                         </a>
@@ -47,8 +47,8 @@
                 </li>
                 <li>
                     <div class="buttons">
-                        <a [routerLink]="['/shop/cart']" class="btn btn-solid btn-xs view-cart">view cart</a>
-                        <a [routerLink]="['/shop/checkout']" class="btn btn-solid btn-xs checkout">checkout</a>
+                        <a [routerLink]="['/cart']" class="btn btn-solid btn-xs view-cart">view cart</a>
+                        <a [routerLink]="['/checkout']" class="btn btn-solid btn-xs checkout">checkout</a>
                     </div>
                 </li>
             </ul>

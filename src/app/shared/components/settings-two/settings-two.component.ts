@@ -69,9 +69,7 @@ export class SettingsTwoComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
   }
 
   public recreateParsedProductList() {

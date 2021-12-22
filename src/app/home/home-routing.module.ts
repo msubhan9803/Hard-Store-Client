@@ -5,13 +5,13 @@ import { MarijuanaComponent } from "./marijuana/marijuana.component";
 
 const routes: Routes = [
   {
-    path: "hardtaker",
+    path: "",
     component: LandingPageComponent,
   },
-  {
-    path: "marijuana",
-    component: MarijuanaComponent,
-  },
+  // {
+  //   path: "marijuana",
+  //   component: MarijuanaComponent,
+  // },
 ];
 
 @NgModule({

@@ -6,22 +6,22 @@ import { PagesComponent } from "./pages/pages.component";
 import { TrackorderComponent } from "./trackorder/trackorder.component";
 
 const routes: Routes = [
-  {
-    path: "",
-    redirectTo: "home/hardtaker",
-    pathMatch: "full",
-  },
+  // {
+  //   path: "",
+  //   redirectTo: "",
+  //   pathMatch: "full",
+  // },
   // {
   //   path: "",
   //   redirectTo: "home/marijuana",
   //   pathMatch: "full",
   // },
   {
-    path: "home",
+    path: "",
     loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
   },
   {
-    path: "shop",
+    path: "",
     component: ShopComponent,
     loadChildren: () => import("./shop/shop.module").then((m) => m.ShopModule),
   },
@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: "**", // Navigate to Home Page if not found any page
-    redirectTo: "home/hardtaker",
+    redirectTo: "",
   }
 ];
 

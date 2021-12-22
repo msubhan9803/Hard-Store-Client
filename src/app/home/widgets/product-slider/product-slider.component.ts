@@ -30,9 +30,7 @@ export class ProductSliderComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.imageAddress = this.productService.getImageUrl();
 
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
     this.productService.getAllProductsAPI().subscribe(
       (res: any) => {
         this.products = res.concat(res);

@@ -40,9 +40,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    await this.userService.getCurrency().toPromise().then((res: any) => {
-      this.conversionRate = res.conversionRate;
-    })
+      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
     this.imageUrl = this.imageAddress + this.product.images.find((image: any) => image.IsThmubnail == true).URL;
   }
 
@@ -123,7 +121,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
     let quantity = this.counter > 1 ? this.counter : 1;
     const status = await this.productService.addToCart(product, quantity);
     // if (status)
-    //   this.router.navigate(['/shop/cart'])
+    //   this.router.navigate(['/cart'])
   }
 
   ngOnDestroy() {
