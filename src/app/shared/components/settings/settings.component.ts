@@ -59,7 +59,7 @@ export class SettingsComponent implements OnInit {
     });
 
     this.productService.storageSubObs.subscribe((data: string) => {
-      if (localStorage.getItem("cartItems").length == 0) {
+      if (localStorage.getItem("hrdtkr_cartItems")?.length == 0) {
         this.products = [];
       }
 

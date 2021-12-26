@@ -3,9 +3,9 @@
     <h3 class="collapse-block-title" (click)="collapse = !collapse">Category</h3>
     <div class="d-flex flex-row align-items-center" *ngFor="let category of filterbyCategory">
         <input type="checkbox" [value]="category" [checked]="checked(category)" [id]="category"
-            (change)="appliedFilter($event)" class="custom-control-input" />
+            (change)="appliedFilter($event, category)" class="custom-control-input" />
         <!-- <span [class]="category" [ngStyle]="{'background-color': category}"></span> -->
-        <label class="custom-control-label" style="margin-left: 8px;" for="{{ category }}"> {{ category }}</label>
+        <label class="custom-control-label" style="margin-left: 8px;" for="{{ category }}"> {{ category.CategoryName }}</label>
     </div>
 </div>
 <!-- End Categories List -->

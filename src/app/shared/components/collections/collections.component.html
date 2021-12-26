@@ -1,17 +1,11 @@
 <!-- Start Categories List -->
-<div class="collection-collapse-block border-0" [class.open]="collapse">
+<div class="collection-collapse-block" [class.open]="collapse">
     <h3 class="collapse-block-title" (click)="collapse = !collapse">Collections</h3>
-    <div class="collection-collapse-block-content">
-        <div class="collection-brand-filter">
-            <ul class="category-list">
-                <li *ngFor="let category of filterbyCategory">
-                    <a [routerLink]="['/products']"
-                       [queryParams]="{ category: category}">
-                        {{ category }}
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <div class="d-flex flex-row align-items-center" *ngFor="let collection of filterbyCollection">
+        <input type="checkbox" [value]="collection" [checked]="checked(collection)" [id]="collection"
+            (change)="appliedFilter($event, collection)" class="custom-control-input" />
+        <!-- <span [class]="collection" [ngStyle]="{'background-color': collection}"></span> -->
+        <label class="custom-control-label" style="margin-left: 8px;" for="{{ collection }}"> {{ collection }}</label>
     </div>
 </div>
 <!-- End Categories List -->

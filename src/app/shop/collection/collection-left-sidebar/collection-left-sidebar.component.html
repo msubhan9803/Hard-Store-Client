@@ -15,7 +15,7 @@
                             </div>
 
                             <!-- Category filter start -->
-                            <app-categories (categoriesFilter)="updateFilter($event)"></app-categories>
+                            <app-categories (categoriesFilter)="updateFilter($event)" [categoryName]="this.categoryName"></app-categories>
                         </div>
                         <!-- silde-bar colleps block end here -->
                         <!-- side-bar colleps block stat -->

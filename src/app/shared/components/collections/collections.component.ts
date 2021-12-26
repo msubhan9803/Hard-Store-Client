@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../classes/product';
 import { Collections } from '../../data/constants';
 import { ProductService } from '../../services/product.service';
@@ -11,19 +11,32 @@ import { ProductService } from '../../services/product.service';
 export class CollectionsComponent implements OnInit {
 
   public products: Product[] = [];
+  public collections = [];
   public collapse: boolean = true;
 
-  constructor(public productService: ProductService) { 
-    this.productService.getAllProductsAPI().subscribe((product: any) => this.products = product);
+  constructor(
+    public productService: ProductService
+  ) {
+    this.collections = Collections;
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
   }
 
-  get filterbyCategory() {
-    // const category = [...new Set(this.products.map(product => product.collections))]
-    const category = Collections;
-    return category
+  appliedFilter(event, collection) {
+    this.productService.updateFilterCollection(collection);
   }
 
+  get filterbyCollection() {
+    // const collection = [...new Set(this.products.map(product => product.collections))]
+    // const collection = Categories;
+    const collection = this.collections;
+    return collection
+  }
+
+  // check if the item are selected
+  checked(item: any) {
+    let temp = JSON.parse(this.productService.getFilterCollection()) || [];
+    return temp.includes(item);
+  }
 }

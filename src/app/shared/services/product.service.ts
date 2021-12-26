@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
 import { EnvironmentUrlService } from './enviroment-url.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 const state = {
   products: JSON.parse(localStorage['hrdtkr_products'] || '[]'),
@@ -27,7 +28,8 @@ export class ProductService {
   constructor(
     private router: Router,
     injector: Injector,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     this.http = injector.get(HttpClient);
     this._env = injector.get(EnvironmentUrlService);
@@ -437,5 +439,126 @@ export class ProductService {
       }
     })
     return this.http.get(url, { params: params });
+  }
+
+  public setFilterCategories(categories) {
+    let localStorageCategories = JSON.parse(localStorage.getItem("hrdtkr_categories"))?.length > 0 ?
+      JSON.parse(localStorage.getItem("hrdtkr_categories")) : [];
+
+    this.storageSub.next('localStorageChanged');
+
+    if (!localStorageCategories.includes(categories)) {
+      localStorageCategories.push(categories)
+    }
+    localStorage.setItem("hrdtkr_categories", JSON.stringify(localStorageCategories));
+  }
+
+  public getFilterCategories() {
+    return localStorage.getItem("hrdtkr_categories");
+  }
+
+  public clearFilterCategories() {
+    localStorage.setItem("hrdtkr_categories", JSON.stringify([]));
+  }
+
+  public updateFilterCategory(category) {
+    let temp = JSON.parse(localStorage.getItem("hrdtkr_categories"))?.length > 0 ?
+      JSON.parse(localStorage.getItem("hrdtkr_categories")) : [];
+
+    if (temp.includes(category)) {
+      temp = temp.filter(cat => cat !== category);
+    } else {
+      temp.push(category)
+    }
+
+    localStorage.setItem("hrdtkr_categories", JSON.stringify(temp));
+    this.storageSub.next('localStorageChanged');
+  }
+
+  public getFilterCollection() {
+    return localStorage.getItem("hrdtkr_collections_filter");
+  }
+
+  public clearFilterCollection() {
+    localStorage.setItem("hrdtkr_collections_filter", JSON.stringify([]));
+  }
+
+  public updateFilterCollection(collection) {
+    let temp = JSON.parse(localStorage.getItem("hrdtkr_collections_filter"))?.length > 0 ?
+      JSON.parse(localStorage.getItem("hrdtkr_collections_filter")) : [];
+
+    if (temp.includes(collection)) {
+      temp = temp.filter(cat => cat !== collection);
+    } else {
+      temp.push(collection)
+    }
+
+    localStorage.setItem("hrdtkr_collections_filter", JSON.stringify(temp));
+    this.storageSub.next('localStorageChanged');
+  }
+
+  async getFilterProducts() {
+    this.spinner.show();
+    let filteredProducts: Array<any> = [];
+    return this.getAllProductsAPI().toPromise().then(async (products: Array<any>) => {
+      let categoriesLocalStorage = JSON.parse(localStorage.getItem("hrdtkr_categories"))?.length > 0 ?
+        JSON.parse(localStorage.getItem("hrdtkr_categories")) : [];
+      let collectionsLocalStorage = JSON.parse(localStorage.getItem("hrdtkr_collections_filter"))?.length > 0 ?
+        JSON.parse(localStorage.getItem("hrdtkr_collections_filter")) : [];
+
+      if (categoriesLocalStorage.length > 0) {
+        filteredProducts = await this.filterByCategory(categoriesLocalStorage, products).then((res: Array<any>) => res);
+      }
+      if (collectionsLocalStorage.length > 0) {
+        filteredProducts = this.filterByCollections(collectionsLocalStorage, filteredProducts);
+      }
+
+      this.spinner.hide();
+      return filteredProducts;
+    })
+  }
+
+  filterByCategory(categoriesLocalStorage, products) {
+    return new Promise(res => {
+      this.getCategories().toPromise().then((categories: Array<any>) => {
+        let actualCategories = [];
+
+        for (let index = 0; index < categories.length; index++) {
+          const category: any = categories[index];
+
+          if (categoriesLocalStorage.includes(category.CategoryName)) {
+            actualCategories.push(category)
+          }
+        }
+
+        let categoryFilteredProductList: Array<any> = [];
+        for (let index = 0; index < products.length; index++) {
+          const product = products[index];
+
+          for (let index = 0; index < actualCategories.length; index++) {
+            const category = actualCategories[index];
+
+            if (category._id == product.categoryId) {
+              categoryFilteredProductList.push(product);
+            }
+          }
+        }
+
+        res(categoryFilteredProductList);
+      });
+    });
+  }
+
+  filterByCollections(collectionsLocalStorage, products) {
+    let temp: Array<any> = [];
+    for (let index = 0; index < products.length; index++) {
+      const product = products[index];
+
+      if (product.collections.filter((n) => collectionsLocalStorage.indexOf(n) !== -1).length > 0) {
+        temp.push(product)
+      }
+    }
+
+    return temp;
   }
 }
