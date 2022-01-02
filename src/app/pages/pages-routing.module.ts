@@ -13,41 +13,41 @@ import { BlogDetailsComponent } from './blog/blog-details/blog-details.component
 
 const routes: Routes = [
   { 
-    path: 'cart', 
-    component: CartComponent 
-  },
-  { 
-    path: 'checkout', 
-    component: CheckoutComponent 
-  },
-  { 
     path: 'faq', 
     component: FaqComponent 
   },
   { 
-    path: 'blog/no/sidebar', 
+    path: 'blogs', 
     component: BlogNoSidebarComponent 
   },
   { 
-    path: 'blog/details/:id', 
+    path: 'blog/:id', 
     component: BlogDetailsComponent 
-  },
-  { 
-    path: '404', 
-    component: ErrorComponent 
-  },
-  { 
-    path: 'comingsoon', 
-    component: ComingSoonComponent 
   },
   { 
     path: 'contact', 
     component: ContactComponent 
   },
   { 
-    path: 'wishlist', 
-    component: WishlistComponent 
-  }
+    path: '404', 
+    component: ErrorComponent 
+  },
+  // { 
+  //   path: 'cart', 
+  //   component: CartComponent 
+  // },
+  // { 
+  //   path: 'checkout', 
+  //   component: CheckoutComponent 
+  // },
+  // { 
+  //   path: 'comingsoon', 
+  //   component: ComingSoonComponent 
+  // },
+  // { 
+  //   path: 'wishlist', 
+  //   component: WishlistComponent 
+  // }
 ];
 
 @NgModule({

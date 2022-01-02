@@ -9,7 +9,7 @@
                         <ng-template ngbTabContent>
                             <div class="no-slider row" *ngIf="collection == 'On Sale'">
                                 <ng-container *ngFor="let product of getCollectionProducts(collection)">
-                                    <div class="col-md-3" *ngIf="product.sale">
+                                    <div class="col-md-3 text-center product-wrapper" *ngIf="product.sale">
                                         <div class="product-box product-wrap m-2">
                                             <app-product-box-three [product]="product"
                                                 [currency]="productService?.Currency">
@@ -27,7 +27,7 @@
                             </div>
                             <div class="no-slider row" *ngIf="collection == 'Best Seller'">
                                 <ng-container *ngFor="let product of getCollectionProducts(collection)">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 text-center product-wrapper">
                                         <div class="product-box product-wrap m-2">
                                             <app-product-box-three [product]="product"
                                                 [currency]="productService?.Currency">
@@ -45,7 +45,7 @@
                             </div>
                             <div class="no-slider row" *ngIf="collection == 'All'">
                                 <ng-container *ngFor="let product of getCollectionProducts(collection)">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 text-center product-wrapper">
                                         <div class="product-box product-wrap m-2">
                                             <app-product-box-three [product]="product"
                                                 [currency]="productService?.Currency">

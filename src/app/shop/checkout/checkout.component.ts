@@ -105,11 +105,11 @@ export class CheckoutComponent implements OnInit {
       let product = {
         product_name: currentProduct.title,
         product_Id: currentProduct._id,
-        unit_Cost: currentProduct.skuArray[0].price,
+        unit_Cost: currentProduct.price,
         quantity: currentProduct.quantity,
-        discount: currentProduct.sale ? currentProduct.skuArray[0].price - currentProduct.skuArray[0].specialPrice : 0,
+        discount: currentProduct.sale ? currentProduct.price - currentProduct.discount : 0,
         sale: currentProduct.sale,
-        amount: currentProduct.quantity * currentProduct.skuArray[0].price,
+        amount: currentProduct.quantity * currentProduct.price,
         sub_Total: 0
       }
       product.sub_Total = (product.unit_Cost - product.discount) * product.quantity;
@@ -211,7 +211,7 @@ export class CheckoutComponent implements OnInit {
         category: 'DIGITAL_GOODS',
         unit_amount: {
           currency_code: 'USD',
-          value: product.sale ? (product.skuArray[0].specialPrice * this.conversionRate).toFixed(2) : (product.skuArray[0].price * this.conversionRate).toFixed(2)
+          value: product.sale ? ((product.price - product.discount) * this.conversionRate).toFixed(2) : (product.price * this.conversionRate).toFixed(2)
           // value: product.sale ? product.skuArray[0].specialPrice : product.skuArray[0].price
         }
       };

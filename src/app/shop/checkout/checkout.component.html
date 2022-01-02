@@ -205,12 +205,12 @@
                                             {{ product.title }} × {{ product.quantity }}
 
                                             <span class="td-color" *ngIf="!product.sale">
-                                                {{ (product.skuArray[product.variantIndex].price * product.quantity) *
+                                                {{ (product?.price * product.quantity) *
                                                 productService?.Currency.price |
                                                 currency:productService?.Currency.currency:'symbol'
                                                 }}
                                                 <small class="text-muted">
-                                                    {{ (product.skuArray[product.variantIndex].price * product.quantity)
+                                                    {{ (product?.price * product.quantity)
                                                     *
                                                     productService?.Currency.price |
                                                     currency:productService?.Currency.currency:'symbol' | aedToDollar:
@@ -219,12 +219,12 @@
                                                 </small>
                                             </span>
                                             <span class="td-color" *ngIf="product.sale">
-                                                {{ (product.skuArray[product.variantIndex].specialPrice *
+                                                {{ ((product?.price - product?.discount) *
                                                 product.quantity) *
                                                 productService?.Currency.price |
                                                 currency:productService?.Currency.currency:'symbol' }}
                                                 <small class="text-muted">
-                                                    {{ (product.skuArray[product.variantIndex].specialPrice *
+                                                    {{ ((product?.price - product?.discount) *
                                                     product.quantity) *
                                                     productService?.Currency.price |
                                                     currency:productService?.Currency.currency:'symbol' | aedToDollar:

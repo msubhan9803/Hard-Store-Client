@@ -655,7 +655,7 @@ button {
 .title1 {
     text-align: center;
     h4 {
-        color: var(--theme-deafult);
+        color: #222222;
         padding-bottom: 10px;
         margin-bottom: 0;
         margin-top: -3px;
@@ -668,7 +668,7 @@ button {
             position: absolute;
             height: 5px;
             width: 70px;
-            background-color: var(--theme-deafult);
+            background-color: $primary-main;
             content: "";
             left: 0;
             right: 0;
@@ -5469,7 +5469,7 @@ footer {
     .avalibility {
         font-size: 15px;
         font-weight: 600;
-        color: var(--theme-deafult);
+        color: $primary-dark;
     }
 }
 
@@ -6201,7 +6201,7 @@ footer {
         }
         .page-item.active {
             a {
-                color: var(--theme-deafult);
+                color: $primary-main;
                 background-color: $white;
                 border-color: lighten($black, 86.5%);
             }
@@ -6718,7 +6718,7 @@ footer {
                     }
                 }
                 .td-color {
-                    color: var(--theme-deafult);
+                    color: #222222;
                 }
                 h2 {
                     font-size: 24px;
@@ -6983,7 +6983,7 @@ footer {
             justify-content: center;
             display: flex;
             h6 {
-                color: var(--theme-deafult);
+                color: $primary-main;
                 text-transform: uppercase;
                 margin-bottom: 10px;
                 margin-top: -7px;
@@ -7923,7 +7923,7 @@ footer {
                 position: relative;
                 font-size: 18px;
                 line-height: 20px;
-                color: var(--theme-deafult);
+                color: $primary-dark;
                 font-weight: 400;
                 width: 35%;
                 float: right;
@@ -7958,7 +7958,7 @@ footer {
                 position: relative;
                 font-size: 18px;
                 line-height: 20px;
-                color: var(--theme-deafult);
+                color: $primary-dark;
                 font-weight: 400;
             }
             span {
@@ -13500,7 +13500,7 @@ footer {
     width: 20px !important;
     height: 20px !important;
     top: -8px !important;
-    background-color: var(--theme-deafult) !important;
+    background-color: $primary-main !important;
     z-index: 3;
     border-radius: 16px !important;
 }
@@ -13517,7 +13517,7 @@ footer {
 }
 
 .ng5-slider .ng5-slider-selection {
-    background: var(--theme-deafult) !important;
+    background: $primary-main !important;
 }
 
 .ng5-slider .ng5-slider-pointer.ng5-slider-active:after {

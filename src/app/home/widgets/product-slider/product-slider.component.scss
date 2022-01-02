@@ -8,11 +8,16 @@
   // max-width: 100% !important;
   border: 1px solid $primary-ultra-ultra-light;
   box-shadow: 4px 4px 20px 0px #0006 !important;
+  width: 90% !important;
 }
 
 // .owl-nav {
 //   width: 100%;
 // }
+
+::ng-deep .owl-item  {
+  text-align: center !important;
+}
 
 ::ng-deep .owl-prev {
   position: absolute !important;

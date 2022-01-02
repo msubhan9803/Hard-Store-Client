@@ -43,6 +43,12 @@ export class HeaderFiveComponent implements OnInit {
     this.productService.updateProductTitleFilter(searchValue);
   }
 
+  clearProductTitle() {
+    localStorage.setItem("hrdtkr_product_title", JSON.stringify(""));
+    this.searchValueInput = this.getProductTitle();
+    window.location.reload();
+  }
+
   searchProducts() {
     let pathName = window.location.pathname;
     let searchValue = this.searchValueInput;
@@ -53,24 +59,8 @@ export class HeaderFiveComponent implements OnInit {
       return;
     }
 
-    // this.productService.getFilterProducts();
     window.location.reload();
-
-    // if (searchValue) {
-    //   if (!searchValue.match(/^[0-9a-z]+$/)) {
-    //     this.searchValueError = true;
-    //   } else {
-    //     this.searchValueError = false;
-    //     this.searchValue.next(searchValue);
-    //   }
-    // }
-    //  else {
-    //   this.showSearchedFaq = false;
-    //   this.updateProudctList("shipping")
-    // }
   }
-
-
 
   updateProudctList(faqType) {
     this.productService.getFaqsByType(faqType).subscribe(

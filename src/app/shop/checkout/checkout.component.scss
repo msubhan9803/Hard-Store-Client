@@ -54,3 +54,13 @@ input[type=number] {
     width: 40% !important;
     text-align: right;
 }
+
+
+@media (max-width: 480px) {
+    .order-box .sub-total li .count {
+        width: auto !important;
+    }
+    .order-box .total li span {
+        width: auto !important;
+    }
+}
