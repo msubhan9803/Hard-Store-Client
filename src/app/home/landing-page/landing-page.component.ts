@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    localStorage.setItem("hrdtkr_minPrice_filter", JSON.stringify(0));
+    localStorage.setItem("hrdtkr_maxPrice_filter", JSON.stringify(100000));
+    localStorage.setItem("hrdtkr_product_title", JSON.stringify(""));
+  }
 
   ngOnInit(): void {
   }

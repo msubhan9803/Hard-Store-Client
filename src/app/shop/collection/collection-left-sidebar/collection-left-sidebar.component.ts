@@ -19,7 +19,7 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
   public colors: any[] = [];
   public size: any[] = [];
   public minPrice: number = 0;
-  public maxPrice: number = 1200;
+  public maxPrice: number = 100000;
   public tags: any[] = [];
   public categoryName: string;
   public pageNo: number = 1;
@@ -50,15 +50,16 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
       this.pageNo = params.page ? params.page : this.pageNo;
 
       // Get Filtered Products..
-      this.productService.getAllProductsAPI().subscribe((response: any) => {
-        this.getFilteredProducts().then(filteredProeducts => {
-          if (this.productService.getFilterCategories().length > 0) {
-            this.products = filteredProeducts;
-          }
-          this.products = this.productService.sortProducts(this.products, this.sortBy);
-          this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
-          this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-        })
+      // this.productService.getAllProductsAPI().subscribe((response: any) => {
+      // })
+
+      this.getFilteredProducts().then(filteredProeducts => {
+        if (this.productService.getFilterCategories().length > 0) {
+          this.products = filteredProeducts;
+        }
+        this.products = this.productService.sortProducts(this.products, this.sortBy);
+        this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
+        this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
       })
 
       this.productService.storageSubObs.subscribe((data: string) => {
@@ -66,6 +67,7 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
       })
     })
   }
+  
   ngOnDestroy() {
     this.productService.clearFilterCategories();
     this.productService.clearFilterCollection();
@@ -77,10 +79,8 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-
   // Append filter value to Url
   updateFilter(tags: any) {
-    console.log("Component: CollectionLeftSidebarComponent | tags: ", tags)
     tags.page = null; // Reset Pagination
     this.router.navigate([], {
       relativeTo: this.route,
@@ -91,6 +91,11 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
       this.viewScroller.setOffset([120, 120]);
       this.viewScroller.scrollToAnchor('products'); // Anchore Link
     });
+  }
+
+  // Append filter value to Url
+  updatePriceFilter(priceObj: any) {
+    this.productService.setPriceFilter(priceObj);
   }
 
   // SortBy Filter

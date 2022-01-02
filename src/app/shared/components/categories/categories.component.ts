@@ -30,7 +30,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   appliedFilter(event, category) {
-    this.productService.updateFilterCategory(category.CategoryName);
+    this.productService.updateFilterCategory(category._id);
 
     // let index = this.products.indexOf(event.target.value);  // checked and unchecked value
     // if (event.target.checked)
@@ -49,6 +49,6 @@ export class CategoriesComponent implements OnInit {
   // check if the item are selected
   checked(item: any) {
     let temp = JSON.parse(this.productService.getFilterCategories()) || [];
-    return temp.includes(item.CategoryName);
+    return temp.includes(item._id);
   }
 }

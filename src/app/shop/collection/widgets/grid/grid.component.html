@@ -5,7 +5,7 @@
                 <div class="search-count">
                     <h5>Showing Products 1-{{ products.length }} of {{ paginate.totalItems }} Result</h5>
                 </div>
-                <div class="collection-view">
+                <!-- <div class="collection-view">
                     <ul>
                         <li (click)="setLayoutView('grid-view')">
                             <i class="fa fa-th grid-layout-view"></i>
@@ -14,8 +14,8 @@
                             <i class="fa fa-list-ul list-layout-view"></i>
                         </li>
                     </ul>
-                </div>
-                <div class="collection-grid-view" *ngIf="layoutView == 'grid-view'">
+                </div> -->
+                <!-- <div class="collection-grid-view" *ngIf="layoutView == 'grid-view'">
                     <ul>
                         <li (click)="setGridLayout('col-lg-6')">
                             <img src="assets/images/icon/2.png" class="product-2-layout-view">
@@ -30,7 +30,7 @@
                             <img src="assets/images/icon/6.png" class="product-6-layout-view">
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="product-page-filter">
                     <select (change)="sorting($event)">
                         <option value="">Sorting Items</option>

@@ -26,8 +26,12 @@
         <div class="col-6 d-flex justify-content-center">
             <div class="input-group input-group-sm">
                 <input type="text" class="form-control" placeholder="What Are You Looking For?"
-                    aria-label="What Are You Looking For?" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                    aria-label="What Are You Looking For?" aria-describedby="button-addon2"
+                    [(ngModel)]="searchValueInput">
+                <!-- <input class="search_input" type="text" name="searchValue" placeholder="What Are You Looking For?"
+                    aria-label="What Are You Looking For?" (input)="searchProducts($event.target.value)"
+                    ng-pattern-restrict="^$|^[A-Za-z0-9]+"> -->
+                <button class="btn btn-outline-secondary" (click)="searchProducts()" type="button" id="button-addon2">
                     <i class="fa fa-2x fa-search"></i>
                 </button>
             </div>

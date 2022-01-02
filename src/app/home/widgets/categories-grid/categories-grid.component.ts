@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./categories-grid.component.scss']
 })
 export class CategoriesGridComponent implements OnInit {
+  public categories = [];
 
   constructor(
     public productService: ProductService,
@@ -17,7 +18,11 @@ export class CategoriesGridComponent implements OnInit {
     public helperMethodsService: HelperMethodsService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.productService.getCategories().subscribe((res: []) => {
+      this.categories = res;
+    });
+  }
 
   async ngOnInit() {
 

@@ -67,6 +67,13 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  // GET: product/FilterProducts
+  public getFilterProductsAPI(payload) {
+    let url = this._env.urlAddress + 'product/FilterProducts';
+    // this.toastrService.success('Product get request .');
+    return this.http.post(url, payload);
+  }
+
   // GET: products/getReviews
   public getReviewsByProductId(productId) {
     let url = this._env.urlAddress + 'product/getReviews/' + productId;
@@ -499,66 +506,80 @@ export class ProductService {
 
   async getFilterProducts() {
     this.spinner.show();
-    let filteredProducts: Array<any> = [];
-    return this.getAllProductsAPI().toPromise().then(async (products: Array<any>) => {
-      let categoriesLocalStorage = JSON.parse(localStorage.getItem("hrdtkr_categories"))?.length > 0 ?
-        JSON.parse(localStorage.getItem("hrdtkr_categories")) : [];
-      let collectionsLocalStorage = JSON.parse(localStorage.getItem("hrdtkr_collections_filter"))?.length > 0 ?
-        JSON.parse(localStorage.getItem("hrdtkr_collections_filter")) : [];
+    let categories = JSON.parse(localStorage.getItem("hrdtkr_categories"));
+    let minPrice = JSON.parse(localStorage.getItem("hrdtkr_minPrice_filter"));
+    let maxPrice = JSON.parse(localStorage.getItem("hrdtkr_maxPrice_filter"));
+    let collections = JSON.parse(localStorage.getItem("hrdtkr_collections_filter"));
+    let title = JSON.parse(localStorage.getItem("hrdtkr_product_title"));
 
-      if (categoriesLocalStorage.length > 0) {
-        filteredProducts = await this.filterByCategory(categoriesLocalStorage, products).then((res: Array<any>) => res);
-      }
-      if (collectionsLocalStorage.length > 0) {
-        filteredProducts = this.filterByCollections(collectionsLocalStorage, filteredProducts);
-      }
+    let payload = {
+      categoryIds: categories.length > 0 ? categories : null,
+      minPrice: minPrice,
+      maxPrice: maxPrice || null,
+      collections: collections.length > 0 ? collections: [],
+      title: title || null
+    };
 
+    return this.getFilterProductsAPI(payload).toPromise().then(async (products: Array<any>) => {
       this.spinner.hide();
-      return filteredProducts;
+
+      return products;
     })
   }
 
-  filterByCategory(categoriesLocalStorage, products) {
-    return new Promise(res => {
-      this.getCategories().toPromise().then((categories: Array<any>) => {
-        let actualCategories = [];
-
-        for (let index = 0; index < categories.length; index++) {
-          const category: any = categories[index];
-
-          if (categoriesLocalStorage.includes(category.CategoryName)) {
-            actualCategories.push(category)
-          }
-        }
-
-        let categoryFilteredProductList: Array<any> = [];
-        for (let index = 0; index < products.length; index++) {
-          const product = products[index];
-
-          for (let index = 0; index < actualCategories.length; index++) {
-            const category = actualCategories[index];
-
-            if (category._id == product.categoryId) {
-              categoryFilteredProductList.push(product);
-            }
-          }
-        }
-
-        res(categoryFilteredProductList);
-      });
-    });
+  setPriceFilter(priceObj) {
+    console.log("priceObj: ", priceObj)
+    localStorage.setItem("hrdtkr_minPrice_filter", priceObj.minPrice)
+    localStorage.setItem("hrdtkr_maxPrice_filter", priceObj.maxPrice)
+    this.storageSub.next('localStorageChanged');
   }
 
-  filterByCollections(collectionsLocalStorage, products) {
-    let temp: Array<any> = [];
-    for (let index = 0; index < products.length; index++) {
-      const product = products[index];
-
-      if (product.collections.filter((n) => collectionsLocalStorage.indexOf(n) !== -1).length > 0) {
-        temp.push(product)
-      }
-    }
-
-    return temp;
+  updateProductTitleFilter(productTitle) {
+    localStorage.setItem("hrdtkr_product_title", JSON.stringify(productTitle))
+    this.storageSub.next('localStorageChanged');
   }
+
+  // filterByCategory(categoriesLocalStorage, products) {
+  //   return new Promise(res => {
+  //     this.getCategories().toPromise().then((categories: Array<any>) => {
+  //       let actualCategories = [];
+
+  //       for (let index = 0; index < categories.length; index++) {
+  //         const category: any = categories[index];
+
+  //         if (categoriesLocalStorage.includes(category.CategoryName)) {
+  //           actualCategories.push(category)
+  //         }
+  //       }
+
+  //       let categoryFilteredProductList: Array<any> = [];
+  //       for (let index = 0; index < products.length; index++) {
+  //         const product = products[index];
+
+  //         for (let index = 0; index < actualCategories.length; index++) {
+  //           const category = actualCategories[index];
+
+  //           if (category._id == product.categoryId) {
+  //             categoryFilteredProductList.push(product);
+  //           }
+  //         }
+  //       }
+
+  //       res(categoryFilteredProductList);
+  //     });
+  //   });
+  // }
+
+  // filterByCollections(collectionsLocalStorage, products) {
+  //   let temp: Array<any> = [];
+  //   for (let index = 0; index < products.length; index++) {
+  //     const product = products[index];
+
+  //     if (product.collections.filter((n) => collectionsLocalStorage.indexOf(n) !== -1).length > 0) {
+  //       temp.push(product)
+  //     }
+  //   }
+
+  //   return temp;
+  // }
 }
