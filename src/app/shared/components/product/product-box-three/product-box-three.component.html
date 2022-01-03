@@ -46,9 +46,9 @@
             </small>
         </h5>
         <h5 [ngClass]="{'strikethrough': product.sale, 'text-danger': product.sale}">
-            {{ (product?.price - product?.discount) * currency?.price | currency:currency?.currency:'symbol' }}
+            {{ (product?.price) * currency?.price | currency:currency?.currency:'symbol' }}
             <small>
-                {{ (product?.price - product?.discount) * currency?.price | currency:currency?.currency:'symbol' | aedToDollar:
+                {{ (product?.price) * currency?.price | currency:currency?.currency:'symbol' | aedToDollar:
                 this.conversionRate }}
             </small>
         </h5>
