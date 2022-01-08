@@ -67,6 +67,12 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  // GET: category/getProducts
+  public getProductBySlugApi(slug) {
+    let url = this._env.urlAddress + 'product/getProductBySlug/' + slug;
+    return this.http.get(url);
+  }
+
   // GET: product/FilterProducts
   public getFilterProductsAPI(payload) {
     let url = this._env.urlAddress + 'product/FilterProducts';
@@ -95,7 +101,7 @@ export class ProductService {
 
   // GET: category/averageRating
   public averageRating(productId) {
-    let url = this._env.urlAddress + 'products/averageRating/' + productId;
+    let url = this._env.urlAddress + 'product/averageRating/' + productId;
     return this.http.get(url);
   }
 

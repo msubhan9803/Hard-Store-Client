@@ -111,7 +111,8 @@ export class TrackorderComponent implements OnInit {
       return;
     }
     this.product_List = [];
-    this.orderService.getOrderbyId(this.searchValue).subscribe(
+    // this.orderService.getOrderbyId(this.searchValue).subscribe(
+    this.orderService.getOrderbyOrderNumber(this.searchValue).subscribe(
       async (res: any) => {
         this.order = res;
         Object.entries(res.tracking_Status).forEach(([key, value]) => {
@@ -130,13 +131,14 @@ export class TrackorderComponent implements OnInit {
           }
         });
 
-        this.product_List = res.products;
+        this.product_List = res.Products;
         console.log("this.product_List: ", this.product_List)
 
         this.total = 0;
         this.product_List.forEach(product => {
-          this.total += (product.unit_Cost - (product.unit_Cost - product.discount)) * product.quantity;
+          this.total += product.sale ? (product.unit_Cost - (product.unit_Cost - product.discount)) * product.quantity : product.unit_Cost * product.quantity;
         })
+        console.log("total: ", this.total)
 
         this.showTimeLine = true;
         this.showProducts = true;

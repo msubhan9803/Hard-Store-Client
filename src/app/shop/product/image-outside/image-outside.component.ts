@@ -71,30 +71,29 @@ export class ImageOutsideComponent implements OnInit {
 
       this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
 
-    this.productService.getProductById(this.productId).subscribe(
+    this.productService.getProductBySlugApi(this.productId).subscribe(
       res => {
-        console.log("res: ", res)
         this.product = res;
         let discountPer = 100 - ((this.product?.price - this.product?.discount) / this.product?.price * 100);
         discountPer = parseFloat(discountPer.toFixed(2));
         this.product.discount = discountPer;
-        // this.currentVariantImage = this.product.variants[this.currentVariant].isThumbnailImageIndex;
+
+        this.productService.averageRating(this.product._id).subscribe((res: any) => {
+          this.product.starAvg = parseInt(res.starAvg);
+          this.product.totalReviews = parseInt(res.totalReviews);
+        })
+        this.productService.getReviewsByProductId(this.product._id).subscribe(
+          (res: []) => {
+            this.reviewsArray = res;
+          }
+        )
       }
     )
-    this.productService.averageRating(this.productId).subscribe((res: any) => {
-      this.product.starAvg = parseInt(res.starAvg);
-      this.product.totalReviews = parseInt(res.totalReviews);
-    })
     this.productService.getAllProductsAPI().subscribe(
       (res: []) => {
         this.products = res.concat(res);
       }
     );
-    this.productService.getReviewsByProductId(this.productId).subscribe(
-      (res: []) => {
-        this.reviewsArray = res;
-      }
-    )
 
     this.createReviewForm();
   }
@@ -105,7 +104,7 @@ export class ImageOutsideComponent implements OnInit {
 
     this.spinner.show();
     let payload = this.reviewForm.value;
-    payload.ProductId = this.productId;
+    payload.ProductId = this.product._id;
 
     this.productService.writeReview(payload).subscribe(
       res => {

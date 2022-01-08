@@ -19,12 +19,12 @@
       <ul class="show-div shopping-cart" *ngIf='products.length > 0'>
         <li class="my-4" *ngFor="let product of products; let arrayIndex = index">
           <div class="media">
-            <a [routerLink]="['/product/', product._id]">
+            <a [routerLink]="['/product/', product.slug]">
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
               <img [src]="getThumbnailImage(product)" width="100px" [alt]="">
             </a>
             <div class="media-body m-2">
-              <a [routerLink]="['/product/', product._id]">
+              <a [routerLink]="['/product/', product.slug]">
                 <h4>{{ product?.title }}</h4>
               </a>
               <h6>

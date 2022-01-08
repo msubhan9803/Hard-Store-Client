@@ -13,7 +13,7 @@
             <ul class="cart_product">
                 <li *ngFor="let product of parsedProducts">
                     <div class="media">
-                        <a [routerLink]="['/product/', product._id]">
+                        <a [routerLink]="['/product/', product.slug]">
                             <!-- <img class="mr-3" [src]="product.images[0].src" [alt]="product.images[0].alt"> -->
                             <img [src]="product.imageAddress" [alt]="">
                         </a>

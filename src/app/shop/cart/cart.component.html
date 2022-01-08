@@ -26,14 +26,14 @@
             <tbody>
                 <tr *ngFor="let product of products; let arrayIndex = index">
                     <td>
-                        <a [routerLink]="['/product/', product._id]">
+                        <a [routerLink]="['/product/', product.slug]">
                             <!-- <img [src]="this.imageAddress + product.variants[product.variantIndex].imagesPreview[product.variants[product.variantIndex].isThumbnailImageIndex]"
                                 height="20px" [alt]=""> -->
                             <img [src]="getThumbnailImage(product)" width="100px" [alt]="">
                         </a>
                     </td>
                     <td>
-                        <a [routerLink]="['/product/', product._id]">
+                        <a [routerLink]="['/product/', product.slug]">
                             <h4>{{ product?.title | titlecase }}</h4>
                         </a>
 

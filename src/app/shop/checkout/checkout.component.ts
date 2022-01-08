@@ -73,7 +73,7 @@ export class CheckoutComponent implements OnInit {
     await this.productService.cartItems.toPromise().then(response => {
       this.products = response;
     });
-      this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
+    this.conversionRate = localStorage.getItem("hrdtkr_conversionRate")
     await this.getTotal.toPromise().then(amount => {
       this.amount = amount;
       this.totalAmount = amount;
@@ -107,32 +107,47 @@ export class CheckoutComponent implements OnInit {
         product_Id: currentProduct._id,
         unit_Cost: currentProduct.price,
         quantity: currentProduct.quantity,
-        discount: currentProduct.sale ? currentProduct.price - currentProduct.discount : 0,
+        discount: currentProduct.discount,
         sale: currentProduct.sale,
         amount: currentProduct.quantity * currentProduct.price,
         sub_Total: 0
       }
-      product.sub_Total = (product.unit_Cost - product.discount) * product.quantity;
+
+      product.sub_Total = currentProduct.sale ? (product.unit_Cost - product.discount) * product.quantity : product.unit_Cost * product.quantity;
 
       this.checkoutForm.value.products.push(product)
     }
 
-    let payload = this.checkoutForm.value;
-    await this.getTotal.subscribe(res => payload.totalAmount = res);
-    let checkoutFormValue = this.checkoutForm.value;
-    checkoutFormValue.phone = this.checkoutForm.value.DailCode + this.checkoutForm.value.phone;
+    let payload = {
+      First_Name: this.checkoutForm.value.first_Name,
+      Last_Name: this.checkoutForm.value.last_Name,
+      Phone: "",
+      Email: this.checkoutForm.value.Email,
+      Country: "",
+      City: this.checkoutForm.value.City,
+      State: this.checkoutForm.value.State,
+      PostalCode: this.checkoutForm.value.postalCode,
+      Address: this.checkoutForm.value.Address,
+      Source: "web",
+      TotalAmount: 0,
+      Products: this.checkoutForm.value.products,
+      PaymentStatus: false,
+      // orderDetails: {}
+    }
+
+    // let payload = this.checkoutForm.value;
+    await this.getTotal.subscribe(res => payload.TotalAmount = res);
+    let checkoutFormValue = payload;
+    checkoutFormValue.Phone = this.checkoutForm.value.DailCode + this.checkoutForm.value.phone;
     checkoutFormValue.Country = this.checkoutForm.value.Country.name ? this.checkoutForm.value.Country.name : this.checkoutForm.value.Country;
 
     // Checking if Payment is Paid by Paypal and sending Order Details in payload
     if (paymentStatus) {
-      checkoutFormValue.paymentStatus = paymentStatus;
-      checkoutFormValue.orderDetails = orderDetails;
+      checkoutFormValue.PaymentStatus = paymentStatus;
+      // checkoutFormValue.orderDetails = orderDetails;
     } else {
-      checkoutFormValue.paymentStatus = false;
+      checkoutFormValue.PaymentStatus = false;
     }
-
-    // Setting Source
-    checkoutFormValue.source = "web";
 
     // console.log("checkoutFormValue: ", checkoutFormValue)
     this.orderService.createOrderAPI(checkoutFormValue).subscribe(
@@ -148,9 +163,10 @@ export class CheckoutComponent implements OnInit {
         this.resetForm();
         this.productService.emptyCartAndProducts();
         // window.location.reload();
-        window.location.href = `order/success/${res._id}`;
+        window.location.href = `order/success/${res.OrderNumber}`;
       },
       err => {
+        console.log("error: ", err)
         this.spinner.hide();
         Swal.fire({
           icon: 'error',
@@ -215,18 +231,28 @@ export class CheckoutComponent implements OnInit {
           // value: product.sale ? product.skuArray[0].specialPrice : product.skuArray[0].price
         }
       };
-      console.log("template (before): ", template)
       // template.unit_amount.value = parseFloat((template.unit_amount.value * this.conversionRate).toFixed(2));
       // console.log("template (after): ", template)
       items.push(template)
     }
+
+    console.log("items: ", items)
+
+    // let totalAmountCalculated = 0;
+    // for (let index = 0; index < items.length; index++) {
+    //   const item = items[index];
+    //   totalAmountCalculated = totalAmountCalculated + parseFloat(item.unit_amount.value)
+    // }
+
+    // console.log("totalAmountCalculated: ", totalAmountCalculated)
 
     let totalAmountConverted = (totalAmount * this.conversionRate).toFixed(2);
     console.log("totalAmountConverted: ", totalAmountConverted)
 
     this.payPalConfig = {
       currency: 'USD',
-      clientId: 'Ac1lp7WNuBgLKMMzxmUykmTFYcRlGE0_xFP_gTDCl1uHMfabmbt8BTSr3k0KGnP1Hltx0mC2k7bwcr2g',
+      // clientId: 'Ac1lp7WNuBgLKMMzxmUykmTFYcRlGE0_xFP_gTDCl1uHMfabmbt8BTSr3k0KGnP1Hltx0mC2k7bwcr2g',
+      clientId: 'AWgt3OgWP7ItdA_tTGJNehvgTzF8ERGXHxB5ByQw-mQOrogFw6T5pf_EcoyDrfA8C4hl5LyE3HOQKpRc',
       createOrderOnClient: () => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [{

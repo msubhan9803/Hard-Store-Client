@@ -48,6 +48,13 @@ export class OrderService {
     return this.http.get(url);
   }
 
+  // GET: order/getOrderbyOrderNumber/
+  public getOrderbyOrderNumber(orderNumber) {
+    let url = this._env.urlAddress + 'order/GetOrderByOrderNumber/' + orderNumber;
+
+    return this.http.get(url);
+  }
+
   // POST: order/createOrder
   public createOrderAPI(productObj: any) {
     let url = this._env.urlAddress + 'order/createOrder';
