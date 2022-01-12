@@ -1,362 +1,333 @@
 <app-header-five></app-header-five>
-<app-breadcrumb [title]="'Track Your Order'" [breadcrumb]="'Track Order'"></app-breadcrumb>
-<app-pagetitle [title]="'Track Your Order'" [subtitle]="'Enter Order Id to'"></app-pagetitle>
+<app-breadcrumb
+  [title]="'Track Your Order'"
+  [breadcrumb]="'Track Order'"
+></app-breadcrumb>
+<app-pagetitle
+  [title]="'Track Your Order'"
+  [subtitle]="'Enter Order Id to'"
+></app-pagetitle>
 
-<section class="section-b-space">
-    <div class="collection-wrapper">
-        <div class="container container-custom">
-            <div class="d-flex flex-row justify-content-center h-100">
-                <div class="searchbar">
-                    <input class="search_input" [(ngModel)]="searchValue" type="text" name="searchValue"
-                        placeholder="Type Order Id...">
-                    <a href="#" class="search_icon" (click)="searchOrder($event)"><i class="fa fa-search"></i></a>
-                </div>
-            </div>
+<section class="section-b-space" style="padding-top: 0px">
+  <div class="collection-wrapper">
+    <div class="container container-custom">
+      <div class="d-flex flex-row justify-content-center h-100">
+        <div class="searchbar">
+          <input
+            class="search_input"
+            [(ngModel)]="searchValue"
+            type="text"
+            name="searchValue"
+            placeholder="Enter Order Number"
+          />
+          <a href="#" class="search_icon" (click)="searchOrder($event)"
+            ><i class="fa fa-search"></i
+          ></a>
         </div>
-
-        <div class="container mt-3" *ngIf="showTimeLine">
-            <div class="page-header mt-4">
-                <h3 id="timeline">Timeline</h3>
-            </div>
-            <ul class="timeline">
-                <!-- <tr *ngFor="let status of this.tracking_Status | keyvalue">
-                    <td style="width: auto;">{{ this.capitalizeFirstLetter(status.key.replaceAll('_', " ")) }}</td>
-                    <td style="width: 20px;">
-                        <div class="form-check">
-                            <input [disabled]="this.current_Status != status.key" class="form-check-input"
-                                type="checkbox" [checked]="status.value.completed"
-                                [(ngModel)]="this.tracking_Status[status.key].completed" id="flexCheckChecked"
-                                (change)="this.checkStatusCheckboxVal(status.key)">
-                        </div>
-                    </td>
-                    <td style="width: 20px;">
-                        <div class="form-check">
-                            <input [disabled]="this.current_Status != status.key" class="form-check-input"
-                                type="checkbox" [checked]="status.value.cancelled"
-                                [(ngModel)]="this.tracking_Status[status.key].cancelled" id="flexCheckChecked"
-                                (change)="this.checkStatusCheckboxVal(status.key)">
-                        </div>
-                    </td>
-                </tr> -->
-
-                <!-- <li class="timeline-li" [ngClass]="{'timeline-sm': i % 2 == 0, 'timeline-inverted': i % 2 != 0 }"
-                    *ngFor="let status of this.tracking_Status | keyvalue; let i = index">
-                    <div [ngClass]="{
-                        'timeline-badge': true, 
-                        'primary': this.tracking_Status.order_Confirmed.inProgress, 
-                        'success': this.tracking_Status.order_Confirmed.completed, 
-                        'danger': this.tracking_Status.order_Confirmed.cancelled
-                    }">
-                        <div class="m-auto">
-                            <div class="timeline-balloon-date-day">13</div>
-                            <div class="timeline-balloon-date-month">APR</div>
-                        </div>
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">{{
-                                this.helperMethodsService.capitalizeFirstLetter(status.key.replaceAll('_', " ")) }}</h4>
-                            <p>
-                                <small class="text-muted">
-                                    <i class="glyphicon glyphicon-time"></i>
-                                    <span>{{ status.value.comment }}</span>
-                                </small>
-                            </p>
-                        </div>
-                        <div class="timeline-body">
-                            <span class="badge badge-pill text-white info" *ngIf="status.value.inProgress">In
-                                Progress</span>
-                            <span class="badge badge-pill text-white success"
-                                *ngIf="status.value.completed">Completed</span>
-                            <span class="badge badge-pill text-white badge-danger"
-                                *ngIf="status.value.cancelled">Cancelled</span>
-                        </div>
-                    </div>
-                </li> -->
-                <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.order_Confirmed.status">
-                    <div [ngClass]="{
-                        'timeline-badge': true, 
-                        'info': this.tracking_Status.order_Confirmed.inProgress, 
-                        'success': this.tracking_Status.order_Confirmed.completed, 
-                        'danger': this.tracking_Status.order_Confirmed.cancelled
-                    }">
-                        <div class="m-auto">
-                            <div class="timeline-balloon-date-day">{{
-                                this.tracking_Status.order_Confirmed.date.getDate() || null }}</div>
-                            <div class="timeline-balloon-date-day">{{
-                                monthNames[this.tracking_Status.order_Confirmed.date.getMonth()] || null }}</div>
-                        </div>
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">Order Confirmed</h4>
-                            <span class="text-muted"
-                                *ngIf="this.tracking_Status.order_Confirmed.status == 'completed'">{{
-                                this.tracking_Status.order_Confirmed.date | timeago:live}}</span>
-                            <p>
-                                <span class="text-muted">
-                                    {{ this.tracking_Status.order_Confirmed.comment || "" }}
-                                </span>
-                            </p>
-                        </div>
-                        <div class="timeline-body">
-                            <span class="badge badge-pill text-white info"
-                                *ngIf="this.tracking_Status.order_Confirmed.inProgress">In
-                                Progress</span>
-                            <span class="badge badge-pill text-white success"
-                                *ngIf="this.tracking_Status.order_Confirmed.completed">Completed</span>
-                            <span class="badge badge-pill text-white badge-danger"
-                                *ngIf="this.tracking_Status.order_Confirmed.cancelled">Cancelled</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted timeline-li" *ngIf="this.tracking_Status.ready_for_Delivery.status">
-                    <div [ngClass]="{
-                        'timeline-badge': true, 
-                        'info': this.tracking_Status.ready_for_Delivery.inProgress, 
-                        'success': this.tracking_Status.ready_for_Delivery.completed, 
-                        'danger': this.tracking_Status.ready_for_Delivery.cancelled
-                    }">
-                        <div class="m-auto">
-                            <div class="timeline-balloon-date-day">{{
-                                this.tracking_Status.ready_for_Delivery.date?.getDate() || null }}</div>
-                            <div class="timeline-balloon-date-day">{{
-                                monthNames[this.tracking_Status.ready_for_Delivery.date?.getMonth()] || null }}</div>
-                        </div>
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">Ready For Delivery</h4>
-                            <span class="text-muted"
-                                *ngIf="this.tracking_Status.ready_for_Delivery.status == 'completed'">{{
-                                this.tracking_Status.ready_for_Delivery.date | timeago:live}}</span>
-                            <p>
-                                <span class="text-muted">
-                                    {{ this.tracking_Status.ready_for_Delivery.comment || "" }}
-                                </span>
-                            </p>
-                        </div>
-                        <div class="timeline-body">
-                            <span class="badge badge-pill text-white info"
-                                *ngIf="this.tracking_Status.ready_for_Delivery.inProgress">In
-                                Progress</span>
-                            <span class="badge badge-pill text-white success"
-                                *ngIf="this.tracking_Status.ready_for_Delivery.completed">Completed</span>
-                            <span class="badge badge-pill text-white badge-danger"
-                                *ngIf="this.tracking_Status.ready_for_Delivery.cancelled">Cancelled</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.out_For_Delivery.status">
-                    <div [ngClass]="{
-                        'timeline-badge': true, 
-                        'info': this.tracking_Status.out_For_Delivery.inProgress, 
-                        'success': this.tracking_Status.out_For_Delivery.completed, 
-                        'danger': this.tracking_Status.out_For_Delivery.cancelled
-                    }">
-                        <div class="m-auto">
-                            <div class="timeline-balloon-date-day">{{
-                                this.tracking_Status.out_For_Delivery.date?.getDate() || null }}</div>
-                            <div class="timeline-balloon-date-day">{{
-                                monthNames[this.tracking_Status.out_For_Delivery.date?.getMonth()] || null }}</div>
-                        </div>
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">Out For Delivery</h4>
-                            <span class="text-muted"
-                                *ngIf="this.tracking_Status.out_For_Delivery.status == 'completed'">{{
-                                this.tracking_Status.out_For_Delivery.date | timeago:live}}</span>
-                            <p>
-                                <span class="text-muted">
-                                    {{ this.tracking_Status.out_For_Delivery.comment || "" }}
-                                </span>
-                            </p>
-                        </div>
-                        <div class="timeline-body">
-                            <span class="badge badge-pill text-white info"
-                                *ngIf="this.tracking_Status.out_For_Delivery.inProgress">In
-                                Progress</span>
-                            <span class="badge badge-pill text-white success"
-                                *ngIf="this.tracking_Status.out_For_Delivery.completed">Completed</span>
-                            <span class="badge badge-pill text-white badge-danger"
-                                *ngIf="this.tracking_Status.out_For_Delivery.cancelled">Cancelled</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted timeline-li" *ngIf="this.tracking_Status.delivered.status">
-                    <div [ngClass]="{
-                        'timeline-badge': true, 
-                        'info': this.tracking_Status.delivered.inProgress, 
-                        'success': this.tracking_Status.delivered.completed, 
-                        'danger': this.tracking_Status.delivered.cancelled
-                    }">
-                        <div class="m-auto">
-                            <div class="timeline-balloon-date-day">{{ this.tracking_Status.delivered.date?.getDate() ||
-                                null }}</div>
-                            <div class="timeline-balloon-date-day">{{
-                                monthNames[this.tracking_Status.delivered.date?.getMonth()] || null }}</div>
-                        </div>
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">Delivered</h4>
-                            <span class="text-muted" *ngIf="this.tracking_Status.delivered.status == 'completed'">{{
-                                this.tracking_Status.delivered.date | timeago:live}}</span>
-                            <p>
-                                <span class="text-muted">
-                                    {{ this.tracking_Status.delivered.comment || "" }}
-                                </span>
-                            </p>
-                        </div>
-                        <div class="timeline-body">
-                            <span class="badge badge-pill text-white info"
-                                *ngIf="this.tracking_Status.delivered.inProgress">In
-                                Progress</span>
-                            <span class="badge badge-pill text-white success"
-                                *ngIf="this.tracking_Status.delivered.completed">Completed</span>
-                            <span class="badge badge-pill text-white badge-danger"
-                                *ngIf="this.tracking_Status.delivered.cancelled">Cancelled</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-sm timeline-li" *ngIf="this.tracking_Status.Paid.status">
-                    <div [ngClass]="{
-                        'timeline-badge': true, 
-                        'info': this.tracking_Status.Paid.inProgress, 
-                        'success': this.tracking_Status.Paid.completed, 
-                        'danger': this.tracking_Status.Paid.cancelled
-                    }">
-                        <div class="m-auto">
-                            <div class="timeline-balloon-date-day">{{ this.tracking_Status.Paid.date?.getDate() || null
-                                }}</div>
-                            <div class="timeline-balloon-date-day">{{
-                                monthNames[this.tracking_Status.Paid.date?.getMonth()] || null }}</div>
-                        </div>
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">Paid</h4>
-                            <span class="text-muted" *ngIf="this.tracking_Status.Paid.status == 'completed'">{{
-                                this.tracking_Status.Paid.date | timeago:live}}</span>
-                            <p>
-                                <span class="text-muted">
-                                    {{ this.tracking_Status.Paid.comment || "" }}
-                                </span>
-                            </p>
-                        </div>
-                        <div class="timeline-body">
-                            <span class="badge badge-pill text-white info"
-                                *ngIf="this.tracking_Status.Paid.inProgress">In
-                                Progress</span>
-                            <span class="badge badge-pill text-white success"
-                                *ngIf="this.tracking_Status.Paid.completed">Completed</span>
-                            <span class="badge badge-pill text-white badge-danger"
-                                *ngIf="this.tracking_Status.Paid.cancelled">Cancelled</span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-            <div class="page-header mt-4">
-                <h3 id="timeline">Product Details</h3>
-            </div>
-            <div class="table-responsive" *ngIf="showProducts">
-                <table class="table table-bordered table-hover shadow">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Unit Cost</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Discount</th>
-                            <th scope="col">Sub Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="" *ngFor="let product of product_List; let arrayIndex = index">
-                            <td class="p-3 w-25">{{ product.product_name }}</td>
-                            <td class="p-3">{{ product.unit_Cost * currency?.price |
-                                currency:currency?.currency:'symbol' }}
-                                <small>
-                                    {{ product.unit_Cost * currency?.price | currency:currency?.currency:'symbol' |
-                                    aedToDollar: this.conversionRate }}
-                                </small>
-                            </td>
-                            <td class="p-3 text-right">{{ product.quantity }}</td>
-                            <td class="p-3">{{ product.discount * currency?.price |
-                                currency:currency?.currency:'symbol' }}
-                                <small>
-                                    {{ product.discount * currency?.price | currency:currency?.currency:'symbol' |
-                                    aedToDollar: this.conversionRate }}
-                                </small>
-                            </td>
-                            <td class="p-3">{{ product.sub_Total * currency?.price |
-                                currency:currency?.currency:'symbol' }}
-                                <small>
-                                    {{ product.sub_Total * currency?.price | currency:currency?.currency:'symbol' |
-                                    aedToDollar: this.conversionRate }}
-                                </small>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="container">
-                <div class="row justify-content-end">
-                    <div class="col-md-6">
-                        <div class="row justify-content-end text-right">
-                            <div class="col-6">
-                                <b>Total</b>
-                            </div>
-                            <div class="col-6">
-                                AED {{order?.totalAmount * currency?.price |
-                                currency:currency?.currency:'symbol' }}
-                                <small>
-                                    {{ order?.totalAmount * currency?.price | currency:currency?.currency:'symbol' |
-                                    aedToDollar: this.conversionRate }}
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="page-header mt-4">
-                <h3 id="timeline">Shipping Address</h3>
-            </div>
-            <div class="card mt-4">
-                <div class="card-body shadow">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="container">
-                                    <div class="row mt-2">
-                                        <div class="col-6">
-                                            <p class="font-weight-bold">Address</p>
-                                            <p class="font-weight-bold">City</p>
-                                            <p class="font-weight-bold">Country</p>
-                                            <p class="font-weight-bold">Postal Code</p>
-                                            <p class="font-weight-bold">State</p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p>{{ order?.Address }}</p>
-                                            <p>{{ order?.City }}</p>
-                                            <p>{{ order?.Country }}</p>
-                                            <p>{{ order?.postalCode }}</p>
-                                            <p>{{ order?.State }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</section>
 
+    <div class="container" *ngIf="showTimeLine">
+      <div class="page-header">
+        <h3 id="timeline">Timeline</h3>
+      </div>
+
+      <div class="md-stepper-horizontal">
+        <div
+          class="md-step"
+          [ngClass]="{
+            active: this.tracking_Status.order_Confirmed.inProgress,
+            done: this.tracking_Status.order_Confirmed.completed,
+            danger: this.tracking_Status.order_Confirmed.cancelled
+          }"
+        >
+          <div class="md-step-circle">
+            <span><i class="fa fa-check"></i></span>
+          </div>
+          <div class="md-step-title">Order Confirmed</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+
+          <div class="text-center">
+            <span
+              class="info"
+              *ngIf="this.tracking_Status.order_Confirmed.inProgress"
+              >In Progress</span
+            >
+            <span
+              class="success"
+              *ngIf="this.tracking_Status.order_Confirmed.completed"
+              >Completed</span
+            >
+            <span
+              class="danger"
+              *ngIf="this.tracking_Status.order_Confirmed.cancelled"
+              >Cancelled</span
+            >
+          </div>
+        </div>
+        <div
+          class="md-step"
+          [ngClass]="{
+            active: this.tracking_Status.ready_for_Delivery.inProgress,
+            done: this.tracking_Status.ready_for_Delivery.completed,
+            danger: this.tracking_Status.ready_for_Delivery.cancelled
+          }"
+        >
+          <div class="md-step-circle">
+            <span><i class="fa fa-clipboard"></i></span>
+          </div>
+          <div class="md-step-title">Ready For Delivery</div>
+          <!-- <div class="md-step-optional">Optional</div> -->
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+
+          <div class="text-center">
+            <span
+              class="info"
+              *ngIf="this.tracking_Status.ready_for_Delivery.inProgress"
+              >In Progress</span
+            >
+            <span
+              class="success"
+              *ngIf="this.tracking_Status.ready_for_Delivery.completed"
+              >Completed</span
+            >
+            <span
+              class="danger"
+              *ngIf="this.tracking_Status.ready_for_Delivery.cancelled"
+              >Cancelled</span
+            >
+          </div>
+        </div>
+        <div
+          class="md-step"
+          [ngClass]="{
+            active: this.tracking_Status.out_For_Delivery.inProgress,
+            done: this.tracking_Status.out_For_Delivery.completed,
+            danger: this.tracking_Status.out_For_Delivery.cancelled
+          }"
+        >
+          <div class="md-step-circle">
+            <span
+              style="
+                -moz-transform: scale(-1, 1);
+                -webkit-transform: scale(-1, 1);
+                -o-transform: scale(-1, 1);
+                -ms-transform: scale(-1, 1);
+                transform: scale(-1, 1);
+              "
+              ><i class="ti-truck"></i
+            ></span>
+          </div>
+          <div class="md-step-title">Out For Delivery</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+
+          <div class="text-center">
+            <span
+              class="info"
+              *ngIf="this.tracking_Status.out_For_Delivery.inProgress"
+              >In Progress</span
+            >
+            <span
+              class="success"
+              *ngIf="this.tracking_Status.out_For_Delivery.completed"
+              >Completed</span
+            >
+            <span
+              class="danger"
+              *ngIf="this.tracking_Status.out_For_Delivery.cancelled"
+              >Cancelled</span
+            >
+          </div>
+        </div>
+        <div
+          class="md-step"
+          [ngClass]="{
+            active: this.tracking_Status.delivered.inProgress,
+            done: this.tracking_Status.delivered.completed,
+            danger: this.tracking_Status.delivered.cancelled
+          }"
+        >
+          <div class="md-step-circle">
+            <span><i class="fa fa-home"></i></span>
+          </div>
+          <div class="md-step-title">Delivered</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+
+          <div class="text-center">
+            <span class="info" *ngIf="this.tracking_Status.delivered.inProgress"
+              >In Progress</span
+            >
+            <span
+              class="success"
+              *ngIf="this.tracking_Status.delivered.completed"
+              >Completed</span
+            >
+            <span
+              class="danger"
+              *ngIf="this.tracking_Status.delivered.cancelled"
+              >Cancelled</span
+            >
+          </div>
+        </div>
+        <div
+          class="md-step"
+          [ngClass]="{
+            active: this.tracking_Status.Paid.inProgress,
+            done: this.tracking_Status.Paid.completed,
+            danger: this.tracking_Status.Paid.cancelled
+          }"
+        >
+          <div class="md-step-circle">
+            <span><i class="fa fa-dollar"></i></span>
+          </div>
+          <div class="md-step-title">Paid</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+
+          <div class="text-center">
+            <span class="info" *ngIf="this.tracking_Status.Paid.inProgress"
+              >In Progress</span
+            >
+            <span class="success" *ngIf="this.tracking_Status.Paid.completed"
+              >Completed</span
+            >
+            <span
+              class="danger"
+              *ngIf="this.tracking_Status.Paid.cancelled"
+              >Cancelled</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="page-header mt-4">
+        <h3 id="timeline">Product Details</h3>
+      </div>
+      <div class="table-responsive" *ngIf="showProducts">
+        <table class="table table-hover shadow">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Unit Cost</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Discount</th>
+              <th scope="col">Sub Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class=""
+              *ngFor="let product of product_List; let arrayIndex = index"
+            >
+              <td class="p-3 w-25">{{ product.product_name }}</td>
+              <td class="p-3">
+                {{
+                  product.unit_Cost * currency?.price
+                    | currency: currency?.currency:"symbol"
+                }}
+                <small>
+                  {{
+                    product.unit_Cost * currency?.price
+                      | currency: currency?.currency:"symbol"
+                      | aedToDollar: this.conversionRate
+                  }}
+                </small>
+              </td>
+              <td class="p-3 text-right">{{ product.quantity }}</td>
+              <td class="p-3">
+                {{
+                  product.discount * currency?.price
+                    | currency: currency?.currency:"symbol"
+                }}
+                <small>
+                  {{
+                    product.discount * currency?.price
+                      | currency: currency?.currency:"symbol"
+                      | aedToDollar: this.conversionRate
+                  }}
+                </small>
+              </td>
+              <td class="p-3">
+                {{
+                  product.sub_Total * currency?.price
+                    | currency: currency?.currency:"symbol"
+                }}
+                <small>
+                  {{
+                    product.sub_Total * currency?.price
+                      | currency: currency?.currency:"symbol"
+                      | aedToDollar: this.conversionRate
+                  }}
+                </small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="container">
+        <div class="row justify-content-end">
+          <div class="col-md-4">
+            <div class="row justify-content-end text-right">
+              <div class="col-6">
+                <b>Total</b>
+              </div>
+              <div class="col-6">
+                {{
+                  this.total * currency?.price
+                    | currency: currency?.currency:"symbol"
+                }}
+                <small>
+                  {{
+                    this.total * currency?.price
+                      | currency: currency?.currency:"symbol"
+                      | aedToDollar: this.conversionRate
+                  }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-header mt-4">
+        <h3 id="timeline">Shipping Address</h3>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mt-4">
+              <div class="card-body shadow">
+                <div class="container">
+                  <div class="row mt-2">
+                    <div class="col-6">
+                      <p class="font-weight-bold">Address</p>
+                      <p class="font-weight-bold">City</p>
+                      <p class="font-weight-bold">Country</p>
+                      <p class="font-weight-bold">Postal Code</p>
+                      <p class="font-weight-bold">State</p>
+                    </div>
+                    <div class="col-6">
+                      <p>{{ order?.Address }}</p>
+                      <p>{{ order?.City }}</p>
+                      <p>{{ order?.Country }}</p>
+                      <p>{{ order?.postalCode }}</p>
+                      <p>{{ order?.State }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- <app-footer-one></app-footer-one> -->
 <app-footer-five></app-footer-five>

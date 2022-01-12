@@ -238,16 +238,16 @@ export class CheckoutComponent implements OnInit {
 
     console.log("items: ", items)
 
-    // let totalAmountCalculated = 0;
-    // for (let index = 0; index < items.length; index++) {
-    //   const item = items[index];
-    //   totalAmountCalculated = totalAmountCalculated + parseFloat(item.unit_amount.value)
-    // }
+    let totalAmountCalculated = 0;
+    for (let index = 0; index < items.length; index++) {
+      const item = items[index];
+      totalAmountCalculated = totalAmountCalculated + parseFloat(item.unit_amount.value)
+    }
 
-    // console.log("totalAmountCalculated: ", totalAmountCalculated)
+    console.log("totalAmountCalculated: ", totalAmountCalculated)
 
-    let totalAmountConverted = (totalAmount * this.conversionRate).toFixed(2);
-    console.log("totalAmountConverted: ", totalAmountConverted)
+    // let totalAmountConverted = (totalAmount * this.conversionRate).toFixed(2);
+    // console.log("totalAmountConverted: ", totalAmountConverted)
 
     this.payPalConfig = {
       currency: 'USD',
@@ -259,11 +259,11 @@ export class CheckoutComponent implements OnInit {
           amount: {
             currency_code: 'USD',
             // This is actual amount
-            value: totalAmountConverted.toString(),
+            value: totalAmountCalculated.toString(),
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: totalAmountConverted.toString()
+                value: totalAmountCalculated.toString()
               }
             }
           },
