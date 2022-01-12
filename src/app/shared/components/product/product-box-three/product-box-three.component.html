@@ -1,14 +1,18 @@
 <div class="product">
-    <div class="img-wrapper">
-        <!-- <div class="ribbon" *ngIf="this.product.new"><span>new</span></div> -->
-        <div class="ribbon" *ngIf="this.product.sale"><span>sale</span></div>
-        <div class="front product-img">
-            <a href="{{'/product/' + product.slug}}">
-                <img [defaultImage]="'assets/images/placeholder.jpg'"
-                    [lazyLoad]="this.imageUrl" class="img-fluid" alt="">
-            </a>
-        </div>
-        <!-- <div class="cart-info cart-wrap">
+  <div class="img-wrapper">
+    <!-- <div class="ribbon" *ngIf="this.product.new"><span>new</span></div> -->
+    <div class="ribbon" *ngIf="this.product.sale"><span>sale</span></div>
+    <div class="front product-img">
+      <a href="{{ '/product/' + product.slug }}">
+        <img
+          [defaultImage]="'assets/images/placeholder.jpg'"
+          [lazyLoad]="this.imageUrl"
+          class="img-fluid"
+          alt=""
+        />
+      </a>
+    </div>
+    <!-- <div class="cart-info cart-wrap">
             <a href="javascript:void(0)" (click)="addToWishlist(product)" title="Add to Wishlist">
                 <i class="fa fa-heart" aria-hidden="true"></i>
             </a>
@@ -25,49 +29,88 @@
                 <i class="ti-search" aria-hidden="true"></i>
             </a>
         </div> -->
-        <div class="quick-view-part">
-            <a href="javascript:void(0)" (click)="QuickView.openModal()" title="Quick View">
-                <i class="ti-search" aria-hidden="true"></i>
-            </a>
-        </div>
+    <div class="quick-view-part">
+      <a
+        href="javascript:void(0)"
+        (click)="QuickView.openModal()"
+        title="Quick View"
+      >
+        <i class="ti-search" aria-hidden="true"></i>
+      </a>
     </div>
-    <div class="product-info">
-        <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
-        <a href="{{'/product/' + product.slug}}">
-            <h6 class="product-title">{{ product?.title ? product?.title : "No Title" | titlecase }}</h6>
-        </a>
-        <br />
+  </div>
+  <div class="product-info">
+    <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
+    <a href="{{ '/product/' + product.slug }}">
+      <h6 class="product-title">
+        {{ product?.title ? product?.title : ("No Title" | titlecase) }}
+      </h6>
+    </a>
+    <br />
 
-        <h5 *ngIf="product.sale">
-            {{ (product?.price - product?.discount) * currency?.price | currency:currency?.currency:'symbol' }}
-            <small>
-                {{ (product?.price - product?.discount)* currency?.price | currency:currency?.currency:'symbol' |
-                aedToDollar: this.conversionRate }}
-            </small>
-        </h5>
-        <h5 [ngClass]="{'strikethrough': product.sale, 'text-danger': product.sale}">
-            {{ (product?.price) * currency?.price | currency:currency?.currency:'symbol' }}
-            <small>
-                {{ (product?.price) * currency?.price | currency:currency?.currency:'symbol' | aedToDollar:
-                this.conversionRate }}
-            </small>
-        </h5>
-        <h5 *ngIf="!product.sale">&nbsp;</h5>
-    </div>
+    <h5 *ngIf="product.sale">
+      {{
+        (product?.price - product?.discount) * currency?.price
+          | currency: currency?.currency:"symbol"
+      }}
+      <small>
+        {{
+          (product?.price - product?.discount) * currency?.price
+            | currency: currency?.currency:"symbol"
+            | aedToDollar: this.conversionRate
+        }}
+      </small>
+    </h5>
+    <h5
+      [ngClass]="{ strikethrough: product.sale, 'text-danger': product.sale }"
+    >
+      {{
+        product?.price * currency?.price | currency: currency?.currency:"symbol"
+      }}
+      <small>
+        {{
+          product?.price * currency?.price
+            | currency: currency?.currency:"symbol"
+            | aedToDollar: this.conversionRate
+        }}
+      </small>
+    </h5>
+    <h5 *ngIf="!product.sale">&nbsp;</h5>
+  </div>
 
-    <div class="product-buttons d-flex flex-row justify-content-center py-3 px-2">
-        <button class="buy-on-whatsapp" title="Buy on Whatsapp" (click)="CartModal.openModal(product)">
-            <div class="d-flex flex-row justify-content-center align-items-center">
-                <i class="fa fa-2x fa-whatsapp"></i>
-                <span>&nbsp;Buy on Whatsapp</span>
-            </div>
-        </button>
-        <button class="add-to-cart-btn" title="Add to cart" (click)="addToCart(product)" *ngIf="!cartModal">
-            <i class="ti-shopping-cart"></i>
-            <span>Add to cart</span>
-        </button>
+  <div class="product-buttons d-flex flex-row justify-content-center py-3 px-2">
+    <a
+      href="{{ 'https://wa.me/971567841933?text=' + 'I would like to buy the Product: ' + product?.title  }}"
+      data-action="share/whatsapp/share"
+      target="_blank"
+      class="buy-on-whatsapp"
+      title="Buy on Whatsapp"
+    >
+    <div class="d-flex flex-row justify-content-center align-items-center">
+      <i class="fa fa-2x fa-whatsapp"></i>
+      <span>&nbsp;Buy on Whatsapp</span>
     </div>
+    </a>
+    <button
+      class="add-to-cart-btn"
+      title="Add to cart"
+      (click)="addToCart(product)"
+      *ngIf="!cartModal"
+    >
+      <i class="ti-shopping-cart"></i>
+      <span>Add to cart</span>
+    </button>
+  </div>
 </div>
 
-<app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view>
-<app-cart-modal #cartModal [product]="product" [currency]="currency" *ngIf="cartModal"></app-cart-modal>
+<app-quick-view
+  #quickView
+  [product]="product"
+  [currency]="currency"
+></app-quick-view>
+<app-cart-modal
+  #cartModal
+  [product]="product"
+  [currency]="currency"
+  *ngIf="cartModal"
+></app-cart-modal>

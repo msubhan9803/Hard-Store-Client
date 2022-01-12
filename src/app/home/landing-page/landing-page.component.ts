@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
+  public categories = [];
 
-  constructor() {
+  constructor(private productService: ProductService) {
     localStorage.setItem("hrdtkr_minPrice_filter", JSON.stringify(0));
     localStorage.setItem("hrdtkr_maxPrice_filter", JSON.stringify(100000));
     localStorage.setItem("hrdtkr_product_title", JSON.stringify(""));
@@ -15,6 +17,9 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.productService.getCategories().subscribe((res: []) => {
+      this.categories = res;
+    })
   }
 
 }

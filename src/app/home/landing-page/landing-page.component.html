@@ -8,4 +8,12 @@
 
 <app-product-slider></app-product-slider>
 
+<app-mens-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-mens-slider>
+
+<app-womens-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-womens-slider>
+
+<app-enlargement-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-enlargement-slider>
+
+<app-power-honey-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-power-honey-slider>
+
 <app-footer-five></app-footer-five>

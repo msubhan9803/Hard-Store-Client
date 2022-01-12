@@ -93,6 +93,13 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  // GET: product/getProductsBYCategory
+  public getProductsBYCategory(categoryId) {
+    let url = this._env.urlAddress + 'product/getProductsBYCategory/' + categoryId;
+
+    return this.http.get(url);
+  }
+
   // GET: products/getCategories
   public getCategories() {
     let url = this._env.urlAddress + 'product/getCategories';
@@ -443,15 +450,20 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  // GET: faq/getFaq
+  public getFaq() {
+    let url = this._env.urlAddress + 'faq/getFaq';
+    return this.http.get(url);
+  }
+
   // GET: products/getFaqsByType
   public searchFaq(searchValue) {
-    let url = this._env.urlAddress + 'products/searchFaq';
-    let params = new HttpParams({
-      fromObject: {
-        question: searchValue
-      }
-    })
-    return this.http.get(url, { params: params });
+    console.log("searchValue: ", searchValue)
+    let url = this._env.urlAddress + 'faq/searchFaq';
+    let payload = {
+      question: searchValue
+    }
+    return this.http.post(url, payload);
   }
 
   public setFilterCategories(categories) {
@@ -522,7 +534,7 @@ export class ProductService {
       categoryIds: categories.length > 0 ? categories : null,
       minPrice: minPrice,
       maxPrice: maxPrice || null,
-      collections: collections.length > 0 ? collections: [],
+      collections: collections.length > 0 ? collections : [],
       title: title || null
     };
 

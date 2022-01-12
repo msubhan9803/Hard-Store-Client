@@ -1,0 +1,16 @@
+<section *ngIf="this.products.length > 0" class="full-banner parallax tools-parallax-product tools-grey border-box related-product"
+    id="products-section">
+    <div class="container">
+        <h4 class="pb-4">Mens</h4>
+        <owl-carousel-o [options]="ProductSlider" [ngClass]="{'owl-item-custom': this.products.length < 4}">
+            <ng-container *ngFor="let product of this.products">
+                <ng-template carouselSlide>
+                    <div class="product-box product-wrap">
+                        <app-product-box-three [product]="product" [currency]="productService?.Currency">
+                        </app-product-box-three>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+</section>

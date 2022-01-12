@@ -20,9 +20,9 @@
             <div class="col-12">
                 <ngb-accordion class="mb-4" *ngFor="let faq of faqList" [closeOthers]="true" activeIds="static-1"
                     class="accordion theme-accordion" id="accordionExample">
-                    <ngb-panel id="static-1" title="{{faq.question}}">
+                    <ngb-panel id="static-1" title="{{faq.Question}}">
                         <ng-template ngbPanelContent>
-                            <p>{{faq.answer}}</p>
+                            <p>{{faq.Answer}}</p>
                         </ng-template>
                     </ngb-panel>
                 </ngb-accordion>
@@ -38,42 +38,14 @@
     <div class="container" *ngIf="!showSearchedFaq">
         <div class="row">
             <div class="col-12">
-                <ngb-tabset [type]="'tabs'" class="nav-material">
-                    <ngb-tab>
-                        <ng-template ngbTabTitle>
-                            <div (click)="onTabChange('shipping')">
-                                Shipping
-                            </div>
+                <ngb-accordion class="mb-4" *ngFor="let faq of faqList" [closeOthers]="true" activeIds="static-1"
+                    class="accordion theme-accordion" id="accordionExample">
+                    <ngb-panel id="static-1" title="{{faq.Question}}">
+                        <ng-template ngbPanelContent>
+                            <p>{{faq.Answer}}</p>
                         </ng-template>
-                        <ng-template ngbTabContent>
-                            <ngb-accordion class="mb-4" *ngFor="let faq of faqList" [closeOthers]="true"
-                                activeIds="static-1" class="accordion theme-accordion" id="accordionExample">
-                                <ngb-panel id="static-1" title="{{faq.question}}">
-                                    <ng-template ngbPanelContent>
-                                        <p>{{faq.answer}}</p>
-                                    </ng-template>
-                                </ngb-panel>
-                            </ngb-accordion>
-                        </ng-template>
-                    </ngb-tab>
-                    <ngb-tab>
-                        <ng-template (click)="onTabChange('product')" ngbTabTitle>
-                            <div (click)="onTabChange('product')">
-                                Product
-                            </div>
-                        </ng-template>
-                        <ng-template *ngFor="let faq of faqList" ngbTabContent>
-                            <ngb-accordion [closeOthers]="true" activeIds="static-1" class="accordion theme-accordion"
-                                id="accordionExample">
-                                <ngb-panel id="static-1" title="{{faq.question}}">
-                                    <ng-template ngbPanelContent>
-                                        <p>{{faq.answer}}</p>
-                                    </ng-template>
-                                </ngb-panel>
-                            </ngb-accordion>
-                        </ng-template>
-                    </ngb-tab>
-                </ngb-tabset>
+                    </ngb-panel>
+                </ngb-accordion>
             </div>
             <div class="col-12" *ngIf="faqList.length == 0">
                 <div class="text-center">
