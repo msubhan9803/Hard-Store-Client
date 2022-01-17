@@ -16,13 +16,13 @@
 }
 
 .product-img {
-  height: 300px;
+  height: 240px;
   // width: 100%;
 }
 
 .product-img img {
   // max-height: 250px;
-  width: 70%;
+  width: 75%;
   margin: auto;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .add-to-cart-btn {
-  width: 70%;
+  width: 85%;
   height: 40px;
   background-image: linear-gradient(to right, $primary-main, $primary-dark);
   border: none;

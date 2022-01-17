@@ -1,9 +1,12 @@
+@import "../../../../assets/scss/theme/variables";
+
 .breadcrumb-section {
-    background-color: #fff !important;
+  background-color: #fff !important;
 }
 
 @media (max-width: 480px) {
-    .title1 h4, h2 {
-        font-size: 0.95rem;
-    }
+  .title1 h4,
+  h2 {
+    font-size: 0.95rem;
+  }
 }

@@ -11,7 +11,7 @@ export class LandingPageComponent implements OnInit {
 
   constructor(private productService: ProductService) {
     localStorage.setItem("hrdtkr_minPrice_filter", JSON.stringify(0));
-    localStorage.setItem("hrdtkr_maxPrice_filter", JSON.stringify(100000));
+    localStorage.setItem("hrdtkr_maxPrice_filter", JSON.stringify(1000));
     localStorage.setItem("hrdtkr_product_title", JSON.stringify(""));
     localStorage.setItem("hrdtkr_collections_filter", JSON.stringify([]));
   }

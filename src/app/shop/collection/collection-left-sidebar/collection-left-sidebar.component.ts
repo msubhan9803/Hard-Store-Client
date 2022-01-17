@@ -186,4 +186,9 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
   getFilteredProducts() {
     return this.productService.getFilterProducts();
   }
+
+  navigateToProductsPage() {
+    this.productService.resetFilterLocalStorage();
+    window.location.href = "/products";
+  }
 }

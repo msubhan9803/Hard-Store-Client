@@ -9,7 +9,9 @@ export const environment = {
   paypal_token: 'PAYPAL_TOKEN',
   // urlAddress: 'http://uaeslimmers.com/api/',
   // imageAddress: 'http://uaeslimmers.com/uploads/'
-  urlAddress: 'http://192.168.18.13:7171/api/',
+  // urlAddress: 'http://192.168.18.13:7171/api/',
+  // imageAddress: 'https://www.hardtaker.com/uploads/',
+  urlAddress: 'https://www.hardtaker.com/api/',
   imageAddress: 'https://www.hardtaker.com/uploads/',
 };
 

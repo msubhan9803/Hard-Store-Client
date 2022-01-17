@@ -53,10 +53,11 @@ export class CategoryProductsComponent implements OnInit {
 
   // Product Tab collection
   getCollectionProducts(collection: any) {
-    return this.products.filter((item: any) => {
+    let temp = this.products.filter((item: any) => {
       if (item.collections.includes(collection)) {
         return item;
       }
-    })
+    });
+    return temp.slice(0, 8)
   }
 }
