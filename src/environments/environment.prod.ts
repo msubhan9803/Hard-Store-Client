@@ -5,6 +5,6 @@ export const environment = {
   paypal_token: 'PAYPAL_TOKEN',
   // urlAddress: 'http://uaeslimmers.com/api/',
   // imageAddress: 'http://uaeslimmers.com/uploads/'
-  urlAddress: 'http://159.223.37.76/api/',
-  imageAddress: 'http://159.223.37.76/uploads/'
+  urlAddress: 'https://www.hardtaker.com/api/',
+  imageAddress: 'https://www.hardtaker.com/uploads/',
 };

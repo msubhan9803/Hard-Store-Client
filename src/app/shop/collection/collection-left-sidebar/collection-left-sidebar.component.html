@@ -63,19 +63,21 @@
                                         </a>
                                     </li>
                                 </ul>
+
                                 <div class="collection-product-wrapper" id="products">
                                     <app-grid [products]="products" [paginate]="paginate" [layoutView]="layoutView"
                                         [sortBy]="sortBy" (setGrid)="updateGridLayout($event)"
                                         (setLayout)="updateLayoutView($event)" (sortedBy)="sortByFilter($event)">
                                     </app-grid>
+
                                     <div class="product-wrapper-grid" [ngClass]="layoutView">
                                         <div #productsSection
                                             class="full-banner parallax tools-parallax-product tools-grey border-box"
-                                            id="products-section">
+                                            id="products-section" *ngIf="products.length > 0">
                                             <div class="container">
                                                 <div class="row">
                                                     <ng-container *ngFor="let product of products">
-                                                        <div class="col-md-4" *ngIf="product.sale">
+                                                        <div class="col-md-4">
                                                             <div class="product-box product-wrap m-2">
                                                                 <app-product-box-three [product]="product"
                                                                     [currency]="productService?.Currency">
@@ -97,7 +99,7 @@
 
 
                                             <div class="col-sm-12 text-center section-b-space mt-5 no-found"
-                                                *ngIf="!products.length">
+                                                *ngIf="products.length == 0">
                                                 <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
                                                 <h3>Sorry! Couldn't find the product you were looking For!!! </h3>
                                                 <p>Please check if you have misspelt something or try searching with

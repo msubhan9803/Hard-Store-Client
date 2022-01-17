@@ -10,7 +10,7 @@ export const environment = {
   // urlAddress: 'http://uaeslimmers.com/api/',
   // imageAddress: 'http://uaeslimmers.com/uploads/'
   urlAddress: 'http://192.168.18.13:7171/api/',
-  imageAddress: 'http://192.168.18.13:7171/'
+  imageAddress: 'https://www.hardtaker.com/uploads/',
 };
 
 /*
