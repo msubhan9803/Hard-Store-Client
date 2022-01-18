@@ -251,8 +251,7 @@ export class CheckoutComponent implements OnInit {
 
     this.payPalConfig = {
       currency: 'USD',
-      // clientId: 'Ac1lp7WNuBgLKMMzxmUykmTFYcRlGE0_xFP_gTDCl1uHMfabmbt8BTSr3k0KGnP1Hltx0mC2k7bwcr2g',
-      clientId: 'AWgt3OgWP7ItdA_tTGJNehvgTzF8ERGXHxB5ByQw-mQOrogFw6T5pf_EcoyDrfA8C4hl5LyE3HOQKpRc',
+      clientId: 'Ac1lp7WNuBgLKMMzxmUykmTFYcRlGE0_xFP_gTDCl1uHMfabmbt8BTSr3k0KGnP1Hltx0mC2k7bwcr2g',
       createOrderOnClient: () => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [{
