@@ -56,7 +56,7 @@
       <small [ngClass]="{ strikethrough: true, 'text-danger': true }">
         {{
           product?.price * currency?.price
-            | currency: currency?.currency:"symbol"
+            | currency: currency?.currency:""
         }}
         <!-- | aedToDollar: this.conversionRate -->
       </small>

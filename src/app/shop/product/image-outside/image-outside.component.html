@@ -37,7 +37,7 @@
                   class="product-slick"
                 >
                   <ng-container
-                  *ngFor="let image of this.product?.images; index as i"
+                    *ngFor="let image of this.product?.images; index as i"
                   >
                     <ng-template carouselSlide [id]="i">
                       <div
@@ -103,26 +103,26 @@
                   <h5>
                     <small
                       *ngIf="product?.sale"
-                      [ngClass]="{
-                        strikethrough: product?.sale,
-                        'text-danger': product?.sale
-                      }"
+                      class="strikethrough text-danger"
                     >
                       {{
                         (product?.price - product?.discount) * currency?.price
-                          | currency: currency?.currency:"symbol"
+                          | currency: currency?.currency:""
                       }}
                     </small>
                   </h5>
-                  <h3>
-                    {{
-                      product?.price * currency?.price
-                        | currency: currency?.currency:"symbol"
-                    }}
-                    <small style="font-size: 1.25rem"
+                  <div style="display: flex; flex-direction: row; align-items: flex-end;">
+                    <h3 class="m-0">
+                      {{
+                        product?.price * currency?.price
+                          | currency: currency?.currency:"symbol"
+                      }}
+                    </h3>
+                    <small class="avalibility" style="font-size: 1.1rem" *ngIf="product?.sale"
                       >&nbsp; {{ product?.discount }}% off</small
                     >
-                  </h3>
+                  </div>
+
                   <!-- <h3>
                     {{
                       (product?.price - product?.discount) * currency?.price
@@ -435,8 +435,8 @@
                         <ul class="p-4">
                           <li>
                             <p>
-                              Please email service@hardtaker.com. We will keep you
-                              updated by email.
+                              Please email service@hardtaker.com. We will keep
+                              you updated by email.
                             </p>
                           </li>
                           <li>

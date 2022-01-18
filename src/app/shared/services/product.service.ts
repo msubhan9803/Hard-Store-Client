@@ -45,7 +45,7 @@ export class ProductService {
     // });
   }
 
-  public Currency = { name: 'AED', currency: 'AED', price: 1 } // Default Currency
+  public Currency = { name: 'د.إ', currency: 'د.إ', price: 1 } // Default Currency
   public OpenCart: boolean = false;
   public Products;
 
