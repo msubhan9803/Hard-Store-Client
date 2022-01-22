@@ -17,6 +17,7 @@ export class LandingPageComponent implements OnInit {
     localStorage.setItem("hrdtkr_maxPrice_filter", JSON.stringify(1000));
     localStorage.setItem("hrdtkr_product_title", JSON.stringify(""));
     localStorage.setItem("hrdtkr_collections_filter", JSON.stringify([]));
+    localStorage.setItem("hrdtkr_categories", JSON.stringify([]));
   }
 
   async ngOnInit() {
