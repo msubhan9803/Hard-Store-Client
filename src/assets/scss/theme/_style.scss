@@ -1669,7 +1669,7 @@ header {
     overflow: hidden;
     &:before,
     &:after {
-        background: var(--theme-deafult);
+        background: $primary-ultra-light !important;
         width: 25%;
         position: absolute;
         content: '';
@@ -1691,7 +1691,7 @@ header {
     span {
         &:before,
         &:after {
-            background: var(--theme-deafult);
+            background: $primary-ultra-light !important;
             width: 25%;
             position: absolute;
             content: '';
@@ -1761,13 +1761,13 @@ header {
     padding-left: 15px;
     padding-right: 15px;
     h4 {
-        color: var(--theme-deafult);
+        color: $primary-dark !important;
         margin-top: 25px;
         line-height: 1;
         margin-bottom: 0;
     }
     p {
-        color: $dark-font;
+        color: $primary-main !important;
         font-size: 18px;
         text-transform: uppercase;
         font-weight: 700;

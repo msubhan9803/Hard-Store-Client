@@ -107,7 +107,7 @@ export class CheckoutComponent implements OnInit {
         product_Id: currentProduct._id,
         unit_Cost: currentProduct.price,
         quantity: currentProduct.quantity,
-        discount: currentProduct.discount,
+        discount: currentProduct.sale ? currentProduct.discount : 0,
         sale: currentProduct.sale,
         amount: currentProduct.quantity * currentProduct.price,
         sub_Total: 0

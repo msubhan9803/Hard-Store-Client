@@ -12,9 +12,9 @@
   object-fit: cover;
 }
 
-// ::ng-deep .image-carousel {
-//   max-height: 200px !important;
-// }
+::ng-deep .image-carousel {
+  height: 500px;
+}
 
 // ::ng-deep .owl-carousel .owl-wrapper {
 //   display: flex !important;
@@ -52,6 +52,12 @@
 @media only screen and (max-width: 425px) {
   .mobile-rating-star {
     justify-content: center !important;
+  }
+  .product-price {
+    justify-content: center !important;
+  }
+  .image-carousel {
+    height: 300px;
   }
 }
 

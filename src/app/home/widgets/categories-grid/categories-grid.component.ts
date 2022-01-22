@@ -21,7 +21,6 @@ export class CategoriesGridComponent implements OnInit {
   ) {
     this.productService.getCategories().subscribe((res: []) => {
       this.categories = res;
-      debugger;
     });
   }
 

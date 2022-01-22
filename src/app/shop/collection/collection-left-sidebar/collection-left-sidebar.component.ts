@@ -53,7 +53,7 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
       // this.productService.getAllProductsAPI().subscribe((response: any) => {
       // })
 
-      this.getFilteredProducts().then(filteredProeducts => {
+      this.getFilteredProducts().then((filteredProeducts: any) => {
         if (this.productService.getFilterCategories().length > 0) {
           this.products = filteredProeducts;
         }
@@ -63,7 +63,7 @@ export class CollectionLeftSidebarComponent implements OnInit, OnDestroy {
       })
 
       this.productService.storageSubObs.subscribe((data: string) => {
-        this.getFilteredProducts().then(res => this.products = res)
+        this.getFilteredProducts().then((res: any) => this.products = res)
       })
     })
   }

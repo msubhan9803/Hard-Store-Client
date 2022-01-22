@@ -114,4 +114,8 @@ export class SettingsComponent implements OnInit {
     this.productService.Currency = currency
   }
 
+  getThumbnailImage(product) {
+    let url = product.images.find(img => img.IsThmubnail == true).URL;
+    return this.imageAddress + url;
+  }
 }

@@ -550,6 +550,8 @@ export class ProductService {
       this.spinner.hide();
 
       return products;
+    }, err => {
+      this.spinner.hide()
     })
   }
 

@@ -43,7 +43,7 @@
     <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
     <a href="{{ '/product/' + product.slug }}">
       <h6 class="product-title" data-toggle="tooltip" data-placement="top" title="{{product?.title}}">
-        {{ product?.title ? product?.title.length > 20 ? product?.title.substring(0, 20)+'...' : product?.title : ("No Title" | titlecase) }}
+        {{ product?.title ? product?.title.length > 20 ? product?.title.substring(0, 60)+'...' : product?.title : ("No Title" | titlecase) }}
       </h6>
     </a>
     <br />

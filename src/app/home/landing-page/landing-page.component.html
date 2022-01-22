@@ -8,12 +8,45 @@
 
 <app-product-slider></app-product-slider>
 
-<app-mens-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-mens-slider>
+<app-mens-slider
+  [categories]="this.categories"
+  *ngIf="this.categories.length > 0"
+></app-mens-slider>
 
-<app-womens-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-womens-slider>
+<app-womens-slider
+  [categories]="this.categories"
+  *ngIf="this.categories.length > 0"
+></app-womens-slider>
 
-<app-enlargement-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-enlargement-slider>
+<app-enlargement-slider
+  [categories]="this.categories"
+  *ngIf="this.categories.length > 0"
+></app-enlargement-slider>
 
-<app-power-honey-slider [categories]="this.categories" *ngIf="this.categories.length > 0"></app-power-honey-slider>
+<app-power-honey-slider
+  [categories]="this.categories"
+  *ngIf="this.categories.length > 0"
+></app-power-honey-slider>
 
+<!-- blog section start-->
+<section class="blog pt-0 section-b-space">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="title1 section-t-space" style="padding-top: 45px">
+          <h4>Recent Story</h4>
+          <h2 class="title-inner1">from the blog</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-blog [blogs]="blogs"></app-blog>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- blog section End -->
+
+<app-tap-to-top></app-tap-to-top>
 <app-footer-five></app-footer-five>

@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <div class="image-carousel" style="height: 500px">
+          <div class="image-carousel">
             <owl-carousel-o
               [options]="ProductDetailsMainSliderConfig"
               #owlCar
@@ -111,7 +111,7 @@
                       }}
                     </small>
                   </h5>
-                  <div style="display: flex; flex-direction: row; align-items: flex-end;">
+                  <div class="product-price" style="display: flex; flex-direction: row; align-items: flex-end;">
                     <h3 class="m-0">
                       {{
                         product?.price * currency?.price

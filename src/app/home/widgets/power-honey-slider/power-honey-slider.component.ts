@@ -27,7 +27,11 @@ export class PowerHoneySliderComponent implements OnInit {
     public userService: UserService,
     private fb: FormBuilder,
     public helperMethodsService: HelperMethodsService
-  ) { }
+  ) {
+    this.productService.getCategories().subscribe((res: []) => {
+      this.categories = res;
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     this.imageAddress = this.productService.getImageUrl();
@@ -45,5 +49,10 @@ export class PowerHoneySliderComponent implements OnInit {
     return this.productService.getFilterProductsAPI(payload).toPromise().then(async (products: Array<any>) => {
       this.products = products;
     })
+  }
+
+  public redirectToProductsFilterPage(category) {
+    this.productService.setFilterCategories(category);
+    this.router.navigate(['products']);
   }
 }

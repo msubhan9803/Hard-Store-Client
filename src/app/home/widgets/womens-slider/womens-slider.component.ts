@@ -46,4 +46,9 @@ export class WomensSliderComponent implements OnInit {
       this.products = products;
     })
   }
+
+  public redirectToProductsFilterPage(category) {
+    this.productService.setFilterCategories(category);
+    this.router.navigate(['products']);
+  }
 }
