@@ -76,6 +76,7 @@ import { HeaderFiveComponent } from './header/header-five/header-five.component'
 import { FooterFiveComponent } from './footer/footer-five/footer-five.component';
 import { SettingsTwoComponent } from './components/settings-two/settings-two.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -150,7 +151,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxMaskModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     TimeagoModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    QuillModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -206,7 +208,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HeaderFiveComponent,
     FooterFiveComponent,
     SettingsTwoComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    QuillModule
   ]
 })
 export class SharedModule { }

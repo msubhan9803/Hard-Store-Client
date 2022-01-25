@@ -16,6 +16,22 @@
   height: 500px;
 }
 
+::ng-deep .product-desc-summary .ql-container {
+  border: none !important;
+}
+::ng-deep .product-desc-summary li {
+  display: list-item !important;
+  text-align: -webkit-match-parent !important;
+}
+
+::ng-deep .editor .ql-container {
+  border: none !important;
+}
+::ng-deep .editor li {
+  display: list-item !important;
+  text-align: -webkit-match-parent !important;
+}
+
 // ::ng-deep .owl-carousel .owl-wrapper {
 //   display: flex !important;
 // }

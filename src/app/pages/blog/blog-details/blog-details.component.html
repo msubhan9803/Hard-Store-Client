@@ -17,7 +17,15 @@
                     <!-- <li><i class="fa fa-heart"></i>  5 Hits  </li>
                     <li><i class="fa fa-comments"></i> 10  Comment</li> -->
                 </ul>
-                <p><span [innerHTML]="this.blogDetails.description"></span></p>
+                <p class="blog-desc">
+                    <!-- <span [innerHTML]="this.blogDetails.description"></span> -->
+                    <quill-editor
+                      [(ngModel)]="this.blogDetails.description"
+                      [readOnly]="true"
+                      [modules]="{ toolbar: false }"
+                      [style]="{ border: '0px' }"
+                    ></quill-editor>
+                  </p>
             </div>
         </div>
         <!-- <section class="tab-product m-0">
