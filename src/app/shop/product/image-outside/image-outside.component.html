@@ -121,11 +121,19 @@
                     "
                   >
                     <h3 class="m-0">
-                      Now
-                      {{
-                        (product?.price - product?.discount) * currency?.price
-                          | currency: currency?.currency:"symbol"
-                      }}
+                      <span *ngIf="product?.sale">Now</span>
+                      <span *ngIf="product?.sale">
+                        {{
+                          (product?.price - product?.discount) * currency?.price
+                            | currency: currency?.currency:"symbol"
+                        }}
+                      </span>
+                      <span *ngIf="!product?.sale">
+                        {{
+                          product?.price * currency?.price
+                            | currency: currency?.currency:"symbol"
+                        }}
+                      </span>
                     </h3>
                     <small
                       class="avalibility"
@@ -377,7 +385,7 @@
                       <div class="col-12">
                         <h4>Shipping FAQ</h4>
                       </div>
-                      
+
                       <div class="col-12 mb-4">
                         <h6>1. When will I receive my order?</h6>
                         <p>
@@ -399,7 +407,7 @@
                           request.
                         </p>
                       </div>
-                      
+
                       <div class="col-12 mb-4">
                         <h6>2. How do I track my order?</h6>
                         <p>
@@ -407,7 +415,7 @@
                           tracking number and order details.
                         </p>
                       </div>
-                      
+
                       <div class="col-12 mb-4">
                         <h6>3. Taxes and other charges?</h6>
                         <p>
@@ -416,7 +424,7 @@
                           and/or import duties.
                         </p>
                       </div>
-                      
+
                       <div class="col-12 mb-4">
                         <h6>4. About the Shipping fee?</h6>
                         <p>Standard Shipping is free shipping.</p>
