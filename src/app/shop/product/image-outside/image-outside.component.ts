@@ -76,7 +76,7 @@ export class ImageOutsideComponent implements OnInit {
         this.product = res;
         let discountPer = 100 - ((this.product?.price - this.product?.discount) / this.product?.price * 100);
         discountPer = parseFloat(discountPer.toFixed(2));
-        this.product.discount = discountPer;
+        this.product.discountPer = discountPer;
 
         this.productService.averageRating(this.product._id).subscribe((res: any) => {
           this.product.starAvg = parseInt(res.starAvg);
