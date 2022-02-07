@@ -31,6 +31,13 @@
   display: list-item !important;
   text-align: -webkit-match-parent !important;
 }
+::ng-deep .ql-editor > * {
+  color: black !important;
+  word-spacing: 0.5px !important;
+  line-height: 1.6 !important;
+  font-family: revert !important;
+  font-size: 12px !important;
+}
 
 // ::ng-deep .owl-carousel .owl-wrapper {
 //   display: flex !important;
@@ -42,9 +49,18 @@
 //   max-width: initial;
 // }
 
-.shipping-faq-content p {
+.shipping-faq-content > * {
+  color: black !important;
+  word-spacing: 0.5px !important;
+  line-height: 1.6 !important;
+  font-family: revert !important;
+  font-size: 12px !important;
+}
+
+.shipping-faq-content p, h1, h2, h3, h4, h5, h6 {
   padding: 0px !important;
-  line-height: 1.5 !important;
+  color: black !important;
+  line-height: 1.6 !important;
 }
 
 .shipping-faq-content li {
@@ -142,12 +158,14 @@
   color: #000 !important;
 }
 
-::ng-deep .owl-prev:hover, ::ng-deep .owl-next:hover {
+::ng-deep .owl-prev:hover,
+::ng-deep .owl-next:hover {
   background-color: $primary-light !important;
   color: #fff !important;
 }
 
-::ng-deep .ti-angle-right, ::ng-deep .ti-angle-left {
+::ng-deep .ti-angle-right,
+::ng-deep .ti-angle-left {
   font-size: 1.5rem !important;
   font-weight: 700 !important;
 }

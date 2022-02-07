@@ -105,9 +105,10 @@
                       *ngIf="product?.sale"
                       class="strikethrough text-danger"
                     >
+                      Was
                       {{
-                        (product?.price - product?.discount) * currency?.price
-                          | currency: currency?.currency:""
+                        product?.price * currency?.price
+                          | currency: currency?.currency:"symbol":"1.0-0"
                       }}
                     </small>
                   </h5>
@@ -120,8 +121,9 @@
                     "
                   >
                     <h3 class="m-0">
+                      Now
                       {{
-                        product?.price * currency?.price
+                        (product?.price - product?.discount) * currency?.price
                           | currency: currency?.currency:"symbol"
                       }}
                     </h3>
@@ -129,7 +131,8 @@
                       class="avalibility"
                       style="font-size: 1.1rem"
                       *ngIf="product?.sale"
-                      >&nbsp; {{ product?.discount }}% off</small
+                      >&nbsp; {{ product?.discount | number: "1.0-0" }}%
+                      off</small
                     >
                   </div>
 
@@ -235,7 +238,6 @@
 
                 <div class="border-product">
                   <h6 class="product-title">product details</h6>
-
                   <div class="product-desc-summary">
                     <div
                       *ngIf="this.product?.description.length > 200"
@@ -351,7 +353,6 @@
                     <div class="row">
                       <div class="col-12">
                         <h4>COVID-19 | Shipping</h4>
-                        <br />
                         <p class="p-0">
                           As the world adjusts to the impact of the coronavirus
                           (COVID-19), shipping is inevitably affected. Every
@@ -372,15 +373,13 @@
                       </div>
                     </div>
                     <br />
-                    <br />
                     <div class="row">
                       <div class="col-12">
                         <h4>Shipping FAQ</h4>
                       </div>
-                      <br />
+                      
                       <div class="col-12 mb-4">
                         <h6>1. When will I receive my order?</h6>
-                        <br />
                         <p>
                           For Standard Shipping from UAE warehouse: Most items
                           are usually shipping in 1-3 business days. For Express
@@ -399,33 +398,27 @@
                           we will do everything we can to accommodate your
                           request.
                         </p>
-                        <br />
                       </div>
-                      <br />
+                      
                       <div class="col-12 mb-4">
                         <h6>2. How do I track my order?</h6>
-                        <br />
                         <p>
                           Your delivery confirmation email will contain your
                           tracking number and order details.
                         </p>
-                        <br />
                       </div>
-                      <br />
+                      
                       <div class="col-12 mb-4">
                         <h6>3. Taxes and other charges?</h6>
-                        <br />
                         <p>
                           Depending on the country of delivery, you may be
                           required to pay extra tax or charges such as VAT
                           and/or import duties.
                         </p>
-                        <br />
                       </div>
-                      <br />
+                      
                       <div class="col-12 mb-4">
                         <h6>4. About the Shipping fee?</h6>
-                        <br />
                         <p>Standard Shipping is free shipping.</p>
                         <br />
                         <p>
@@ -437,14 +430,11 @@
                           please feel free to contact us immediately at +971 4
                           570 9887.
                         </p>
-                        <br />
                       </div>
                     </div>
-                    <br />
                     <div class="row">
                       <div class="col-12">
                         <h3>Returns Process.</h3>
-                        <br />
                         <p>
                           Please contact us if you want to return an item.
                           Return without prior discussion and authorization will
