@@ -23,28 +23,30 @@
               <!-- <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt"> -->
               <img [src]="getThumbnailImage(product)" width="100px" [alt]="">
             </a>
-            <div class="media-body m-2">
-              <a [routerLink]="['/product/', product.slug]">
-                <h4>{{ product?.title }}</h4>
-              </a>
-              <h6>
-                <span *ngIf="!product?.sale">
-                  {{ product?.quantity }} x
-                  {{ product?.price * currency?.price |
-                  currency:currency?.currency:'symbol'
-                  }}
-                  {{ product?.price * productService?.Currency.price |
-                  currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
-                </span>
-                <span *ngIf="product?.sale">
-                  {{ product?.quantity }} x
-                  {{ (product?.price - product?.discount) * currency?.price |
-                  currency:currency?.currency:'symbol'
-                  }}
-                  {{ (product?.price - product?.discount) * productService?.Currency.price |
-                  currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
-                </span>
-              </h6>
+            <div class="media-body m-3 d-flex flex-row">
+              <span>
+                <a [routerLink]="['/product/', product.slug]">
+                  <h4>{{ product?.title }}</h4>
+                </a>
+                <h6>
+                  <span *ngIf="!product?.sale">
+                    {{ product?.quantity }} x
+                    {{ product?.price * currency?.price |
+                    currency:currency?.currency:'symbol'
+                    }}
+                    {{ product?.price * productService?.Currency.price |
+                    currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
+                  </span>
+                  <span *ngIf="product?.sale">
+                    {{ product?.quantity }} x
+                    {{ (product?.price - product?.discount) * currency?.price |
+                    currency:currency?.currency:'symbol'
+                    }}
+                    {{ (product?.price - product?.discount) * productService?.Currency.price |
+                    currency:productService?.Currency.currency:'symbol' | aedToDollar: this.conversionRate }}
+                  </span>
+                </h6>
+              </span>
               <div class="close-circle" style="cursor: pointer; color: #000; font-weight: 300;"
                 (click)="removeItem(arrayIndex)">
                 <!-- <i class="fa fa-times" aria-hidden="true"></i> -->

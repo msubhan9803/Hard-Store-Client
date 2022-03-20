@@ -55,7 +55,7 @@
   min-width: 320px;
   left: unset;
   right: 0;
-  max-height: 315px;
+  max-height: 400px;
   overflow: auto;
   /* width */
   &::-webkit-scrollbar {
@@ -100,7 +100,7 @@
     }
     .close-circle {
       position: absolute;
-      bottom: 0;
+      top: 0;
       right: 0;
       i {
         color: $grey-light;
