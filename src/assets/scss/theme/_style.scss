@@ -1278,10 +1278,10 @@ header {
                 .show-div {
                     &.shopping-cart {
                         padding: 15px 15px;
-                        min-width: 280px;
+                        min-width: 320px;
                         left: unset;
                         right: 0;
-                        max-height: 315px;
+                        max-height: 400px;
                         overflow: auto;
                         /* width */
                         &::-webkit-scrollbar {
